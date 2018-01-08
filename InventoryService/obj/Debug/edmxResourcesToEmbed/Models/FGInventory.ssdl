@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="InventoryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="InventoryIns">
+    <Key>
+      <PropertyRef Name="Seq" />
+    </Key>
+    <Property Name="Seq" Type="int" Nullable="false" />
+    <Property Name="SN" Type="varchar" MaxLength="16" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Location" Type="nchar" MaxLength="3" Nullable="false" />
+    <Property Name="ModelNo" Type="nchar" MaxLength="6" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Location">
+    <Key>
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="Code" Type="varchar" MaxLength="3" Nullable="false" />
+    <Property Name="ZoneCode" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="InventoryModelStoreContainer">
+    <EntitySet Name="InventoryIns" EntityType="Self.InventoryIns" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

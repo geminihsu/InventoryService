@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FGInventoryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="InventoryIn">
+    <Key>
+      <PropertyRef Name="Seq" />
+    </Key>
+    <Property Name="Seq" Type="int" Nullable="false" />
+    <Property Name="SN" Type="varchar" MaxLength="16" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Location" Type="nchar" MaxLength="3" Nullable="false" />
+    <Property Name="ModelNo" Type="nchar" MaxLength="6" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Location">
+    <Key>
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="Code" Type="varchar" MaxLength="3" Nullable="false" />
+    <Property Name="ZoneCode" Type="smallint" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6005: The data type 'sql_variant' is currently not supported for the target Entity Framework version; the column 'VIEW' in the table 'FGInventory.dbo.MODEL' was excluded.
+warning 6005: The data type 'sql_variant' is currently not supported for the target Entity Framework version; the column 'SP' in the table 'FGInventory.dbo.MODEL' was excluded.
+warning 6002: The table/view 'FGInventory.dbo.MODEL' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="MODEL">
+    <Key>
+      <PropertyRef Name="MODELNO" />
+    </Key>
+    <Property Name="MODELNO" Type="varchar" MaxLength="6" Nullable="false" />
+    <Property Name="VERSION" Type="int" Nullable="false" />
+    <Property Name="FG" Type="nvarchar" MaxLength="255" />
+    <Property Name="MODEL" Type="nvarchar" MaxLength="255" />
+    <Property Name="SOLE" Type="bit" />
+    <Property Name="DESC" Type="nvarchar" MaxLength="255" />
+    <Property Name="FP_DATE" Type="datetime" />
+    <Property Name="LABOR_W" Type="bit" />
+    <Property Name="SNBegin" Type="int" />
+    <Property Name="SNEnd" Type="int" />
+    <Property Name="ViewFile" Type="varbinary(max)" />
+    <Property Name="SPFile" Type="varbinary(max)" />
+    <Property Name="Commercial" Type="bit" />
+    <Property Name="Brand" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityContainer Name="FGInventoryModelStoreContainer">
+    <EntitySet Name="InventoryIn" EntityType="Self.InventoryIn" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MODEL" EntityType="Self.MODEL" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [MODEL].[MODELNO] AS [MODELNO], 
+    [MODEL].[VERSION] AS [VERSION], 
+    [MODEL].[FG] AS [FG], 
+    [MODEL].[MODEL] AS [MODEL], 
+    [MODEL].[SOLE] AS [SOLE], 
+    [MODEL].[DESC] AS [DESC], 
+    [MODEL].[FP_DATE] AS [FP_DATE], 
+    [MODEL].[LABOR_W] AS [LABOR_W], 
+    [MODEL].[SNBegin] AS [SNBegin], 
+    [MODEL].[SNEnd] AS [SNEnd], 
+    [MODEL].[ViewFile] AS [ViewFile], 
+    [MODEL].[SPFile] AS [SPFile], 
+    [MODEL].[Commercial] AS [Commercial], 
+    [MODEL].[Brand] AS [Brand]
+    FROM [dbo].[MODEL] AS [MODEL]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FGInventoryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="InventoryIn">
+    <Key>
+      <PropertyRef Name="Seq" />
+    </Key>
+    <Property Name="Seq" Type="Int32" Nullable="false" />
+    <Property Name="SN" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Location" Type="String" MaxLength="3" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="ModelNo" Type="String" MaxLength="6" FixedLength="true" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Location">
+    <Key>
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="Code" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ZoneCode" Type="Int16" />
+  </EntityType>
+  <EntityContainer Name="FGInventoryEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="InventoryIns" EntityType="Self.InventoryIn" />
+    <EntitySet Name="Locations" EntityType="Self.Location" />
+    <EntitySet Name="MODELs" EntityType="FGInventoryModel.MODEL" />
+  </EntityContainer>
+  <EntityType Name="MODEL">
+    <Key>
+      <PropertyRef Name="MODELNO" />
+    </Key>
+    <Property Name="MODELNO" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="VERSION" Type="Int32" Nullable="false" />
+    <Property Name="FG" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="MODEL1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="SOLE" Type="Boolean" />
+    <Property Name="DESC" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="FP_DATE" Type="DateTime" Precision="3" />
+    <Property Name="LABOR_W" Type="Boolean" />
+    <Property Name="SNBegin" Type="Int32" />
+    <Property Name="SNEnd" Type="Int32" />
+    <Property Name="ViewFile" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="SPFile" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Commercial" Type="Boolean" />
+    <Property Name="Brand" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>

@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FGInventoryModelStoreContainer" CdmEntityContainer="FGInventoryEntities">
+    <EntitySetMapping Name="InventoryIns">
+      <EntityTypeMapping TypeName="FGInventoryModel.InventoryIn">
+        <MappingFragment StoreEntitySet="InventoryIn">
+          <ScalarProperty Name="Seq" ColumnName="Seq" />
+          <ScalarProperty Name="SN" ColumnName="SN" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="ModelNo" ColumnName="ModelNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Locations">
+      <EntityTypeMapping TypeName="FGInventoryModel.Location">
+        <MappingFragment StoreEntitySet="Location">
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="ZoneCode" ColumnName="ZoneCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MODELs">
+      <EntityTypeMapping TypeName="FGInventoryModel.MODEL">
+        <MappingFragment StoreEntitySet="MODEL">
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
+          <ScalarProperty Name="Commercial" ColumnName="Commercial" />
+          <ScalarProperty Name="SPFile" ColumnName="SPFile" />
+          <ScalarProperty Name="ViewFile" ColumnName="ViewFile" />
+          <ScalarProperty Name="SNEnd" ColumnName="SNEnd" />
+          <ScalarProperty Name="SNBegin" ColumnName="SNBegin" />
+          <ScalarProperty Name="LABOR_W" ColumnName="LABOR_W" />
+          <ScalarProperty Name="FP_DATE" ColumnName="FP_DATE" />
+          <ScalarProperty Name="DESC" ColumnName="DESC" />
+          <ScalarProperty Name="SOLE" ColumnName="SOLE" />
+          <ScalarProperty Name="MODEL1" ColumnName="MODEL" />
+          <ScalarProperty Name="FG" ColumnName="FG" />
+          <ScalarProperty Name="VERSION" ColumnName="VERSION" />
+          <ScalarProperty Name="MODELNO" ColumnName="MODELNO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

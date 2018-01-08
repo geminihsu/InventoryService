@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FGInventoryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="InventoryIn">
+          <Key>
+            <PropertyRef Name="Seq" />
+          </Key>
+          <Property Name="Seq" Type="int" Nullable="false" />
+          <Property Name="SN" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Location" Type="nchar" MaxLength="3" Nullable="false" />
+          <Property Name="ModelNo" Type="nchar" MaxLength="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="ZoneCode" Type="smallint" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6005: The data type 'sql_variant' is currently not supported for the target Entity Framework version; the column 'VIEW' in the table 'FGInventory.dbo.MODEL' was excluded.
+warning 6005: The data type 'sql_variant' is currently not supported for the target Entity Framework version; the column 'SP' in the table 'FGInventory.dbo.MODEL' was excluded.
+warning 6002: The table/view 'FGInventory.dbo.MODEL' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="MODEL">
+          <Key>
+            <PropertyRef Name="MODELNO" />
+          </Key>
+          <Property Name="MODELNO" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="VERSION" Type="int" Nullable="false" />
+          <Property Name="FG" Type="nvarchar" MaxLength="255" />
+          <Property Name="MODEL" Type="nvarchar" MaxLength="255" />
+          <Property Name="SOLE" Type="bit" />
+          <Property Name="DESC" Type="nvarchar" MaxLength="255" />
+          <Property Name="FP_DATE" Type="datetime" />
+          <Property Name="LABOR_W" Type="bit" />
+          <Property Name="SNBegin" Type="int" />
+          <Property Name="SNEnd" Type="int" />
+          <Property Name="ViewFile" Type="varbinary(max)" />
+          <Property Name="SPFile" Type="varbinary(max)" />
+          <Property Name="Commercial" Type="bit" />
+          <Property Name="Brand" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="FGInventoryModelStoreContainer">
+          <EntitySet Name="InventoryIn" EntityType="Self.InventoryIn" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MODEL" EntityType="Self.MODEL" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [MODEL].[MODELNO] AS [MODELNO], 
+    [MODEL].[VERSION] AS [VERSION], 
+    [MODEL].[FG] AS [FG], 
+    [MODEL].[MODEL] AS [MODEL], 
+    [MODEL].[SOLE] AS [SOLE], 
+    [MODEL].[DESC] AS [DESC], 
+    [MODEL].[FP_DATE] AS [FP_DATE], 
+    [MODEL].[LABOR_W] AS [LABOR_W], 
+    [MODEL].[SNBegin] AS [SNBegin], 
+    [MODEL].[SNEnd] AS [SNEnd], 
+    [MODEL].[ViewFile] AS [ViewFile], 
+    [MODEL].[SPFile] AS [SPFile], 
+    [MODEL].[Commercial] AS [Commercial], 
+    [MODEL].[Brand] AS [Brand]
+    FROM [dbo].[MODEL] AS [MODEL]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FGInventoryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="InventoryIn">
+          <Key>
+            <PropertyRef Name="Seq" />
+          </Key>
+          <Property Name="Seq" Type="Int32" Nullable="false" />
+          <Property Name="SN" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Location" Type="String" MaxLength="3" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ModelNo" Type="String" MaxLength="6" FixedLength="true" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ZoneCode" Type="Int16" />
+        </EntityType>
+        <EntityContainer Name="FGInventoryEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="InventoryIns" EntityType="Self.InventoryIn" />
+          <EntitySet Name="Locations" EntityType="Self.Location" />
+          <EntitySet Name="MODELs" EntityType="FGInventoryModel.MODEL" />
+        </EntityContainer>
+        <EntityType Name="MODEL">
+          <Key>
+            <PropertyRef Name="MODELNO" />
+          </Key>
+          <Property Name="MODELNO" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="VERSION" Type="Int32" Nullable="false" />
+          <Property Name="FG" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MODEL1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SOLE" Type="Boolean" />
+          <Property Name="DESC" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FP_DATE" Type="DateTime" Precision="3" />
+          <Property Name="LABOR_W" Type="Boolean" />
+          <Property Name="SNBegin" Type="Int32" />
+          <Property Name="SNEnd" Type="Int32" />
+          <Property Name="ViewFile" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="SPFile" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Commercial" Type="Boolean" />
+          <Property Name="Brand" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FGInventoryModelStoreContainer" CdmEntityContainer="FGInventoryEntities">
+          <EntitySetMapping Name="InventoryIns">
+            <EntityTypeMapping TypeName="FGInventoryModel.InventoryIn">
+              <MappingFragment StoreEntitySet="InventoryIn">
+                <ScalarProperty Name="Seq" ColumnName="Seq" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="ModelNo" ColumnName="ModelNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="FGInventoryModel.Location">
+              <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="ZoneCode" ColumnName="ZoneCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MODELs">
+            <EntityTypeMapping TypeName="FGInventoryModel.MODEL">
+              <MappingFragment StoreEntitySet="MODEL">
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
+                <ScalarProperty Name="Commercial" ColumnName="Commercial" />
+                <ScalarProperty Name="SPFile" ColumnName="SPFile" />
+                <ScalarProperty Name="ViewFile" ColumnName="ViewFile" />
+                <ScalarProperty Name="SNEnd" ColumnName="SNEnd" />
+                <ScalarProperty Name="SNBegin" ColumnName="SNBegin" />
+                <ScalarProperty Name="LABOR_W" ColumnName="LABOR_W" />
+                <ScalarProperty Name="FP_DATE" ColumnName="FP_DATE" />
+                <ScalarProperty Name="DESC" ColumnName="DESC" />
+                <ScalarProperty Name="SOLE" ColumnName="SOLE" />
+                <ScalarProperty Name="MODEL1" ColumnName="MODEL" />
+                <ScalarProperty Name="FG" ColumnName="FG" />
+                <ScalarProperty Name="VERSION" ColumnName="VERSION" />
+                <ScalarProperty Name="MODELNO" ColumnName="MODELNO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

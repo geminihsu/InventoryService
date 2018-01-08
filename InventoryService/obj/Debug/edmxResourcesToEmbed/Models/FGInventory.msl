@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="InventoryModelStoreContainer" CdmEntityContainer="InventoryEntities">
+    <EntitySetMapping Name="InventoryIns">
+      <EntityTypeMapping TypeName="InventoryModel.InventoryIn">
+        <MappingFragment StoreEntitySet="InventoryIns">
+          <ScalarProperty Name="Seq" ColumnName="Seq" />
+          <ScalarProperty Name="SN" ColumnName="SN" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="ModelNo" ColumnName="ModelNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Locations">
+      <EntityTypeMapping TypeName="InventoryModel.Location">
+        <MappingFragment StoreEntitySet="Location">
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="ZoneCode" ColumnName="ZoneCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
