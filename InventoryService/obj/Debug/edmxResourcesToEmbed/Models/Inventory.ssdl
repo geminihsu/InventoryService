@@ -40,9 +40,20 @@ warning 6002: The table/view 'FGInventory.dbo.MODEL' does not have a primary key
     <Property Name="Commercial" Type="bit" />
     <Property Name="Brand" Type="nvarchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="Shipping">
+    <Key>
+      <PropertyRef Name="Seq" />
+    </Key>
+    <Property Name="Seq" Type="int" Nullable="false" />
+    <Property Name="SN" Type="varchar" MaxLength="16" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Location" Type="nchar" MaxLength="3" Nullable="false" />
+    <Property Name="ModelNo" Type="nchar" MaxLength="6" Nullable="false" />
+  </EntityType>
   <EntityContainer Name="FGInventoryModelStoreContainer">
     <EntitySet Name="InventoryIn" EntityType="Self.InventoryIn" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Shipping" EntityType="Self.Shipping" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MODEL" EntityType="Self.MODEL" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [MODEL].[MODELNO] AS [MODELNO], 

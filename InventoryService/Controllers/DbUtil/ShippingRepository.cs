@@ -6,67 +6,67 @@ using System.Web;
 
 namespace InventoryService.Controllers.DbUtil
 {
-    public class InventoryRepository
+    public class ShippingRepository
     {
         private static FGInventoryEntities db = new FGInventoryEntities();
 
         //Get all inventory Items from DB
-        public static List<InventoryIn> GetAllInventory()
+        public static List<Shipping> GetAllShippingHistory()
         {
-            var query = from inventory in db.InventoryIns
+            var query = from inventory in db.Shippings
                         select inventory;
             return query.ToList();
         }
 
-        //Query inventory Items By Seq
-        public static InventoryIn GetInventory(int itemSeq)
+        //Query Shipping record By Seq
+        public static Shipping GetInventory(int itemSeq)
         {
-            var query = from inventory in db.InventoryIns
+            var query = from inventory in db.Shippings
                         where inventory.Seq == itemSeq
                         select inventory;
             return query.SingleOrDefault();
         }
 
 
-        //Query inventory Items By Location
-        public static List<InventoryIn> SearchInventoryByLocation(string location)
+        //Query Shipping histoty By Date
+        public static List<Shipping> SearchShippingByDate(DateTime datetime)
         {
-            var query = from inventory in db.InventoryIns
-                        where inventory.Location.Contains(location)
+            var query = from inventory in db.Shippings
+                        where inventory.Date == datetime
                         select inventory;
             return query.ToList();
         }
 
         //Query inventory Items By model
-        public static List<InventoryIn> SearchInventoryByModel(string modelNo)
+        public static List<Shipping> SearchhShippingByModel(string modelNo)
         {
-            var query = from inventory in db.InventoryIns
+            var query = from inventory in db.Shippings
                         where inventory.ModelNo.Contains(modelNo) orderby inventory.SN
                         select inventory;
             return query.ToList();
         }
 
         //Insert one item into Inventory table
-        public static List<InventoryIn> InsertInventory(InventoryIn e)
+        public static List<Shipping> InsertInventory(Shipping e)
         {
-            db.InventoryIns.Add(e);
+            db.Shippings.Add(e);
             db.SaveChanges();
-            return GetAllInventory();
+            return GetAllShippingHistory();
         }
 
         //Insert more than one item into Inventory table
-        public static List<InventoryIn> InsertInventory(List<InventoryIn> e)
+        public static List<Shipping> InsertInventory(List<Shipping> e)
         {
-            db.InventoryIns.AddRange(e);
+            db.Shippings.AddRange(e);
             db.SaveChanges();
-            return GetAllInventory();
+            return GetAllShippingHistory();
         }
 
         //update one item into Inventory table
-        public static List<InventoryIn> UpdateInventory(InventoryIn e)
+        public static List<Shipping> UpdateInventory(Shipping e)
         {
-            var item = (from inventory in db.InventoryIns
-                       where inventory.Seq == e.Seq
+            var item = (from inventory in db.Shippings
+                        where inventory.Seq == e.Seq
                        select inventory).SingleOrDefault();
             item.SN = e.SN;
             item.Date = e.Date;
@@ -74,16 +74,16 @@ namespace InventoryService.Controllers.DbUtil
             item.ModelNo = e.ModelNo;
 
             db.SaveChanges();
-            return GetAllInventory();
+            return GetAllShippingHistory();
         }
 
 
         //update more than one item into Inventory table
-        public static List<InventoryIn> UpdateInventory(List<InventoryIn> e)
+        public static List<Shipping> UpdateInventory(List<Shipping> e)
         {
-            foreach (InventoryIn i in e)
+            foreach (Shipping i in e)
             {
-                var item = (from inventory in db.InventoryIns
+                var item = (from inventory in db.Shippings
                             where inventory.Seq == i.Seq
                             select inventory).SingleOrDefault();
                 item.SN = i.SN;
@@ -94,36 +94,27 @@ namespace InventoryService.Controllers.DbUtil
             }
 
             db.SaveChanges();
-            return GetAllInventory();
+            return GetAllShippingHistory();
         }
 
         //delete one item from Inventory table
-        public static List<InventoryIn> DeleteInventory(InventoryIn e)
+        public static List<Shipping> DeleteInventory(Shipping e)
         {
-            var item = (from inventory in db.InventoryIns
+            var item = (from inventory in db.Shippings
                         where inventory.Seq == e.Seq
                         select inventory).SingleOrDefault();
-            db.InventoryIns.Remove(item);
-
+            db.Shippings.Remove(item);
             db.SaveChanges();
-            return GetAllInventory();
+            return GetAllShippingHistory();
         }
 
         //delete more than one item from Inventory table
-        public static List<InventoryIn> DeleteInventory(List<Shipping> e)
+        public static List<Shipping> DeleteInventory(List<Shipping> e)
         {
-
-            foreach (Shipping x in e)
-            {
-
-                var item = (from inventory in db.InventoryIns
-                            where inventory.Seq == x.Seq
-                            select inventory).SingleOrDefault();
-                db.InventoryIns.Remove(item);
-            }
-           
+          
+            db.Shippings.RemoveRange(e);
             db.SaveChanges();
-            return GetAllInventory();
+            return GetAllShippingHistory();
         }
     }
 

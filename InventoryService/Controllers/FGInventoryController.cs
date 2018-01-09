@@ -19,14 +19,14 @@ namespace InventoryService.Controllers
 
 
 
-       /* // GET: api/FGInventory
-        public IQueryable<InventoryIn> GetInventoryIns()
-        {
-            return db.InventoryIns;
-        }*/
+        /* // GET: api/FGInventory
+         public IQueryable<InventoryIn> GetInventoryIns()
+         {
+             return db.InventoryIns;
+         }*/
 
 
-      
+
 
         // GET api/FGInventory
         [Route("api/FGInventory")]
@@ -201,13 +201,13 @@ namespace InventoryService.Controllers
              return response;
          }*/
 
-       /* [Route("api/FGInventory")]
-        public HttpResponseMessage Put(InventoryIn e)
-        {
-            var item = InventoryRepository.UpdateInventory(e);
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, item);
-            return response;
-        }*/
+        /* [Route("api/FGInventory")]
+         public HttpResponseMessage Put(InventoryIn e)
+         {
+             var item = InventoryRepository.UpdateInventory(e);
+             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, item);
+             return response;
+         }*/
 
         [Route("api/FGInventory")]
         public HttpResponseMessage Put(List<InventoryIn> e)
@@ -235,13 +235,33 @@ namespace InventoryService.Controllers
             return Ok(inventoryIn);
         }*/
 
+        // DELETE: api/FGInventory
+        /*[ResponseType(typeof(List<InventoryIn>))]
+        public IHttpActionResult DeleteInventoryIn(List<InventoryIn> e)
+        {
+            foreach (InventoryIn x in e)
+            {
+
+                InventoryIn inventoryIn = db.InventoryIns.Find(x.Seq);
+                if (inventoryIn == null)
+                {
+                    return NotFound();
+                }
+
+                db.InventoryIns.Remove(inventoryIn);
+            }
+             db.SaveChanges();
+
+    }*/
+
+        /*[HttpDelete]
         [Route("api/FGInventory")]
-        public HttpResponseMessage Delete(InventoryIn e)
+        public HttpResponseMessage Delete(List<InventoryIn> e)
         {
             var employees = InventoryRepository.DeleteInventory(e);
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
             return response;
-        }
+        }*/
 
         protected override void Dispose(bool disposing)
         {
@@ -258,3 +278,4 @@ namespace InventoryService.Controllers
         }
     }
 }
+ 

@@ -21,6 +21,7 @@
     <EntitySet Name="InventoryIns" EntityType="Self.InventoryIn" />
     <EntitySet Name="Locations" EntityType="Self.Location" />
     <EntitySet Name="MODELs" EntityType="FGInventoryModel.MODEL" />
+    <EntitySet Name="Shippings" EntityType="FGInventoryModel.Shipping" />
   </EntityContainer>
   <EntityType Name="MODEL">
     <Key>
@@ -40,5 +41,15 @@
     <Property Name="SPFile" Type="Binary" MaxLength="Max" FixedLength="false" />
     <Property Name="Commercial" Type="Boolean" />
     <Property Name="Brand" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Shipping">
+    <Key>
+      <PropertyRef Name="Seq" />
+    </Key>
+    <Property Name="Seq" Type="Int32" Nullable="false" />
+    <Property Name="SN" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Location" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
+    <Property Name="ModelNo" Type="String" Nullable="false" MaxLength="6" FixedLength="true" Unicode="true" />
   </EntityType>
 </Schema>
