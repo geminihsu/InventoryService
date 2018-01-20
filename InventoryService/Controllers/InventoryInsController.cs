@@ -188,8 +188,22 @@ namespace InventoryService.Controllers
         [Route("api/FGInventory")]
         public HttpResponseMessage Post(List<InventoryIn> e)
         {
-            var employees = InventoryRepository.InsertInventory(e);
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
+            HttpResponseMessage response = null;
+            try
+            {
+                var inventory = InventoryRepository.InsertInventory(e);
+                response = Request.CreateResponse(HttpStatusCode.OK, inventory);
+            }
+            catch (Exception x)
+            {
+                string error = x.ToString();
+                if (error.Equals("An error occurred while updating the entries. See the inner exception for details."))
+                    return new HttpResponseMessage(HttpStatusCode.NotModified);
+                else
+                    return new HttpResponseMessage(HttpStatusCode.Forbidden);
+            }
+
+
             return response;
         }
 
@@ -278,4 +292,3 @@ namespace InventoryService.Controllers
         }
     }
 }
- 

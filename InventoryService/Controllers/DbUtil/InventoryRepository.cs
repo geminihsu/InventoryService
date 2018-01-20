@@ -31,8 +31,13 @@ namespace InventoryService.Controllers.DbUtil
         //Query inventory Items By Location
         public static List<InventoryIn> SearchInventoryByLocation(string location)
         {
+            if (location.Length == 1)
+                location  = "00" + location;
+
+            if (location.Length == 2)
+                location = "0" + location;
             var query = from inventory in db.InventoryIns
-                        where inventory.Location.Contains(location)
+                        where inventory.Location.Equals(location)
                         select inventory;
             return query.ToList();
         }
@@ -41,7 +46,7 @@ namespace InventoryService.Controllers.DbUtil
         public static List<InventoryIn> SearchInventoryByModel(string modelNo)
         {
             var query = from inventory in db.InventoryIns
-                        where inventory.ModelNo.Contains(modelNo) orderby inventory.SN
+                        where inventory.ModelNo.Equals(modelNo) orderby inventory.SN
                         select inventory;
             return query.ToList();
         }
@@ -84,7 +89,7 @@ namespace InventoryService.Controllers.DbUtil
             foreach (InventoryIn i in e)
             {
                 var item = (from inventory in db.InventoryIns
-                            where inventory.Seq == i.Seq
+                            where inventory.SN == i.SN
                             select inventory).SingleOrDefault();
                 item.SN = i.SN;
                 item.Date = i.Date;
@@ -109,6 +114,18 @@ namespace InventoryService.Controllers.DbUtil
             return GetAllInventory();
         }
 
+        //delete one item from Inventory table
+        public static List<InventoryIn> DeleteInventory(History e)
+        {
+            var item = (from inventory in db.InventoryIns
+                        where inventory.Seq == e.Seq
+                        select inventory).SingleOrDefault();
+            db.InventoryIns.Remove(item);
+
+            db.SaveChanges();
+            return GetAllInventory();
+        }
+
         //delete more than one item from Inventory table
         public static List<InventoryIn> DeleteInventory(List<Shipping> e)
         {
@@ -117,11 +134,28 @@ namespace InventoryService.Controllers.DbUtil
             {
 
                 var item = (from inventory in db.InventoryIns
-                            where inventory.Seq == x.Seq
+                            where inventory.SN.Contains(x.SN)
                             select inventory).SingleOrDefault();
                 db.InventoryIns.Remove(item);
             }
            
+            db.SaveChanges();
+            return GetAllInventory();
+        }
+
+        //delete more than one item from Inventory table
+        public static List<InventoryIn> DeleteInventory(List<History> e)
+        {
+
+            foreach (History x in e)
+            {
+
+                var item = (from inventory in db.InventoryIns
+                            where inventory.SN.Contains(x.SN)
+                            select inventory).SingleOrDefault();
+                db.InventoryIns.Remove(item);
+            }
+
             db.SaveChanges();
             return GetAllInventory();
         }

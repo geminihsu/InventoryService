@@ -57,7 +57,15 @@ namespace InventoryService.Controllers
         [Route("~/api/Shippings/model/{modelNo:int}")]
         public HttpResponseMessage GetItemsByModel(int modelNo)
         {
-            var employees = ShippingRepository.SearchhShippingByModel(modelNo.ToString());
+            var employees = ShippingRepository.SearchShippingByModel(modelNo.ToString());
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
+            return response;
+        }
+
+        [Route("~/api/Shippings/salesOrder/{salesOrder}")]
+        public HttpResponseMessage GetItemsBySalesOrder(String salesOrder)
+        {
+            var employees = ShippingRepository.SearchShippingBySalesOrder(salesOrder);
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
             return response;
         }
