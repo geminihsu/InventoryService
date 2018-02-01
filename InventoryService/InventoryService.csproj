@@ -193,6 +193,7 @@
     <Compile Include="Controllers\CustOrdersController.cs" />
     <Compile Include="Controllers\DbUtil\CustOrderRepository.cs" />
     <Compile Include="Controllers\DbUtil\HistoryRepository.cs" />
+    <Compile Include="Controllers\DbUtil\ModelZone2MinQuantityRepository.cs" />
     <Compile Include="Controllers\DbUtil\ReportsRepository.cs" />
     <Compile Include="Controllers\DbUtil\ShippingRepository.cs" />
     <Compile Include="Controllers\DbUtil\LocationRepository.cs" />
@@ -203,9 +204,11 @@
     <Compile Include="Controllers\InventoryInsController.cs" />
     <Compile Include="Controllers\LocationsController.cs" />
     <Compile Include="Controllers\ModelsController.cs" />
+    <Compile Include="Controllers\ModelZoneMapsController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\ShippingsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="DTOs\FGZoneDto.cs" />
     <Compile Include="DTOs\ModelDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -238,6 +241,9 @@
       <DependentUpon>Inventory.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MODEL.cs">
+      <DependentUpon>Inventory.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModelZoneMap.cs">
       <DependentUpon>Inventory.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Report.cs">

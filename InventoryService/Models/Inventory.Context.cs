@@ -32,5 +32,6 @@ namespace InventoryService.Models
         public virtual DbSet<CustOrder> CustOrders { get; set; }
         public virtual DbSet<History> Histories { get; set; }
         public virtual DbSet<Report> Reports { get; set; }
+        public virtual DbSet<ModelZoneMap> ModelZoneMaps { get; set; }
     }
 }

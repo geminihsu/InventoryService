@@ -78,6 +78,18 @@ warning 6002: The table/view 'FGInventory.dbo.MODEL' does not have a primary key
     <Property Name="Commercial" Type="bit" />
     <Property Name="Brand" Type="nvarchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="ModelZoneMap">
+    <Key>
+      <PropertyRef Name="Seq" />
+    </Key>
+    <Property Name="Seq" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Model" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="FG" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Z2MinQty" Type="int" Nullable="false" />
+    <Property Name="Z2CurtQty" Type="int" Nullable="false" />
+    <Property Name="Zone1Code" Type="varchar" MaxLength="3" Nullable="false" />
+    <Property Name="Zone2Code" Type="varchar" MaxLength="3" Nullable="false" />
+  </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'FGInventory.dbo.Report' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="Report">
@@ -114,6 +126,7 @@ warning 6002: The table/view 'FGInventory.dbo.Report' does not have a primary ke
     <EntitySet Name="History" EntityType="Self.History" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InventoryIn" EntityType="Self.InventoryIn" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ModelZoneMap" EntityType="Self.ModelZoneMap" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Shipping" EntityType="Self.Shipping" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MODEL" EntityType="Self.MODEL" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 

@@ -110,5 +110,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ModelZoneMaps">
+      <EntityTypeMapping TypeName="FGInventoryModel.ModelZoneMap">
+        <MappingFragment StoreEntitySet="ModelZoneMap">
+          <ScalarProperty Name="Z2CurtQty" ColumnName="Z2CurtQty" />
+          <ScalarProperty Name="Zone2Code" ColumnName="Zone2Code" />
+          <ScalarProperty Name="Zone1Code" ColumnName="Zone1Code" />
+          <ScalarProperty Name="Z2MinQty" ColumnName="Z2MinQty" />
+          <ScalarProperty Name="FG" ColumnName="FG" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="Seq" ColumnName="Seq" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
