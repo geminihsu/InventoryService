@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InventoryService.Controllers.DbUtil;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,7 @@ namespace InventoryService.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
-
+            //InventoryRepository.retrievePeachTree();
             return View();
         }
     }

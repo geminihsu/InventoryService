@@ -42,6 +42,15 @@ namespace InventoryService.Controllers
             return response;
         }
 
+        // GET api/ModelZoneMaps/DailyReport/date/
+        [Route("api/ModelZoneMaps/DailyReport/date/{date:datetime}")]
+        public HttpResponseMessage GetDailyReport(DateTime date)
+        {
+            var models = ModelZone2MinQuantityRepository.GetDailyReportByModels(date);
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, models);
+            return response;
+        }
+
         // GET: api/ModelZoneMaps/5
         [ResponseType(typeof(ModelZoneMap))]
         public IHttpActionResult GetModelZoneMap(int id)
@@ -55,7 +64,7 @@ namespace InventoryService.Controllers
             return Ok(modelZoneMap);
         }
 
-        // PUT: api/ModelZoneMaps/5
+       /* // PUT: api/ModelZoneMaps/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutModelZoneMap(int id, ModelZoneMap modelZoneMap)
         {
@@ -88,7 +97,7 @@ namespace InventoryService.Controllers
             }
 
             return StatusCode(HttpStatusCode.NoContent);
-        }
+        }*/
 
         // POST: api/ModelZoneMaps
         [ResponseType(typeof(ModelZoneMap))]

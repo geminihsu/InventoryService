@@ -54,7 +54,7 @@ namespace InventoryService.Controllers
         }
 
         // PUT: api/Models/5
-        [ResponseType(typeof(void))]
+       /* [ResponseType(typeof(void))]
         public IHttpActionResult PutMODEL(string id, MODEL mODEL)
         {
             if (!ModelState.IsValid)
@@ -86,7 +86,7 @@ namespace InventoryService.Controllers
             }
 
             return StatusCode(HttpStatusCode.NoContent);
-        }
+        }*/
 
         // POST: api/Models
         [ResponseType(typeof(MODEL))]

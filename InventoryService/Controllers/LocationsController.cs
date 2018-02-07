@@ -53,7 +53,7 @@ namespace InventoryService.Controllers
         }
 
         // PUT: api/Locations/5
-        [ResponseType(typeof(void))]
+       /* [ResponseType(typeof(void))]
         public IHttpActionResult PutLocation(string id, Location location)
         {
             if (!ModelState.IsValid)
@@ -85,7 +85,7 @@ namespace InventoryService.Controllers
             }
 
             return StatusCode(HttpStatusCode.NoContent);
-        }
+        }*/
 
         // POST: api/Locations
         [ResponseType(typeof(Location))]

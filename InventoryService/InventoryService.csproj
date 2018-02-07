@@ -61,6 +61,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.SqlServer.Compact.4.0.8876.1\lib\net40\System.Data.SqlServerCe.dll</HintPath>
     </Reference>
@@ -191,8 +192,10 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\CustOrdersController.cs" />
+    <Compile Include="Controllers\DailyTotalsController.cs" />
     <Compile Include="Controllers\DbUtil\CustOrderRepository.cs" />
     <Compile Include="Controllers\DbUtil\HistoryRepository.cs" />
+    <Compile Include="Controllers\DbUtil\ModelDailyTotal.cs" />
     <Compile Include="Controllers\DbUtil\ModelZone2MinQuantityRepository.cs" />
     <Compile Include="Controllers\DbUtil\ReportsRepository.cs" />
     <Compile Include="Controllers\DbUtil\ShippingRepository.cs" />
@@ -208,12 +211,16 @@
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\ShippingsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="DTOs\FGDailyReportDto.cs" />
     <Compile Include="DTOs\FGZoneDto.cs" />
     <Compile Include="DTOs\ModelDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CustOrder.cs">
+      <DependentUpon>Inventory.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DailyTotal.cs">
       <DependentUpon>Inventory.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\History.cs">

@@ -80,8 +80,6 @@
           <ScalarProperty Name="Seq" ColumnName="Seq" />
           <ScalarProperty Name="Location" ColumnName="Location" />
           <ScalarProperty Name="ModelNo" ColumnName="ModelNo" />
-          <ScalarProperty Name="IsPurchaseImported" ColumnName="IsPurchaseImported" />
-          <ScalarProperty Name="CustPO" ColumnName="CustPO" />
           <ScalarProperty Name="ShipCity" ColumnName="ShipCity" />
           <ScalarProperty Name="ShipState" ColumnName="ShipState" />
           <ScalarProperty Name="ShipVia" ColumnName="ShipVia" />
@@ -120,6 +118,16 @@
           <ScalarProperty Name="FG" ColumnName="FG" />
           <ScalarProperty Name="Model" ColumnName="Model" />
           <ScalarProperty Name="Seq" ColumnName="Seq" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DailyTotals">
+      <EntityTypeMapping TypeName="FGInventoryModel.DailyTotal">
+        <MappingFragment StoreEntitySet="DailyTotal">
+          <ScalarProperty Name="Seq" ColumnName="Seq" />
+          <ScalarProperty Name="ModelNo" ColumnName="ModelNo" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

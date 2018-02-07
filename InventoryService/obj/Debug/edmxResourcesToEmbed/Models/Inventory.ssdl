@@ -20,11 +20,20 @@
     <Property Name="Closed" Type="bit" Nullable="false" />
     <Property Name="Seq" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
+  <EntityType Name="DailyTotal">
+    <Key>
+      <PropertyRef Name="Seq" />
+    </Key>
+    <Property Name="ModelNo" Type="nchar" MaxLength="6" Nullable="false" />
+    <Property Name="Total" Type="int" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Seq" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
   <EntityType Name="History">
     <Key>
       <PropertyRef Name="Seq" />
     </Key>
-    <Property Name="SN" Type="varchar" MaxLength="16" Nullable="false" />
+    <Property Name="SN" Type="varchar" MaxLength="16" />
     <Property Name="SalesOrder" Type="varchar" MaxLength="100" />
     <Property Name="Date" Type="datetime" Nullable="false" />
     <Property Name="TrackingNo" Type="varchar" MaxLength="100" />
@@ -32,10 +41,8 @@
     <Property Name="ShipVia" Type="varchar" MaxLength="200" />
     <Property Name="ShipState" Type="varchar" MaxLength="100" />
     <Property Name="ShipCity" Type="varchar" MaxLength="150" />
-    <Property Name="CustPO" Type="varchar" MaxLength="100" />
-    <Property Name="IsPurchaseImported" Type="bit" />
     <Property Name="ModelNo" Type="varchar" MaxLength="6" Nullable="false" />
-    <Property Name="Location" Type="varchar" MaxLength="3" Nullable="false" />
+    <Property Name="Location" Type="varchar" MaxLength="3" />
     <Property Name="Seq" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="InventoryIn">
@@ -83,7 +90,7 @@ warning 6002: The table/view 'FGInventory.dbo.MODEL' does not have a primary key
       <PropertyRef Name="Seq" />
     </Key>
     <Property Name="Seq" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Model" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Model" Type="varchar" MaxLength="16" Nullable="false" />
     <Property Name="FG" Type="nvarchar" MaxLength="255" Nullable="false" />
     <Property Name="Z2MinQty" Type="int" Nullable="false" />
     <Property Name="Z2CurtQty" Type="int" Nullable="false" />
@@ -123,6 +130,7 @@ warning 6002: The table/view 'FGInventory.dbo.Report' does not have a primary ke
   </EntityType>
   <EntityContainer Name="FGInventoryModelStoreContainer">
     <EntitySet Name="CustOrder" EntityType="Self.CustOrder" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DailyTotal" EntityType="Self.DailyTotal" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="History" EntityType="Self.History" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InventoryIn" EntityType="Self.InventoryIn" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />

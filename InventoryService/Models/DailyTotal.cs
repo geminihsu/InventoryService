@@ -12,18 +12,11 @@ namespace InventoryService.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class History
+    public partial class DailyTotal
     {
-        public string SN { get; set; }
-        public string SalesOrder { get; set; }
+        public int Total { get; set; }
         public System.DateTime Date { get; set; }
-        public string TrackingNo { get; set; }
-        public string BillTo { get; set; }
-        public string ShipVia { get; set; }
-        public string ShipState { get; set; }
-        public string ShipCity { get; set; }
         public string ModelNo { get; set; }
-        public string Location { get; set; }
         public int Seq { get; set; }
     }
 }

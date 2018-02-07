@@ -51,10 +51,18 @@ namespace InventoryService.Controllers
             return Ok(inventoryIn);
         }
 
-       /* [Route("~/api/FGInventory/SN/LocationInfo")]
+        /* [Route("~/api/FGInventory/SN/LocationInfo")]
+         public HttpResponseMessage GetItemsLocationBySN(List<InventoryIn> e)
+         {
+             var employees = InventoryRepository.SearchInventoryBySNList(e);
+             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
+             return response;
+         }*/
+
+        /*[Route("~/api/FGInventory/SN/NotExist")]
         public HttpResponseMessage GetItemsLocationBySN(List<InventoryIn> e)
         {
-            var employees = InventoryRepository.SearchInventoryBySNList(e);
+            var employees = InventoryRepository.SearchInventoryBySNListExits(e);
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
             return response;
         }*/
@@ -270,7 +278,13 @@ namespace InventoryService.Controllers
         }
 
 
-
+        [Route("~/api/FGInventory/SN/NotExist")]
+        public HttpResponseMessage PutItemsLocationBySN(List<InventoryIn> e)
+        {
+            var employees = InventoryRepository.SearchInventoryBySNListExits(e);
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
+            return response;
+        }
         // DELETE: api/FGInventory/5
         /*[ResponseType(typeof(InventoryIn))]
         public IHttpActionResult DeleteInventoryIn(int id)

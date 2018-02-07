@@ -2,7 +2,10 @@
 using InventoryService.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Odbc;
 using System.Linq;
+using System.Text;
 using System.Web;
 
 namespace InventoryService.Controllers.DbUtil
@@ -39,6 +42,25 @@ namespace InventoryService.Controllers.DbUtil
                             where inventory.SN == i.SN
                             select inventory).SingleOrDefault();
                 items.Add(item);
+
+            }
+
+            return items;
+        }
+
+
+        //Query inventory Items By SN List(Inorder to filter all items exit inventory table)
+        public static List<InventoryIn> SearchInventoryBySNListExits(List<InventoryIn> e)
+        {
+            var items = new List<InventoryIn>();
+            foreach (InventoryIn i in e)
+            {
+                var item = (from inventory in db.InventoryIns
+                            where inventory.SN == i.SN
+                            select inventory).FirstOrDefault() != null;
+
+                if(!item)
+                    items.Add(i);
 
             }
 
@@ -177,7 +199,7 @@ namespace InventoryService.Controllers.DbUtil
                             where inventory.SN == i.SN
                             select inventory).SingleOrDefault();
                 item.SN = i.SN;
-                item.Date = i.Date;
+                //item.Date = i.Date;
                 item.Location = i.Location;
                 item.ModelNo = i.ModelNo;
 
@@ -243,6 +265,40 @@ namespace InventoryService.Controllers.DbUtil
 
             db.SaveChanges();
             return GetAllInventory();
+        }
+
+        public static void retrievePeachTree()
+        {
+            String connString = System.Configuration.ConfigurationManager.ConnectionStrings["PeachreeSNOConnectionString"].ToString();
+            DataTable dt = new DataTable();
+            OdbcConnection cn; //= new OdbcConnection(connString);
+
+
+            dt = new DataTable(); //reset
+
+            //Peachtree
+
+            using (cn = new OdbcConnection(connString))
+            {
+                string sqlCheck = @"
+SELECT        LineItem.ItemID, LineItem.ItemDescription, CONVERT(JrnlRow.Quantity, SQL_INTEGER) AS QTY, JrnlHdr.Reference, JrnlRow.RowDate
+FROM            JrnlRow, LineItem, JrnlHdr
+WHERE        JrnlRow.ItemRecordNumber = LineItem.ItemRecordNumber AND JrnlRow.PostOrder = JrnlHdr.PostOrder AND (JrnlRow.Quantity > 0) AND (JrnlHdr.Module <> 'R') AND (JrnlRow.RowDate = '2017-12-04') and (LineItem.ItemID like 'T%') ";
+                OdbcCommand sqlCmd = new OdbcCommand(sqlCheck, cn);
+                //                sqlCmd.Parameters.Add("?", OdbcType.VarChar).Value = (rec.ServiceId.ToString() + "-" + rec.OrderId.ToString());
+                OdbcDataAdapter adapter = new OdbcDataAdapter(sqlCmd);
+                adapter.Fill(dt);
+            }
+
+            var sb = new StringBuilder();
+            foreach (DataRow row in dt.Rows)
+            {
+                var arr = row.ItemArray.Select(i => i.ToString()).ToArray();
+                var line = String.Join(",", arr);
+                sb.Append(line + "\r\n");
+            }
+            var str = sb.ToString();
+            Console.WriteLine(str);
         }
     }
 
