@@ -8,7 +8,7 @@
     <Property Name="SN" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Date" Type="DateTime" Precision="3" Nullable="false" />
     <Property Name="Location" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="ModelNo" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ModelNo" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
   </EntityType>
   <EntityType Name="Location">
     <Key>
@@ -83,7 +83,7 @@
     <Key>
       <PropertyRef Name="Seq" />
     </Key>
-    <Property Name="SN" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="SN" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="SalesOrder" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="TrackingNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
@@ -91,7 +91,7 @@
     <Property Name="ShipVia" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="ShipState" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="ShipCity" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-    <Property Name="ModelNo" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="ModelNo" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
     <Property Name="Location" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
     <Property Name="Seq" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
   </EntityType>
@@ -123,6 +123,8 @@
     <Property Name="Zone1Code" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
     <Property Name="Zone2Code" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
     <Property Name="Z2CurtQty" Type="Int32" Nullable="false" />
+    <Property Name="PalletNum" Type="Int32" Nullable="false" />
+    <Property Name="Z2MaxQty" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="DailyTotal">
     <Key>

@@ -38,15 +38,15 @@
           <Key>
             <PropertyRef Name="Seq" />
           </Key>
-          <Property Name="SN" Type="varchar" MaxLength="16" />
-          <Property Name="SalesOrder" Type="varchar" MaxLength="100" />
+          <Property Name="SN" Type="varchar" MaxLength="16" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="ModelNo" Type="varchar" MaxLength="6" />
           <Property Name="TrackingNo" Type="varchar" MaxLength="100" />
+          <Property Name="ShipCity" Type="varchar" MaxLength="150" />
+          <Property Name="ShipState" Type="varchar" MaxLength="100" />
           <Property Name="BillTo" Type="varchar" MaxLength="200" />
           <Property Name="ShipVia" Type="varchar" MaxLength="200" />
-          <Property Name="ShipState" Type="varchar" MaxLength="100" />
-          <Property Name="ShipCity" Type="varchar" MaxLength="150" />
-          <Property Name="ModelNo" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="SalesOrder" Type="varchar" MaxLength="100" />
           <Property Name="Location" Type="varchar" MaxLength="3" />
           <Property Name="Seq" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
@@ -57,7 +57,7 @@
           <Property Name="SN" Type="varchar" MaxLength="16" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="Location" Type="varchar" MaxLength="3" Nullable="false" />
-          <Property Name="ModelNo" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="ModelNo" Type="varchar" MaxLength="6" Nullable="false" />
           <Property Name="Seq" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="Location">
@@ -98,7 +98,9 @@ warning 6002: The table/view 'FGInventory.dbo.MODEL' does not have a primary key
           <Property Name="Seq" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Model" Type="varchar" MaxLength="16" Nullable="false" />
           <Property Name="FG" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="PalletNum" Type="int" Nullable="false" />
           <Property Name="Z2MinQty" Type="int" Nullable="false" />
+          <Property Name="Z2MaxQty" Type="int" Nullable="false" />
           <Property Name="Z2CurtQty" Type="int" Nullable="false" />
           <Property Name="Zone1Code" Type="varchar" MaxLength="3" Nullable="false" />
           <Property Name="Zone2Code" Type="varchar" MaxLength="3" Nullable="false" />
@@ -189,7 +191,7 @@ warning 6002: The table/view 'FGInventory.dbo.Report' does not have a primary ke
           <Property Name="SN" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Date" Type="DateTime" Precision="3" Nullable="false" />
           <Property Name="Location" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ModelNo" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModelNo" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="Location">
           <Key>
@@ -264,7 +266,7 @@ warning 6002: The table/view 'FGInventory.dbo.Report' does not have a primary ke
           <Key>
             <PropertyRef Name="Seq" />
           </Key>
-          <Property Name="SN" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="SN" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="SalesOrder" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="TrackingNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
@@ -272,7 +274,7 @@ warning 6002: The table/view 'FGInventory.dbo.Report' does not have a primary ke
           <Property Name="ShipVia" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="ShipState" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="ShipCity" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="ModelNo" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="ModelNo" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
           <Property Name="Location" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
           <Property Name="Seq" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
@@ -304,6 +306,8 @@ warning 6002: The table/view 'FGInventory.dbo.Report' does not have a primary ke
           <Property Name="Zone1Code" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
           <Property Name="Zone2Code" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
           <Property Name="Z2CurtQty" Type="Int32" Nullable="false" />
+          <Property Name="PalletNum" Type="Int32" Nullable="false" />
+          <Property Name="Z2MaxQty" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="DailyTotal">
           <Key>
@@ -430,6 +434,8 @@ warning 6002: The table/view 'FGInventory.dbo.Report' does not have a primary ke
           <EntitySetMapping Name="ModelZoneMaps">
             <EntityTypeMapping TypeName="FGInventoryModel.ModelZoneMap">
               <MappingFragment StoreEntitySet="ModelZoneMap">
+                <ScalarProperty Name="Z2MaxQty" ColumnName="Z2MaxQty" />
+                <ScalarProperty Name="PalletNum" ColumnName="PalletNum" />
                 <ScalarProperty Name="Z2CurtQty" ColumnName="Z2CurtQty" />
                 <ScalarProperty Name="Zone2Code" ColumnName="Zone2Code" />
                 <ScalarProperty Name="Zone1Code" ColumnName="Zone1Code" />

@@ -57,7 +57,7 @@ namespace InventoryService.Controllers.DbUtil
         }
 
 
-        //Insert one item into Inventory table
+        //Insert one item into History table
         public static List<History> InsertInventory(History e)
         {
             db.Histories.Add(e);
@@ -65,7 +65,7 @@ namespace InventoryService.Controllers.DbUtil
             return GetAllShippingHistory();
         }
 
-        //Insert more than one item into Inventory table
+        //Insert more than one item into History table
         public static List<History> InsertInventory(List<History> e)
         {
             db.Histories.AddRange(e);

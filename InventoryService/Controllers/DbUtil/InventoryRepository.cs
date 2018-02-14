@@ -113,7 +113,9 @@ namespace InventoryService.Controllers.DbUtil
         {
             var query = (from inventory in db.InventoryIns
                          where inventory.ModelNo.Equals(modelNo)
+                         join code in db.Locations on inventory.Location equals code.Code
                          orderby inventory.SN.Substring(6, 10) ascending, inventory.Location descending
+                         where inventory.ModelNo.Equals(modelNo) && (code.ZoneCode == 1 || code.ZoneCode == 2)
                          select inventory).Take(count);
             return query.ToList();
         }
@@ -267,39 +269,7 @@ namespace InventoryService.Controllers.DbUtil
             return GetAllInventory();
         }
 
-        public static void retrievePeachTree()
-        {
-            String connString = System.Configuration.ConfigurationManager.ConnectionStrings["PeachreeSNOConnectionString"].ToString();
-            DataTable dt = new DataTable();
-            OdbcConnection cn; //= new OdbcConnection(connString);
-
-
-            dt = new DataTable(); //reset
-
-            //Peachtree
-
-            using (cn = new OdbcConnection(connString))
-            {
-                string sqlCheck = @"
-SELECT        LineItem.ItemID, LineItem.ItemDescription, CONVERT(JrnlRow.Quantity, SQL_INTEGER) AS QTY, JrnlHdr.Reference, JrnlRow.RowDate
-FROM            JrnlRow, LineItem, JrnlHdr
-WHERE        JrnlRow.ItemRecordNumber = LineItem.ItemRecordNumber AND JrnlRow.PostOrder = JrnlHdr.PostOrder AND (JrnlRow.Quantity > 0) AND (JrnlHdr.Module <> 'R') AND (JrnlRow.RowDate = '2017-12-04') and (LineItem.ItemID like 'T%') ";
-                OdbcCommand sqlCmd = new OdbcCommand(sqlCheck, cn);
-                //                sqlCmd.Parameters.Add("?", OdbcType.VarChar).Value = (rec.ServiceId.ToString() + "-" + rec.OrderId.ToString());
-                OdbcDataAdapter adapter = new OdbcDataAdapter(sqlCmd);
-                adapter.Fill(dt);
-            }
-
-            var sb = new StringBuilder();
-            foreach (DataRow row in dt.Rows)
-            {
-                var arr = row.ItemArray.Select(i => i.ToString()).ToArray();
-                var line = String.Join(",", arr);
-                sb.Append(line + "\r\n");
-            }
-            var str = sb.ToString();
-            Console.WriteLine(str);
-        }
+       
     }
 
 

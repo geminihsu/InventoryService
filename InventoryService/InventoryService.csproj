@@ -197,8 +197,8 @@
     <Compile Include="Controllers\DbUtil\HistoryRepository.cs" />
     <Compile Include="Controllers\DbUtil\ModelDailyTotal.cs" />
     <Compile Include="Controllers\DbUtil\ModelZone2MinQuantityRepository.cs" />
+    <Compile Include="Controllers\DbUtil\ReachTreeRepository.cs" />
     <Compile Include="Controllers\DbUtil\ReportsRepository.cs" />
-    <Compile Include="Controllers\DbUtil\ShippingRepository.cs" />
     <Compile Include="Controllers\DbUtil\LocationRepository.cs" />
     <Compile Include="Controllers\DbUtil\ModelsRepository.cs" />
     <Compile Include="Controllers\DbUtil\InventoryRepository.cs" />
@@ -209,8 +209,6 @@
     <Compile Include="Controllers\ModelsController.cs" />
     <Compile Include="Controllers\ModelZoneMapsController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
-    <Compile Include="Controllers\ShippingsController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DTOs\FGDailyReportDto.cs" />
     <Compile Include="DTOs\FGZoneDto.cs" />
     <Compile Include="DTOs\ModelDto.cs" />

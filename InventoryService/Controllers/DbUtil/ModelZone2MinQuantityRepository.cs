@@ -47,7 +47,10 @@ namespace InventoryService.Controllers.DbUtil
                         continue;
                     else
                     {
-                        i.Z2CurtQty = i.Z2MinQty - zone2.Count;
+
+                        int remainder = (i.Z2MaxQty - zone2.Count) % i.PalletNum;
+                        i.Z2CurtQty = (i.Z2MaxQty - zone2.Count) - remainder;
+
                         result.Add(i);
                     }
                 }
@@ -83,7 +86,8 @@ namespace InventoryService.Controllers.DbUtil
 
                 var previous = (from prev in db.DailyTotals
                                 where prev.ModelNo.Equals(i.Model) && prev.Date >= yesterday && prev.Date < date
-                                select prev).SingleOrDefault();
+                                select prev).FirstOrDefault();
+                //var previous = 0;
 
                 var shipped = (from ship in db.Histories
                                where ship.ModelNo.Equals(i.Model) && ship.Date >= date && ship.Date < tomorrow

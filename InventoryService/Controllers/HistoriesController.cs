@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using InventoryService.Controllers.DbUtil;
 using InventoryService.Models;
 
 namespace InventoryService.Controllers
@@ -16,12 +17,16 @@ namespace InventoryService.Controllers
     {
         private FGInventoryEntities db = new FGInventoryEntities();
 
-        // GET: api/Histories
-        public IQueryable<History> GetHistories()
+        // GET api/FGInventory
+        [Route("api/Histories")]
+        public HttpResponseMessage Get()
         {
-            return db.Histories;
+            var employees = HistoryRepository.GetAllShippingHistory();
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
+            return response;
         }
 
+       
         // GET: api/Histories/5
         [ResponseType(typeof(History))]
         public IHttpActionResult GetHistory(int id)
@@ -35,42 +40,67 @@ namespace InventoryService.Controllers
             return Ok(history);
         }
 
-        // PUT: api/Histories/5
-       /* [ResponseType(typeof(void))]
-        public IHttpActionResult PutHistory(int id, History history)
+
+       /* [Route("~/api/Histories/model/{modelNo:int}")]
+        public HttpResponseMessage GetItemsByModelNo(int modelNo)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != history.Seq)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(history).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!HistoryExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
+            var employees = HistoryRepository.SearchShippingByModel(modelNo.ToString());
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
+            return response;
         }*/
 
-        // POST: api/Histories
+        [Route("~/api/Histories/salesOrder/{salesOrder}")]
+        public HttpResponseMessage GetItemsBySalesOrder(String salesOrder)
+        {
+            var employees = HistoryRepository.SearchShippingBySalesOrder(salesOrder);
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
+            return response;
+        }
+
+        [Route("~/api/Histories/date/{date:datetime}")]
+        public HttpResponseMessage GetItemsByDate(DateTime date)
+        {
+            var employees = HistoryRepository.SearchShippingByDate(date);
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
+            return response;
+        }
+
+        // PUT: api/Histories/5
+        /* [ResponseType(typeof(void))]
+         public IHttpActionResult PutHistory(int id, History history)
+         {
+             if (!ModelState.IsValid)
+             {
+                 return BadRequest(ModelState);
+             }
+
+             if (id != history.Seq)
+             {
+                 return BadRequest();
+             }
+
+             db.Entry(history).State = EntityState.Modified;
+
+             try
+             {
+                 db.SaveChanges();
+             }
+             catch (DbUpdateConcurrencyException)
+             {
+                 if (!HistoryExists(id))
+                 {
+                     return NotFound();
+                 }
+                 else
+                 {
+                     throw;
+                 }
+             }
+
+             return StatusCode(HttpStatusCode.NoContent);
+         }*/
+
+        /*// POST: api/Histories
         [ResponseType(typeof(History))]
         public IHttpActionResult PostHistory(History history)
         {
@@ -83,6 +113,30 @@ namespace InventoryService.Controllers
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = history.Seq }, history);
+        }*/
+
+        [Route("api/Histories")]
+        public HttpResponseMessage Post(List<History> e)
+        {
+            HttpResponseMessage response = null;
+            try
+            {
+
+                InventoryRepository.DeleteInventory(e);
+                var inventory = HistoryRepository.InsertInventory(e);
+                response = Request.CreateResponse(HttpStatusCode.OK, inventory);
+            }
+            catch (Exception x)
+            {
+                string error = x.ToString();
+                if (error.Equals("An error occurred while updating the entries. See the inner exception for details."))
+                    return new HttpResponseMessage(HttpStatusCode.NotModified);
+                else
+                    return new HttpResponseMessage(HttpStatusCode.Forbidden);
+            }
+
+
+            return response;
         }
 
         // DELETE: api/Histories/5

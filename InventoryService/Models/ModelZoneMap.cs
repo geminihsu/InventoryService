@@ -21,5 +21,7 @@ namespace InventoryService.Models
         public string Zone1Code { get; set; }
         public string Zone2Code { get; set; }
         public int Z2CurtQty { get; set; }
+        public int PalletNum { get; set; }
+        public int Z2MaxQty { get; set; }
     }
 }

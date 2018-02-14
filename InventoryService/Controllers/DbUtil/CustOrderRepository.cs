@@ -22,9 +22,10 @@ namespace InventoryService.Controllers.DbUtil
         //Query order Items By SalesOrder
         public static List<CustOrder> SearchOrderBySalesOrder(string salesOrder)
         {
-            var query = from order in db.CustOrders
-                        where order.Sales_Order.Equals(salesOrder)
-                        select order;
+            //var query = from order in db.CustOrders
+            //            where order.Sales_Order.Equals(salesOrder)
+            //            select order;
+            var query = ReachTreeRepository.getSalesOrderInfo(salesOrder);
             return query.ToList();
         }
 
