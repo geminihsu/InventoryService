@@ -27,6 +27,7 @@
     <EntitySet Name="Reports" EntityType="FGInventoryModel.Report" />
     <EntitySet Name="ModelZoneMaps" EntityType="FGInventoryModel.ModelZoneMap" />
     <EntitySet Name="DailyTotals" EntityType="FGInventoryModel.DailyTotal" />
+    <EntitySet Name="ModelInfoes" EntityType="FGInventoryModel.ModelInfo" />
   </EntityContainer>
   <EntityType Name="MODEL">
     <Key>
@@ -133,6 +134,14 @@
     <Property Name="Total" Type="Int32" Nullable="false" />
     <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="ModelNo" Type="String" Nullable="false" MaxLength="6" FixedLength="true" Unicode="true" />
+    <Property Name="Seq" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="ModelInfo">
+    <Key>
+      <PropertyRef Name="Seq" />
+    </Key>
+    <Property Name="ModelNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="Seq" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
   </EntityType>
 </Schema>

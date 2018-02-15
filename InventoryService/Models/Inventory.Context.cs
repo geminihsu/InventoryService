@@ -34,5 +34,6 @@ namespace InventoryService.Models
         public virtual DbSet<Report> Reports { get; set; }
         public virtual DbSet<ModelZoneMap> ModelZoneMaps { get; set; }
         public virtual DbSet<DailyTotal> DailyTotals { get; set; }
+        public virtual DbSet<ModelInfo> ModelInfoes { get; set; }
     }
 }

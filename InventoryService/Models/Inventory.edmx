@@ -91,6 +91,14 @@ warning 6002: The table/view 'FGInventory.dbo.MODEL' does not have a primary key
           <Property Name="Commercial" Type="bit" />
           <Property Name="Brand" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="ModelInfo">
+          <Key>
+            <PropertyRef Name="Seq" />
+          </Key>
+          <Property Name="ModelNo" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar" MaxLength="255" />
+          <Property Name="Seq" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
         <EntityType Name="ModelZoneMap">
           <Key>
             <PropertyRef Name="Seq" />
@@ -143,6 +151,7 @@ warning 6002: The table/view 'FGInventory.dbo.Report' does not have a primary ke
           <EntitySet Name="History" EntityType="Self.History" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InventoryIn" EntityType="Self.InventoryIn" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModelInfo" EntityType="Self.ModelInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ModelZoneMap" EntityType="Self.ModelZoneMap" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Shipping" EntityType="Self.Shipping" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MODEL" EntityType="Self.MODEL" store:Type="Tables" store:Schema="dbo">
@@ -210,6 +219,7 @@ warning 6002: The table/view 'FGInventory.dbo.Report' does not have a primary ke
           <EntitySet Name="Reports" EntityType="FGInventoryModel.Report" />
           <EntitySet Name="ModelZoneMaps" EntityType="FGInventoryModel.ModelZoneMap" />
           <EntitySet Name="DailyTotals" EntityType="FGInventoryModel.DailyTotal" />
+          <EntitySet Name="ModelInfoes" EntityType="FGInventoryModel.ModelInfo" />
         </EntityContainer>
         <EntityType Name="MODEL">
           <Key>
@@ -316,6 +326,14 @@ warning 6002: The table/view 'FGInventory.dbo.Report' does not have a primary ke
           <Property Name="Total" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModelNo" Type="String" Nullable="false" MaxLength="6" FixedLength="true" Unicode="true" />
+          <Property Name="Seq" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="ModelInfo">
+          <Key>
+            <PropertyRef Name="Seq" />
+          </Key>
+          <Property Name="ModelNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Seq" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
       </Schema>
@@ -453,6 +471,15 @@ warning 6002: The table/view 'FGInventory.dbo.Report' does not have a primary ke
                 <ScalarProperty Name="ModelNo" ColumnName="ModelNo" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Total" ColumnName="Total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ModelInfoes">
+            <EntityTypeMapping TypeName="FGInventoryModel.ModelInfo">
+              <MappingFragment StoreEntitySet="ModelInfo">
+                <ScalarProperty Name="Seq" ColumnName="Seq" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ModelNo" ColumnName="ModelNo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

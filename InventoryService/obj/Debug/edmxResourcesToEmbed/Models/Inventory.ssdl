@@ -85,6 +85,14 @@ warning 6002: The table/view 'FGInventory.dbo.MODEL' does not have a primary key
     <Property Name="Commercial" Type="bit" />
     <Property Name="Brand" Type="nvarchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="ModelInfo">
+    <Key>
+      <PropertyRef Name="Seq" />
+    </Key>
+    <Property Name="ModelNo" Type="varchar" MaxLength="50" />
+    <Property Name="Description" Type="varchar" MaxLength="255" />
+    <Property Name="Seq" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
   <EntityType Name="ModelZoneMap">
     <Key>
       <PropertyRef Name="Seq" />
@@ -136,6 +144,7 @@ warning 6002: The table/view 'FGInventory.dbo.Report' does not have a primary ke
     <EntitySet Name="History" EntityType="Self.History" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InventoryIn" EntityType="Self.InventoryIn" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ModelInfo" EntityType="Self.ModelInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ModelZoneMap" EntityType="Self.ModelZoneMap" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Shipping" EntityType="Self.Shipping" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MODEL" EntityType="Self.MODEL" store:Type="Tables" store:Schema="dbo">

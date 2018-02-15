@@ -194,6 +194,7 @@
     <Compile Include="Controllers\CustOrdersController.cs" />
     <Compile Include="Controllers\DailyTotalsController.cs" />
     <Compile Include="Controllers\DbUtil\CustOrderRepository.cs" />
+    <Compile Include="Controllers\DbUtil\ModelInfoRepository.cs" />
     <Compile Include="Controllers\DbUtil\HistoryRepository.cs" />
     <Compile Include="Controllers\DbUtil\ModelDailyTotal.cs" />
     <Compile Include="Controllers\DbUtil\ModelZone2MinQuantityRepository.cs" />
@@ -206,6 +207,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventoryInsController.cs" />
     <Compile Include="Controllers\LocationsController.cs" />
+    <Compile Include="Controllers\ModelInfoesController.cs" />
     <Compile Include="Controllers\ModelsController.cs" />
     <Compile Include="Controllers\ModelZoneMapsController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
@@ -246,6 +248,9 @@
       <DependentUpon>Inventory.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MODEL.cs">
+      <DependentUpon>Inventory.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModelInfo.cs">
       <DependentUpon>Inventory.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ModelZoneMap.cs">

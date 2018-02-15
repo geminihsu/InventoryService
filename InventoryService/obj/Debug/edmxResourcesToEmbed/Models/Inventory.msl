@@ -133,5 +133,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ModelInfoes">
+      <EntityTypeMapping TypeName="FGInventoryModel.ModelInfo">
+        <MappingFragment StoreEntitySet="ModelInfo">
+          <ScalarProperty Name="Seq" ColumnName="Seq" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ModelNo" ColumnName="ModelNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
