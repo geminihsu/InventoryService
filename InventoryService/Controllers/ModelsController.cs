@@ -46,7 +46,7 @@ namespace InventoryService.Controllers
         }*/
 
         [Route("~/api/Models/{modelNo?}")]
-        public HttpResponseMessage GetModelByNo(int modelNo)
+        public HttpResponseMessage GetModelByNo(string modelNo)
         {
             var model = ModelsRepository.GetModelDtoByModeNo(modelNo.ToString());
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, model);

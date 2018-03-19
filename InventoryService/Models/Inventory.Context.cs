@@ -28,7 +28,6 @@ namespace InventoryService.Models
         public virtual DbSet<InventoryIn> InventoryIns { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<MODEL> MODELs { get; set; }
-        public virtual DbSet<Shipping> Shippings { get; set; }
         public virtual DbSet<CustOrder> CustOrders { get; set; }
         public virtual DbSet<History> Histories { get; set; }
         public virtual DbSet<Report> Reports { get; set; }

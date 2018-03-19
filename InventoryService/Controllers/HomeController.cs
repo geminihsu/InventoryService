@@ -19,7 +19,7 @@ namespace InventoryService.Controllers
             return View();
         }
 
-      
+
     }
 
 

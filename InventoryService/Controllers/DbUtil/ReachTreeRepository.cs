@@ -155,8 +155,62 @@ namespace InventoryService.Controllers.DbUtil
 
 
         //Get Model Data from PeachTree
-        public static void getModelInfo()
+        public static List<ModelInfo> getModelInfo()
         {
+
+            List<ModelInfo> data = ModelInfoRepository.GetAllModel();
+
+            List<ModelInfo> result = null;
+
+            if (data.Count == 0)
+            {
+                String connString = System.Configuration.ConfigurationManager.ConnectionStrings["PeachreeSNOConnectionString"].ToString();
+                DataTable dt = new DataTable();
+                OdbcConnection cn; //= new OdbcConnection(connString);
+
+
+                dt = new DataTable(); //reset
+
+                //Peachtree
+
+                using (cn = new OdbcConnection(connString))
+                {
+
+                    string sqlCheck = @"
+                        SELECT         ItemID, ItemDescription
+                        FROM           LineItem
+                        WHERE        (CHAR_LENGTH(ItemID) = 6)
+                      ";
+
+
+                    OdbcCommand sqlCmd = new OdbcCommand(sqlCheck, cn);
+                    //                sqlCmd.Parameters.Add("?", OdbcType.VarChar).Value = (rec.ServiceId.ToString() + "-" + rec.OrderId.ToString());
+                    OdbcDataAdapter adapter = new OdbcDataAdapter(sqlCmd);
+                    adapter.Fill(dt);
+                }
+
+                var models = new List<ModelInfo>();
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    var arr = row.ItemArray.Select(i => i.ToString()).ToArray();
+                    var model = new ModelInfo();
+                    model.ModelNo = arr[0];
+                    model.Description = arr[1];
+                    models.Add(model);
+                }
+                result = ModelInfoRepository.InsertModel(models);
+            }
+            else
+                result = ModelInfoRepository.GetAllModel();
+
+            return result;
+
+        }
+
+        public static Boolean checkItemPeachTreeExists(String serialNo,String salesOrder)
+        {
+
             String connString = System.Configuration.ConfigurationManager.ConnectionStrings["PeachreeSNOConnectionString"].ToString();
             DataTable dt = new DataTable();
             OdbcConnection cn; //= new OdbcConnection(connString);
@@ -169,28 +223,69 @@ namespace InventoryService.Controllers.DbUtil
             using (cn = new OdbcConnection(connString))
             {
                 string sqlCheck = @"
-                        SELECT         ItemID, ItemDescription
-                        FROM           LineItem
-                      ";
+                        SELECT JrnlSNum.SerialNumber FROM JrnlRow, LineItem, JrnlHdr, JrnlSNum 
+                        WHERE  (JrnlRow.ItemRecordNumber = LineItem.ItemRecordNumber) AND (JrnlRow.PostOrder = JrnlHdr.PostOrder) AND (JrnlHdr.Reference = '"+ salesOrder +"') " +
+                        "AND (JrnlSNum.TransactionClass = '1') AND (LineItem.ItemRecordNumber = JrnlSNum.ItemRecordNumber) AND (JrnlSNum.SerialNumber = '" + serialNo + "') AND (JrnlRow.Quantity > 0)";
                 OdbcCommand sqlCmd = new OdbcCommand(sqlCheck, cn);
                 //                sqlCmd.Parameters.Add("?", OdbcType.VarChar).Value = (rec.ServiceId.ToString() + "-" + rec.OrderId.ToString());
                 OdbcDataAdapter adapter = new OdbcDataAdapter(sqlCmd);
                 adapter.Fill(dt);
             }
 
-            var models = new List<ModelInfo>();
-
+            var sb = new StringBuilder();
             foreach (DataRow row in dt.Rows)
             {
                 var arr = row.ItemArray.Select(i => i.ToString()).ToArray();
-                var model = new ModelInfo();
-                model.ModelNo = arr[0];
-                model.Description = arr[1];
-                models.Add(model);
+                if (arr[0].Equals(serialNo))
+                    return true;
+            }
+            return false;
+        }
+
+        public static Boolean checkItemPeachTreeSold(String serialNo, String salesOrder)
+        {
+
+            String connString = System.Configuration.ConfigurationManager.ConnectionStrings["PeachreeSNOConnectionString"].ToString();
+            DataTable dt = new DataTable();
+            OdbcConnection cn; //= new OdbcConnection(connString);
+
+
+            dt = new DataTable(); //reset
+
+            //Peachtree
+
+            using (cn = new OdbcConnection(connString))
+            {
+                string sqlCheck = @"
+                        SELECT JrnlSNum.SerialNumber,JrnlSNum.TransactionClass FROM JrnlRow, LineItem, JrnlHdr, JrnlSNum 
+                        WHERE  (JrnlRow.ItemRecordNumber = LineItem.ItemRecordNumber) AND (JrnlRow.PostOrder = JrnlHdr.PostOrder) AND (JrnlHdr.Reference = '" + salesOrder + "') " +
+                        "AND (JrnlSNum.TransactionClass != '1') AND (LineItem.ItemRecordNumber = JrnlSNum.ItemRecordNumber) AND (JrnlSNum.SerialNumber = '" + serialNo + "') AND (JrnlRow.Quantity > 0)" +
+                        "Order by JrnlSNum.TransactionDate DESC";
+                OdbcCommand sqlCmd = new OdbcCommand(sqlCheck, cn);
+                //                sqlCmd.Parameters.Add("?", OdbcType.VarChar).Value = (rec.ServiceId.ToString() + "-" + rec.OrderId.ToString());
+                OdbcDataAdapter adapter = new OdbcDataAdapter(sqlCmd);
+                adapter.Fill(dt);
             }
 
-            ModelInfoRepository.InsertModel(models);
+            var sb = new StringBuilder();
+            foreach (DataRow row in dt.Rows)
+            {
+                var arr = row.ItemArray.Select(i => i.ToString()).ToArray();
 
+                if (arr[0].Equals(serialNo) && arr[1].Equals("1"))
+                {
+                    return false;
+                }
+                else if (arr[0].Equals(serialNo) && arr[1].Equals("2"))
+                {
+                    return false;
+                }
+                else if (arr[0].Equals(serialNo) && arr[1].Equals("3"))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
         /*  //Get Data from PeachTree
           public static List<CustOrder> copyCustOrderFromPeachTree()

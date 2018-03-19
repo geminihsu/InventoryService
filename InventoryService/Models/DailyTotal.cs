@@ -16,7 +16,7 @@ namespace InventoryService.Models
     {
         public int Total { get; set; }
         public System.DateTime Date { get; set; }
-        public string ModelNo { get; set; }
         public int Seq { get; set; }
+        public string ModelNo { get; set; }
     }
 }

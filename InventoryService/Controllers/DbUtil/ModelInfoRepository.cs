@@ -102,6 +102,20 @@ namespace InventoryService.Controllers.DbUtil
             db.SaveChanges();
             return GetAllModel();
         }
+
+        public static void DeleteModel()
+        {
+            var query = from inventory in db.ModelInfoes
+                        select inventory;
+
+            foreach (ModelInfo i in query)
+            {
+                db.ModelInfoes.Remove(i);
+
+            }
+          
+            db.SaveChanges();
+        }
     }
 
 

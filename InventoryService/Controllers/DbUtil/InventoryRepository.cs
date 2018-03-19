@@ -1,5 +1,6 @@
 ﻿using InventoryService.DTOs;
 using InventoryService.Models;
+using InventoryService.Common;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -7,12 +8,14 @@ using System.Data.Odbc;
 using System.Linq;
 using System.Text;
 using System.Web;
+using System.Net;
 
 namespace InventoryService.Controllers.DbUtil
 {
     public class InventoryRepository
     {
         private static FGInventoryEntities db = new FGInventoryEntities();
+        private static string SearchInventoryZone2BySNListExitsCode = "";
 
         //Get all inventory Items from DB
         public static List<InventoryIn> GetAllInventory()
@@ -67,7 +70,45 @@ namespace InventoryService.Controllers.DbUtil
             return items;
         }
 
+        //Query inventory Items By SN List(Inorder to filter all items exits in zone2 inventory table)
+        public static List<InventoryIn> SearchInventoryZone2BySNListExits(String salesOrder, List<InventoryIn> e)
+        {
+            var items = new List<InventoryIn>();
+            SearchInventoryZone2BySNListExitsCode = HttpStatusCode.OK.ToString();
+            foreach (InventoryIn i in e)
+            {
+                Boolean exist = ReachTreeRepository.checkItemPeachTreeExists(i.SN, salesOrder);
 
+                Boolean isSold = ReachTreeRepository.checkItemPeachTreeSold(i.SN, salesOrder);
+
+            
+
+                if (exist && !isSold)
+                {
+                    var item = (from inventory in db.InventoryIns
+                                where inventory.SN == i.SN
+                                select inventory).SingleOrDefault();
+
+                    if (LocationHelper.MapZoneCode(item.Location) != 2 || item == null)
+                    {
+                        items.Add(i);
+                    }
+                }
+                else
+                {
+                    SearchInventoryZone2BySNListExitsCode = HttpStatusCode.Forbidden.ToString();
+                    items.Add(i);
+                }
+            }
+
+            return items;
+        }
+
+        public static string getSearchInventoryZone2BySNListExits()
+        {
+ 
+            return SearchInventoryZone2BySNListExitsCode;
+        }
         //Query inventory Items By Location
         public static List<InventoryIn> SearchInventoryByLocation(string location)
         {
@@ -113,9 +154,9 @@ namespace InventoryService.Controllers.DbUtil
         {
             var query = (from inventory in db.InventoryIns
                          where inventory.ModelNo.Equals(modelNo)
-                         join code in db.Locations on inventory.Location equals code.Code
-                         orderby inventory.SN.Substring(6, 10) ascending, inventory.Location descending
+                         join code in db.Locations on inventory.Location equals code.Code where inventory.ModelNo.Equals(modelNo) && (code.ZoneCode == 1 || code.ZoneCode == 2)
                          where inventory.ModelNo.Equals(modelNo) && (code.ZoneCode == 1 || code.ZoneCode == 2)
+                         orderby inventory.SN.Substring(6, 10) ascending, inventory.Location descending
                          select inventory).Take(count);
             return query.ToList();
         }
@@ -211,7 +252,7 @@ namespace InventoryService.Controllers.DbUtil
             return GetAllInventory();
         }
 
-        //delete one item from Inventory table
+        //delete one item from Inventory tableSN/NotExist
         public static List<InventoryIn> DeleteInventory(InventoryIn e)
         {
             var item = (from inventory in db.InventoryIns
@@ -235,23 +276,7 @@ namespace InventoryService.Controllers.DbUtil
             return GetAllInventory();
         }
 
-        //delete more than one item from Inventory table
-        public static List<InventoryIn> DeleteInventory(List<Shipping> e)
-        {
-
-            foreach (Shipping x in e)
-            {
-
-                var item = (from inventory in db.InventoryIns
-                            where inventory.SN.Contains(x.SN)
-                            select inventory).SingleOrDefault();
-                db.InventoryIns.Remove(item);
-            }
-           
-            db.SaveChanges();
-            return GetAllInventory();
-        }
-
+        
         //delete more than one item from Inventory table
         public static List<InventoryIn> DeleteInventory(List<History> e)
         {

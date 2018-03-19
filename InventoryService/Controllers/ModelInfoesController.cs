@@ -27,9 +27,9 @@ namespace InventoryService.Controllers
         [Route("api/ModelInfoes")]
         public HttpResponseMessage Get()
         {
-            ReachTreeRepository.getModelInfo();
+            var models = ReachTreeRepository.getModelInfo();
 
-            var models = ModelInfoRepository.GetAllModel();
+            //var models = ModelInfoRepository.GetAllModel();
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, models);
             return response;
         }
@@ -48,7 +48,7 @@ namespace InventoryService.Controllers
          }*/
 
         [Route("~/api/ModelInfoes/{modelNo?}")]
-        public HttpResponseMessage GetModelByNo(int modelNo)
+        public HttpResponseMessage GetModelByNo(string modelNo)
         {
             var model = ModelInfoRepository.GetModelByNo(modelNo.ToString());
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, model);

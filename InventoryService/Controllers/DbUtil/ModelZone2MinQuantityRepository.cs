@@ -18,14 +18,41 @@ namespace InventoryService.Controllers.DbUtil
         {
             var query = from model in db.ModelZoneMaps
                         select model;
+            var result = new List<ModelZoneMap>();
+
+            foreach (ModelZoneMap i in query)
+            {
+
+                var zone2 = (from inventory in db.InventoryIns
+                             where inventory.Location.Equals(i.Zone2Code) && inventory.ModelNo.Equals(i.Model)
+                             select inventory
+                             ).ToList();
+
+
+                i.Z2CurtQty = (i.Z2MaxQty - zone2.Count);
+
+                result.Add(i);
+            }
+                return result;
+
+        }
+
+        //Get all model Items from DB
+        public static List<ModelZoneMap> GetAllInfoByModel(String modelNo)
+        {
+            var query = from model in db.ModelZoneMaps
+                        where model.Model.Equals(modelNo)
+                        select model;
 
             return query.ToList();
         }
+
         //Get all model Items from DB
         public static List<ModelZoneMap> GetAllModelsQty()
         {
             var query = from model in db.ModelZoneMaps
-                        select model;
+                        orderby model.FG ascending
+                        select model ;
 
             var result = new List<ModelZoneMap>();
 
@@ -48,10 +75,12 @@ namespace InventoryService.Controllers.DbUtil
                     else
                     {
 
-                        int remainder = (i.Z2MaxQty - zone2.Count) % i.PalletNum;
-                        i.Z2CurtQty = (i.Z2MaxQty - zone2.Count) - remainder;
+                        //int remainder = (i.Z2MaxQty - zone2.Count) % i.PalletNum;
+                        // i.Z2CurtQty = (i.Z2MaxQty - zone2.Count) - remainder;
+                        i.Z2CurtQty = (i.Z2MaxQty - zone2.Count);
 
                         result.Add(i);
+
                     }
                 }
                 
@@ -63,9 +92,10 @@ namespace InventoryService.Controllers.DbUtil
         //Get all model daily report from DB
         public static List<FGDailyReportDto> GetDailyReportByModels(DateTime date)
         {
-            var query = from model in db.ModelZoneMaps
+            var query = (from model in db.ModelZoneMaps
                         orderby model.FG, model.Model descending
-                        select model;
+                        select model);
+
             var result = new List<FGDailyReportDto>();
 
             int modelTotal = 0;
@@ -83,6 +113,7 @@ namespace InventoryService.Controllers.DbUtil
                 FGDailyReportDto m = new FGDailyReportDto();
                 m.ModelNo = i.Model;
                 m.ModelFG = i.FG;
+
 
                 var previous = (from prev in db.DailyTotals
                                 where prev.ModelNo.Equals(i.Model) && prev.Date >= yesterday && prev.Date < date
@@ -105,9 +136,9 @@ namespace InventoryService.Controllers.DbUtil
                                        group inventory by inventory.Location);*/
 
                 var receivedCurrent = (from inventory in db.InventoryIns
-                                       join code in db.Locations on inventory.Location equals code.Code
+                                       where inventory.ModelNo.Equals(i.Model)
+                                       join code in db.Locations on inventory.Location equals code.Code                                      
                                        orderby code.ZoneCode ascending, inventory.SN.Substring(6, 10) ascending
-                                       where inventory.ModelNo.Equals(i.Model) /*&& inventory.Date >= date*/
                                        group inventory by code.ZoneCode);
                 modelTotal = 0;
                 zone1Count = 0;
@@ -166,6 +197,7 @@ namespace InventoryService.Controllers.DbUtil
                         where model.Model.Contains(modelNo)
                         select model;
             return query.SingleOrDefault();
+
         }
 
 
@@ -189,8 +221,8 @@ namespace InventoryService.Controllers.DbUtil
         public static List<ModelZoneMap> UpdateInventory(ModelZoneMap e)
         {
             var model1 = (from model in db.ModelZoneMaps
-                        where model.Model.Contains(model.Model)
-                        select model).SingleOrDefault();
+                          where model.Model.Contains(model.Model)
+                          select model).SingleOrDefault();
             /*model1.MODELNO = e.MODELNO;
             model1.VERSION = e.VERSION;
             model1.FG = e.FG;
@@ -203,7 +235,7 @@ namespace InventoryService.Controllers.DbUtil
             model1.SPFile = e.SPFile;
             model1.Commercial = e.Commercial;
             model1.Brand = e.Brand;*/
-           
+
 
             db.SaveChanges();
             return GetAllModels();
@@ -237,6 +269,8 @@ namespace InventoryService.Controllers.DbUtil
             db.SaveChanges();
             return GetAllModels();
         }
+
+
 
         //delete more than one item from Inventory table
         public static List<ModelZoneMap> DeleteInventory(List<ModelZoneMap> e)

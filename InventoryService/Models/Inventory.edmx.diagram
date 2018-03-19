@@ -8,7 +8,6 @@
         <EntityTypeShape EntityType="FGInventoryModel.InventoryIn" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FGInventoryModel.Location" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FGInventoryModel.MODEL" Width="1.5" PointX="0.75" PointY="3.75" />
-        <EntityTypeShape EntityType="FGInventoryModel.Shipping" Width="1.5" PointX="3.375" PointY="3.75" />
         <EntityTypeShape EntityType="FGInventoryModel.CustOrder" Width="1.5" PointX="5.375" PointY="3.75" />
         <EntityTypeShape EntityType="FGInventoryModel.History" Width="1.5" PointX="7.375" PointY="0.75" />
         <EntityTypeShape EntityType="FGInventoryModel.Report" Width="1.5" PointX="7.375" PointY="5.75" />

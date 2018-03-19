@@ -32,6 +32,13 @@ namespace InventoryService.Controllers
             return response;
         }
 
+        [Route("api/ModelZoneMaps/{modelNo?}")]
+        public HttpResponseMessage GetByModel(int modelNo)
+        {
+            var models = ModelZone2MinQuantityRepository.GetAllInfoByModel(modelNo.ToString());
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, models);
+            return response;
+        }
 
         // GET api/ModelZoneMaps
         [Route("api/ModelZoneMaps/Qty")]

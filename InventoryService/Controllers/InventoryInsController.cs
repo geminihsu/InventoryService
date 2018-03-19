@@ -75,40 +75,40 @@ namespace InventoryService.Controllers
             return response;
         }
 
-        [Route("~/api/FGInventory/model/{modelNo:int}")]
-        public HttpResponseMessage GetItemsByModelNo(int modelNo)
+        [Route("~/api/FGInventory/model/{modelNo}")]
+        public HttpResponseMessage GetItemsByModelNo(string modelNo)
         {
             var employees = InventoryRepository.SearchInventoryByModel(modelNo.ToString());
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
             return response;
         }
 
-        [Route("~/api/FGInventory/model/{modelNo:int}/location/{location:int}")]
-        public HttpResponseMessage GetItemsByModelNoAndLocation(int modelNo,int location)
+        [Route("~/api/FGInventory/model/{modelNo}/location/{location:int}")]
+        public HttpResponseMessage GetItemsByModelNoAndLocation(string modelNo,int location)
         {
             var employees = InventoryRepository.SearchInventoryByModelAndLocation(modelNo.ToString(), location.ToString());
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
             return response;
         }
 
-        [Route("~/api/FGInventory/model/{modelNo:int}/count/{count:int}")]
-        public HttpResponseMessage GetItemsByModelNoAndCount(int modelNo, int count)
+        [Route("~/api/FGInventory/model/{modelNo}/count/{count:int}")]
+        public HttpResponseMessage GetItemsByModelNoAndCount(string modelNo, int count)
         {
             var employees = InventoryRepository.SearchInventoryByModel(modelNo.ToString(), count);
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
             return response;
         }
 
-        [Route("~/api/FGInventory/model/{modelNo:int}/date/{date:datetime}")]
-        public HttpResponseMessage GetItemsByModelNoAndDate(int modelNo, DateTime date)
+        [Route("~/api/FGInventory/model/{modelNo}/date/{date:datetime}")]
+        public HttpResponseMessage GetItemsByModelNoAndDate(string modelNo, DateTime date)
         {
             var employees = InventoryRepository.SearchInventoryByModelAndDateTime(modelNo.ToString(), date);
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
             return response;
         }
 
-        [Route("~/api/FGInventory/model/{modelNo:int}/code/{zone:int}")]
-        public HttpResponseMessage GetItemsByModelJoinLocation(int modelNo, int zone)
+        [Route("~/api/FGInventory/model/{modelNo}/code/{zone:int}")]
+        public HttpResponseMessage GetItemsByModelJoinLocation(string modelNo, int zone)
         {
             var employees = InventoryRepository.SearchInventoryByModelJoinLocation(modelNo.ToString(), zone);
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
@@ -283,6 +283,21 @@ namespace InventoryService.Controllers
         {
             var employees = InventoryRepository.SearchInventoryBySNListExits(e);
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
+            return response;
+        }
+
+        [Route("~/api/FGInventory/SN/Zone2/{salesOrder}")]
+        public HttpResponseMessage PutItemsZone2BySN(String salesOrder, List<InventoryIn> e)
+        {
+            var employees = InventoryRepository.SearchInventoryZone2BySNListExits(salesOrder,e);
+
+            HttpResponseMessage response = null;
+            if (InventoryRepository.getSearchInventoryZone2BySNListExits().Equals(HttpStatusCode.OK.ToString()))
+                    response = Request.CreateResponse(HttpStatusCode.OK, employees);
+            else if (InventoryRepository.getSearchInventoryZone2BySNListExits().Equals(HttpStatusCode.Forbidden.ToString()))
+                response = Request.CreateResponse(HttpStatusCode.Accepted, employees);
+         
+
             return response;
         }
         // DELETE: api/FGInventory/5
