@@ -19,5 +19,6 @@ namespace InventoryService.Models
         public System.DateTime Date { get; set; }
         public string Location { get; set; }
         public string ModelNo { get; set; }
+        public string ContainerNo { get; set; }
     }
 }

@@ -9,6 +9,7 @@
     <Property Name="Date" Type="DateTime" Precision="3" Nullable="false" />
     <Property Name="Location" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="ModelNo" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ContainerNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Location">
     <Key>
@@ -20,53 +21,12 @@
   <EntityContainer Name="FGInventoryEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="InventoryIns" EntityType="Self.InventoryIn" />
     <EntitySet Name="Locations" EntityType="Self.Location" />
-    <EntitySet Name="MODELs" EntityType="FGInventoryModel.MODEL" />
-    <EntitySet Name="CustOrders" EntityType="FGInventoryModel.CustOrder" />
     <EntitySet Name="Histories" EntityType="FGInventoryModel.History" />
-    <EntitySet Name="Reports" EntityType="FGInventoryModel.Report" />
     <EntitySet Name="ModelZoneMaps" EntityType="FGInventoryModel.ModelZoneMap" />
     <EntitySet Name="DailyTotals" EntityType="FGInventoryModel.DailyTotal" />
     <EntitySet Name="ModelInfoes" EntityType="FGInventoryModel.ModelInfo" />
+    <EntitySet Name="Containers" EntityType="FGInventoryModel.Container" />
   </EntityContainer>
-  <EntityType Name="MODEL">
-    <Key>
-      <PropertyRef Name="MODELNO" />
-    </Key>
-    <Property Name="MODELNO" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
-    <Property Name="VERSION" Type="Int32" Nullable="false" />
-    <Property Name="FG" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="MODEL1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="SOLE" Type="Boolean" />
-    <Property Name="DESC" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="FP_DATE" Type="DateTime" Precision="3" />
-    <Property Name="LABOR_W" Type="Boolean" />
-    <Property Name="SNBegin" Type="Int32" />
-    <Property Name="SNEnd" Type="Int32" />
-    <Property Name="ViewFile" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="SPFile" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="Commercial" Type="Boolean" />
-    <Property Name="Brand" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="CustOrder">
-    <Key>
-      <PropertyRef Name="Seq" />
-    </Key>
-    <Property Name="Sales_Order" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="Bill_to" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Ship_to_Address_Line_One" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Ship_to_City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Ship_to_State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Ship_to_Zipcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Ship_to_Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Customer_PO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Ship_Via" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Quantity" Type="Int32" Nullable="false" />
-    <Property Name="Item_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Description" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="Seq" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Closed" Type="Boolean" Nullable="false" />
-  </EntityType>
   <EntityType Name="History">
     <Key>
       <PropertyRef Name="Seq" />
@@ -82,23 +42,6 @@
     <Property Name="ModelNo" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
     <Property Name="Location" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
     <Property Name="Seq" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-  </EntityType>
-  <EntityType Name="Report">
-    <Key>
-      <PropertyRef Name="Model" />
-      <PropertyRef Name="MinQuantity" />
-    </Key>
-    <Property Name="FG" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="Model" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="total" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="Shipped" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="OnHand" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="Unshippable" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="Zone1" Type="Int32" />
-    <Property Name="Zone2" Type="Int32" />
-    <Property Name="ReturnItem" Type="Int32" />
-    <Property Name="ShowRoom" Type="Int32" />
-    <Property Name="MinQuantity" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="ModelZoneMap">
     <Key>
@@ -130,5 +73,16 @@
     <Property Name="ModelNo" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="Seq" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="Container">
+    <Key>
+      <PropertyRef Name="Seq" />
+    </Key>
+    <Property Name="Seq" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ContainerNo" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="SNBegin" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="SNEnd" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="Close" Type="Boolean" Nullable="false" />
   </EntityType>
 </Schema>

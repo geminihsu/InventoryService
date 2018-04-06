@@ -27,11 +27,10 @@ namespace InventoryService.Models
     
         public virtual DbSet<InventoryIn> InventoryIns { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
-        public virtual DbSet<MODEL> MODELs { get; set; }
-        public virtual DbSet<CustOrder> CustOrders { get; set; }
         public virtual DbSet<History> Histories { get; set; }
         public virtual DbSet<ModelZoneMap> ModelZoneMaps { get; set; }
         public virtual DbSet<DailyTotal> DailyTotals { get; set; }
         public virtual DbSet<ModelInfo> ModelInfoes { get; set; }
+        public virtual DbSet<Container> Containers { get; set; }
     }
 }

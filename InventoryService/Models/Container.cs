@@ -12,13 +12,13 @@ namespace InventoryService.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class InventoryIn
+    public partial class Container
     {
         public int Seq { get; set; }
-        public string SN { get; set; }
         public System.DateTime Date { get; set; }
-        public string Location { get; set; }
-        public string ModelNo { get; set; }
         public string ContainerNo { get; set; }
+        public string SNBegin { get; set; }
+        public string SNEnd { get; set; }
+        public bool Close { get; set; }
     }
 }

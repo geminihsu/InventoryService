@@ -23,13 +23,13 @@ namespace InventoryService.Controllers
             return db.CustOrders;
         }*/
 
-        [Route("api/CustOrders")]
+        /*[Route("api/CustOrders")]
         public HttpResponseMessage Get()
         {
             var employees = CustOrderRepository.GetAllOrder();
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
             return response;
-        }
+        }*/
 
         // GET: api/CustOrders/5
         /*[ResponseType(typeof(CustOrder))]
@@ -47,7 +47,7 @@ namespace InventoryService.Controllers
         [Route("~/api/CustOrders/salesOrder/{salesorder}")]
         public HttpResponseMessage GetItemsBySalesOrder(string salesorder)
         {
-            var order = CustOrderRepository.SearchOrderBySalesOrder(salesorder);
+            var order = ReachTreeRepository.getSalesOrderInfo(salesorder);
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, order);
             return response;
         }
@@ -88,13 +88,13 @@ namespace InventoryService.Controllers
              return StatusCode(HttpStatusCode.NoContent);
          }*/
 
-        [Route("api/CustOrders")]
+       /* [Route("api/CustOrders")]
         public HttpResponseMessage Put(List<CustOrder> e)
         {
             var item = CustOrderRepository.UpdateOrder(e);
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, item);
             return response;
-        }
+        }*/
 
         /*// POST: api/CustOrders
         [ResponseType(typeof(CustOrder))]
@@ -110,7 +110,7 @@ namespace InventoryService.Controllers
 
             return CreatedAtRoute("DefaultApi", new { id = custOrder.Seq }, custOrder);
         }*/
-        [Route("api/CustOrders")]
+      /*  [Route("api/CustOrders")]
         public HttpResponseMessage Post(List<CustOrder> e)
         {
             HttpResponseMessage response = null;
@@ -130,9 +130,9 @@ namespace InventoryService.Controllers
 
 
             return response;
-        }
+        }*/
 
-        // DELETE: api/CustOrders/5
+        /*// DELETE: api/CustOrders/5
         [ResponseType(typeof(CustOrder))]
         public IHttpActionResult DeleteCustOrder(int id)
         {
@@ -160,6 +160,6 @@ namespace InventoryService.Controllers
         private bool CustOrderExists(int id)
         {
             return db.CustOrders.Count(e => e.Seq == id) > 0;
-        }
+        }*/
     }
 }

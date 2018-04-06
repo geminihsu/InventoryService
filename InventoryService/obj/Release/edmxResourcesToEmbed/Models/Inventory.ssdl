@@ -1,24 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="FGInventoryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityType Name="CustOrder">
+  <EntityType Name="Container">
     <Key>
       <PropertyRef Name="Seq" />
     </Key>
-    <Property Name="Sales_Order" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Date" Type="datetime" Nullable="false" />
-    <Property Name="Bill_to" Type="nvarchar" MaxLength="50" />
-    <Property Name="Ship_to_Address_Line_One" Type="nvarchar" MaxLength="50" />
-    <Property Name="Ship_to_City" Type="nvarchar" MaxLength="50" />
-    <Property Name="Ship_to_State" Type="nvarchar" MaxLength="50" />
-    <Property Name="Ship_to_Zipcode" Type="nvarchar" MaxLength="50" />
-    <Property Name="Ship_to_Country" Type="nvarchar" MaxLength="50" />
-    <Property Name="Customer_PO" Type="nvarchar" MaxLength="50" />
-    <Property Name="Ship_Via" Type="nvarchar" MaxLength="50" />
-    <Property Name="Quantity" Type="int" Nullable="false" />
-    <Property Name="Item_ID" Type="nvarchar" MaxLength="50" />
-    <Property Name="Description" Type="nvarchar" MaxLength="100" Nullable="false" />
-    <Property Name="Closed" Type="bit" Nullable="false" />
     <Property Name="Seq" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="ContainerNo" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="SNBegin" Type="varchar" MaxLength="16" Nullable="false" />
+    <Property Name="SNEnd" Type="varchar" MaxLength="16" Nullable="false" />
+    <Property Name="Close" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="DailyTotal">
     <Key>
@@ -54,6 +45,7 @@
     <Property Name="Location" Type="varchar" MaxLength="3" Nullable="false" />
     <Property Name="ModelNo" Type="varchar" MaxLength="6" Nullable="false" />
     <Property Name="Seq" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ContainerNo" Type="varchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="Location">
     <Key>
@@ -61,29 +53,6 @@
     </Key>
     <Property Name="Code" Type="varchar" MaxLength="3" Nullable="false" />
     <Property Name="ZoneCode" Type="smallint" />
-  </EntityType>
-  <!--Errors Found During Generation:
-warning 6005: The data type 'sql_variant' is currently not supported for the target Entity Framework version; the column 'VIEW' in the table 'FGInventory.dbo.MODEL' was excluded.
-warning 6005: The data type 'sql_variant' is currently not supported for the target Entity Framework version; the column 'SP' in the table 'FGInventory.dbo.MODEL' was excluded.
-warning 6002: The table/view 'FGInventory.dbo.MODEL' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="MODEL">
-    <Key>
-      <PropertyRef Name="MODELNO" />
-    </Key>
-    <Property Name="MODELNO" Type="varchar" MaxLength="6" Nullable="false" />
-    <Property Name="VERSION" Type="int" Nullable="false" />
-    <Property Name="FG" Type="nvarchar" MaxLength="255" />
-    <Property Name="MODEL" Type="nvarchar" MaxLength="255" />
-    <Property Name="SOLE" Type="bit" />
-    <Property Name="DESC" Type="nvarchar" MaxLength="255" />
-    <Property Name="FP_DATE" Type="datetime" />
-    <Property Name="LABOR_W" Type="bit" />
-    <Property Name="SNBegin" Type="int" />
-    <Property Name="SNEnd" Type="int" />
-    <Property Name="ViewFile" Type="varbinary(max)" />
-    <Property Name="SPFile" Type="varbinary(max)" />
-    <Property Name="Commercial" Type="bit" />
-    <Property Name="Brand" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="ModelInfo">
     <Key>
@@ -107,65 +76,13 @@ warning 6002: The table/view 'FGInventory.dbo.MODEL' does not have a primary key
     <Property Name="Zone1Code" Type="varchar" MaxLength="3" Nullable="false" />
     <Property Name="Zone2Code" Type="varchar" MaxLength="3" Nullable="false" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'FGInventory.dbo.Report' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="Report">
-    <Key>
-      <PropertyRef Name="Model" />
-      <PropertyRef Name="MinQuantity" />
-    </Key>
-    <Property Name="Model" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="FG" Type="nvarchar" MaxLength="255" Nullable="false" />
-    <Property Name="Shipped" Type="decimal" Precision="38" Scale="0" />
-    <Property Name="Unshippable" Type="decimal" Precision="38" Scale="0" />
-    <Property Name="OnHand" Type="decimal" Precision="38" Scale="0" />
-    <Property Name="Zone2" Type="int" />
-    <Property Name="Zone1" Type="int" />
-    <Property Name="ReturnItem" Type="int" />
-    <Property Name="ShowRoom" Type="int" />
-    <Property Name="total" Type="decimal" Precision="38" Scale="0" />
-    <Property Name="MinQuantity" Type="int" Nullable="false" />
-  </EntityType>
   <EntityContainer Name="FGInventoryModelStoreContainer">
-    <EntitySet Name="CustOrder" EntityType="Self.CustOrder" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Container" EntityType="Self.Container" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DailyTotal" EntityType="Self.DailyTotal" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="History" EntityType="Self.History" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InventoryIn" EntityType="Self.InventoryIn" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ModelInfo" EntityType="Self.ModelInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ModelZoneMap" EntityType="Self.ModelZoneMap" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="MODEL" EntityType="Self.MODEL" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [MODEL].[MODELNO] AS [MODELNO], 
-    [MODEL].[VERSION] AS [VERSION], 
-    [MODEL].[FG] AS [FG], 
-    [MODEL].[MODEL] AS [MODEL], 
-    [MODEL].[SOLE] AS [SOLE], 
-    [MODEL].[DESC] AS [DESC], 
-    [MODEL].[FP_DATE] AS [FP_DATE], 
-    [MODEL].[LABOR_W] AS [LABOR_W], 
-    [MODEL].[SNBegin] AS [SNBegin], 
-    [MODEL].[SNEnd] AS [SNEnd], 
-    [MODEL].[ViewFile] AS [ViewFile], 
-    [MODEL].[SPFile] AS [SPFile], 
-    [MODEL].[Commercial] AS [Commercial], 
-    [MODEL].[Brand] AS [Brand]
-    FROM [dbo].[MODEL] AS [MODEL]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="Report" EntityType="Self.Report" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [Report].[Model] AS [Model], 
-    [Report].[FG] AS [FG], 
-    [Report].[Shipped] AS [Shipped], 
-    [Report].[Unshippable] AS [Unshippable], 
-    [Report].[OnHand] AS [OnHand], 
-    [Report].[Zone2] AS [Zone2], 
-    [Report].[Zone1] AS [Zone1], 
-    [Report].[ReturnItem] AS [ReturnItem], 
-    [Report].[ShowRoom] AS [ShowRoom], 
-    [Report].[total] AS [total], 
-    [Report].[MinQuantity] AS [MinQuantity]
-    FROM [dbo].[Report] AS [Report]</DefiningQuery>
-    </EntitySet>
   </EntityContainer>
 </Schema>
