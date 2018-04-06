@@ -85,9 +85,10 @@ namespace InventoryService.Controllers.DbUtil
             foreach (Container i in e)
             {
                 var containerItem = (from container in db.Containers
-                                     where container.ContainerNo.Contains(container.ContainerNo)
+                                     where container.ContainerNo.Equals(i.ContainerNo)
+                                     where container.SNBegin.Equals(i.SNBegin)
                                      select container).SingleOrDefault();
-                containerItem.Date = i.Date;
+                //containerItem.Date = i.Date;
                 containerItem.ContainerNo = i.ContainerNo;
                 containerItem.SNBegin = i.SNBegin;
                 containerItem.SNEnd = i.SNEnd;
