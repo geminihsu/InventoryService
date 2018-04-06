@@ -35,6 +35,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,7 +44,34 @@
     <OutputPath>bin\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>1</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <FilesToIncludeForPublish>AllFilesInTheProject</FilesToIncludeForPublish>
+    <PublishDatabaseSettings>
+      <Objects>
+        <ObjectGroup Name="InventoryEntities-Deployment" Order="1">
+          <Destination Path="" />
+          <Object Type="DbFullSql">
+            <PreSource Path="Data Source=SPIRITSRV-006\MSSQL2017%3bInitial Catalog=Inventory%3bIntegrated Security=True%3bApplication Name=EntityFramework" ScriptSchema="True" ScriptData="False" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\Release\AutoScripts\InventoryEntities-Deployment_SchemaOnly.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+        <ObjectGroup Name="FGInventoryEntities-Deployment" Order="2">
+          <Destination Path="" />
+          <Object Type="DbFullSql">
+            <PreSource Path="Data Source=SPIRITSRV-006\MSSQL2017%3bInitial Catalog=FGInventory%3bIntegrated Security=True%3bApplication Name=EntityFramework" ScriptSchema="True" ScriptData="False" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\Release\AutoScripts\FGInventoryEntities-Deployment_SchemaOnly.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+        <ObjectGroup Name="PeachreeSNOConnectionString-Deployment" Order="3">
+          <Destination Path="" />
+          <Object Type="DbFullSql">
+            <PreSource Path="Dsn=Spirit Manufacturing1%3buid=Peachtree%3bpwd=tiger123" ScriptSchema="True" ScriptData="False" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\Release\AutoScripts\PeachreeSNOConnectionString-Deployment_SchemaOnly.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+      </Objects>
+    </PublishDatabaseSettings>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -201,27 +229,21 @@
     <Compile Include="Controllers\DbUtil\ModelDailyTotal.cs" />
     <Compile Include="Controllers\DbUtil\ModelZone2MinQuantityRepository.cs" />
     <Compile Include="Controllers\DbUtil\ReachTreeRepository.cs" />
-    <Compile Include="Controllers\DbUtil\ReportsRepository.cs" />
     <Compile Include="Controllers\DbUtil\LocationRepository.cs" />
-    <Compile Include="Controllers\DbUtil\ModelsRepository.cs" />
     <Compile Include="Controllers\DbUtil\InventoryRepository.cs" />
     <Compile Include="Controllers\HistoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventoryInsController.cs" />
     <Compile Include="Controllers\LocationsController.cs" />
     <Compile Include="Controllers\ModelInfoesController.cs" />
-    <Compile Include="Controllers\ModelsController.cs" />
     <Compile Include="Controllers\ModelZoneMapsController.cs" />
-    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="DTOs\FGDailyReportDto.cs" />
     <Compile Include="DTOs\FGZoneDto.cs" />
     <Compile Include="DTOs\ModelDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\CustOrder.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\CustOrder.cs" />
     <Compile Include="Models\DailyTotal.cs">
       <DependentUpon>Inventory.tt</DependentUpon>
     </Compile>
@@ -249,16 +271,11 @@
     <Compile Include="Models\Location.cs">
       <DependentUpon>Inventory.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\MODEL.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\MODEL.cs" />
     <Compile Include="Models\ModelInfo.cs">
       <DependentUpon>Inventory.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ModelZoneMap.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Report.cs">
       <DependentUpon>Inventory.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

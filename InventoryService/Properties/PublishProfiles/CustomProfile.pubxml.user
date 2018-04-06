@@ -12,7 +12,100 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="ApplicationInsights.config">
       <publishTime>03/19/2018 17:10:40</publishTime>
     </File>
+    <File Include="App_Start/BundleConfig.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="App_Start/FilterConfig.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="App_Start/RouteConfig.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="App_Start/WebApiConfig.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/ApiDescriptionExtensions.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/App_Start/HelpPageConfig.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/Controllers/HelpController.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
     <File Include="Areas/HelpPage/HelpPage.css">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/HelpPageAreaRegistration.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/HelpPageConfigurationExtensions.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/ModelDescriptions/CollectionModelDescription.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/ModelDescriptions/ComplexTypeModelDescription.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/ModelDescriptions/DictionaryModelDescription.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/ModelDescriptions/EnumTypeModelDescription.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/ModelDescriptions/EnumValueDescription.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/ModelDescriptions/IModelDocumentationProvider.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/ModelDescriptions/KeyValuePairModelDescription.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/ModelDescriptions/ModelDescription.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/ModelDescriptions/ModelDescriptionGenerator.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/ModelDescriptions/ModelNameAttribute.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/ModelDescriptions/ModelNameHelper.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/ModelDescriptions/ParameterAnnotation.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/ModelDescriptions/ParameterDescription.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/ModelDescriptions/SimpleTypeModelDescription.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/Models/HelpPageApiModel.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/SampleGeneration/HelpPageSampleGenerator.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/SampleGeneration/HelpPageSampleKey.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/SampleGeneration/ImageSample.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/SampleGeneration/InvalidSample.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/SampleGeneration/ObjectGenerator.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/SampleGeneration/SampleDirection.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/SampleGeneration/TextSample.cs">
       <publishTime>03/19/2018 17:10:40</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/Api.cshtml">
@@ -75,6 +168,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Areas/HelpPage/Views/_ViewStart.cshtml">
       <publishTime>03/19/2018 17:10:40</publishTime>
     </File>
+    <File Include="Areas/HelpPage/XmlDocumentationProvider.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
     <File Include="bin/amd64/Microsoft.VC90.CRT/Microsoft.VC90.CRT.manifest">
       <publishTime>03/19/2018 17:10:40</publishTime>
     </File>
@@ -121,10 +217,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/19/2018 17:10:43</publishTime>
     </File>
     <File Include="bin/InventoryService.dll">
-      <publishTime>03/19/2018 17:12:27</publishTime>
+      <publishTime>04/06/2018 09:50:06</publishTime>
     </File>
     <File Include="bin/InventoryService.pdb">
-      <publishTime>03/19/2018 17:12:27</publishTime>
+      <publishTime>04/06/2018 09:50:06</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.Agent.Intercept.dll">
       <publishTime>03/19/2018 17:10:43</publishTime>
@@ -363,6 +459,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/x86/sqlcese40.dll">
       <publishTime>03/19/2018 17:10:40</publishTime>
     </File>
+    <File Include="Common/Constants.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Common/LocationHelper.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
     <File Include="Content/bootstrap.css">
       <publishTime>03/19/2018 17:10:40</publishTime>
     </File>
@@ -370,6 +472,63 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/19/2018 17:10:40</publishTime>
     </File>
     <File Include="Content/Site.css">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Controllers/CustOrdersController.cs">
+      <publishTime>03/20/2018 09:33:07</publishTime>
+    </File>
+    <File Include="Controllers/DailyTotalsController.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Controllers/DbUtil/CustOrderRepository.cs">
+      <publishTime>03/20/2018 09:33:20</publishTime>
+    </File>
+    <File Include="Controllers/DbUtil/HistoryRepository.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Controllers/DbUtil/InventoryRepository.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Controllers/DbUtil/LocationRepository.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Controllers/DbUtil/ModelDailyTotal.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Controllers/DbUtil/ModelInfoRepository.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Controllers/DbUtil/ModelZone2MinQuantityRepository.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Controllers/DbUtil/ReachTreeRepository.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Controllers/HistoriesController.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Controllers/HomeController.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Controllers/InventoryInsController.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Controllers/LocationsController.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Controllers/ModelInfoesController.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Controllers/ModelZoneMapsController.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="DTOs/FGDailyReportDto.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="DTOs/FGZoneDto.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="DTOs/ModelDto.cs">
       <publishTime>03/19/2018 17:10:40</publishTime>
     </File>
     <File Include="favicon.ico">
@@ -390,13 +549,73 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Global.asax">
       <publishTime>03/19/2018 17:10:40</publishTime>
     </File>
+    <File Include="Global.asax.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="InventoryService.csproj">
+      <publishTime>04/06/2018 09:49:43</publishTime>
+    </File>
+    <File Include="InventoryService.csproj.user">
+      <publishTime>04/06/2018 09:49:43</publishTime>
+    </File>
+    <File Include="Models/CustOrder.cs">
+      <publishTime>03/20/2018 09:29:38</publishTime>
+    </File>
+    <File Include="Models/DailyTotal.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Models/History.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Models/Inventory.Context.cs">
+      <publishTime>03/20/2018 09:47:02</publishTime>
+    </File>
+    <File Include="Models/Inventory.Context.tt">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Models/Inventory.Designer.cs">
+      <publishTime>03/20/2018 09:46:41</publishTime>
+    </File>
     <File Include="Models/Inventory.edmx.diagram">
+      <publishTime>03/20/2018 09:46:41</publishTime>
+    </File>
+    <File Include="Models/Inventory.tt">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Models/InventoryIn.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Models/Location.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Models/MODEL.cs">
+      <publishTime>03/20/2018 09:39:32</publishTime>
+    </File>
+    <File Include="Models/ModelInfo.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Models/ModelZoneMap.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>03/19/2018 17:10:42</publishTime>
+    </File>
+    <File Include="Properties/AssemblyInfo.cs">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Properties/PublishProfiles/CustomProfile.pubxml">
+      <publishTime>03/19/2018 17:13:10</publishTime>
+    </File>
+    <File Include="Properties/PublishProfiles/CustomProfile1.pubxml">
       <publishTime>03/19/2018 17:10:40</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>03/19/2018 17:10:40</publishTime>
     </File>
     <File Include="Scripts/bootstrap.min.js">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.10.2.intellisense.js">
       <publishTime>03/19/2018 17:10:40</publishTime>
     </File>
     <File Include="Scripts/jquery-1.10.2.js">
@@ -433,7 +652,67 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/19/2018 17:10:40</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>03/19/2018 17:18:17</publishTime>
+      <publishTime>03/20/2018 08:58:43</publishTime>
+    </File>
+    <File Include="Web.Debug.config">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="Web.Release.config">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="_bin_deployableAssemblies/amd64/Microsoft.VC90.CRT/Microsoft.VC90.CRT.manifest">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="_bin_deployableAssemblies/amd64/Microsoft.VC90.CRT/msvcr90.dll">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="_bin_deployableAssemblies/amd64/Microsoft.VC90.CRT/README_ENU.txt">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="_bin_deployableAssemblies/amd64/sqlceca40.dll">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="_bin_deployableAssemblies/amd64/sqlcecompact40.dll">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="_bin_deployableAssemblies/amd64/sqlceer40EN.dll">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="_bin_deployableAssemblies/amd64/sqlceme40.dll">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="_bin_deployableAssemblies/amd64/sqlceqp40.dll">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="_bin_deployableAssemblies/amd64/sqlcese40.dll">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="_bin_deployableAssemblies/x86/Microsoft.VC90.CRT/Microsoft.VC90.CRT.manifest">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="_bin_deployableAssemblies/x86/Microsoft.VC90.CRT/msvcr90.dll">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="_bin_deployableAssemblies/x86/Microsoft.VC90.CRT/README_ENU.txt">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="_bin_deployableAssemblies/x86/sqlceca40.dll">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="_bin_deployableAssemblies/x86/sqlcecompact40.dll">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="_bin_deployableAssemblies/x86/sqlceer40EN.dll">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="_bin_deployableAssemblies/x86/sqlceme40.dll">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="_bin_deployableAssemblies/x86/sqlceqp40.dll">
+      <publishTime>03/19/2018 17:10:40</publishTime>
+    </File>
+    <File Include="_bin_deployableAssemblies/x86/sqlcese40.dll">
+      <publishTime>03/19/2018 17:10:40</publishTime>
     </File>
   </ItemGroup>
 </Project>
