@@ -86,7 +86,10 @@ namespace InventoryService.Controllers.DbUtil
                 
             }
 
-            return result;
+            List<ModelZoneMap> SortedList = result.OrderByDescending(o => o.Z2CurtQty).ToList();
+
+            return SortedList;
+
         }
 
         //Get all model daily report from DB

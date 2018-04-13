@@ -217,10 +217,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/19/2018 17:10:43</publishTime>
     </File>
     <File Include="bin/InventoryService.dll">
-      <publishTime>04/13/2018 09:21:44</publishTime>
+      <publishTime>04/13/2018 11:03:04</publishTime>
     </File>
     <File Include="bin/InventoryService.pdb">
-      <publishTime>04/13/2018 09:21:44</publishTime>
+      <publishTime>04/13/2018 11:03:04</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.Agent.Intercept.dll">
       <publishTime>03/19/2018 17:10:43</publishTime>
@@ -505,7 +505,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/19/2018 17:10:40</publishTime>
     </File>
     <File Include="Controllers/DbUtil/ModelZone2MinQuantityRepository.cs">
-      <publishTime>03/19/2018 17:10:40</publishTime>
+      <publishTime>04/13/2018 11:02:27</publishTime>
     </File>
     <File Include="Controllers/DbUtil/ReachTreeRepository.cs">
       <publishTime>03/19/2018 17:10:40</publishTime>
