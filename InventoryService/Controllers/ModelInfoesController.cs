@@ -27,6 +27,9 @@ namespace InventoryService.Controllers
         [Route("api/ModelInfoes")]
         public HttpResponseMessage Get()
         {
+            //Clear Table before copy model from PeachTree
+            ModelInfoRepository.DeleteModel();
+
             var models = ReachTreeRepository.getModelInfo();
 
             //var models = ModelInfoRepository.GetAllModel();

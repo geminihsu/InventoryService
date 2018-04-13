@@ -18,16 +18,6 @@ namespace InventoryService.Controllers
         private FGInventoryEntities db = new FGInventoryEntities();
 
 
-
-        /* // GET: api/FGInventory
-         public IQueryable<InventoryIn> GetInventoryIns()
-         {
-             return db.InventoryIns;
-         }*/
-
-
-
-
         // GET api/FGInventory
         [Route("api/FGInventory")]
         public HttpResponseMessage Get()
@@ -278,8 +268,16 @@ namespace InventoryService.Controllers
         }
 
 
-        [Route("~/api/FGInventory/SN/NotExist")]
-        public HttpResponseMessage PutItemsLocationBySN(List<InventoryIn> e)
+        [Route("~/api/FGInventory/SN/CheckMoveItem")]
+        public HttpResponseMessage PutMoveItemsBySN(List<InventoryIn> e)
+        {
+            var employees = InventoryRepository.SearchInventoryBySNListExits(e);
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
+            return response;
+        }
+
+        [Route("~/api/FGInventory/SN/CheckReceiveItem")]
+        public HttpResponseMessage PutReceiveItemBySN(List<InventoryIn> e)
         {
             var employees = InventoryRepository.SearchInventoryBySNListExits(e);
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);

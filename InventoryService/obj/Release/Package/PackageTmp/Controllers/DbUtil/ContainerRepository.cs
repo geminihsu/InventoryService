@@ -85,10 +85,10 @@ namespace InventoryService.Controllers.DbUtil
             foreach (Container i in e)
             {
                 var containerItem = (from container in db.Containers
+                                     where container.Seq.Equals(i.Seq)
                                      where container.ContainerNo.Equals(i.ContainerNo)
-                                     where container.SNBegin.Equals(i.SNBegin)
                                      select container).SingleOrDefault();
-                //containerItem.Date = i.Date;
+                containerItem.Date = i.Date;
                 containerItem.ContainerNo = i.ContainerNo;
                 containerItem.SNBegin = i.SNBegin;
                 containerItem.SNEnd = i.SNEnd;
@@ -101,10 +101,10 @@ namespace InventoryService.Controllers.DbUtil
         }
 
         //delete one item from Inventory table
-        public static List<Container> DeleteContainer(Container e)
+        public static List<Container> DeleteContainer(int seq)
         {
             var containerItem = (from container in db.Containers
-                                 where container.ContainerNo.Contains(container.ContainerNo)
+                                 where container.Seq == seq
                                  select container).SingleOrDefault();
             db.Containers.Remove(containerItem);
             db.SaveChanges();

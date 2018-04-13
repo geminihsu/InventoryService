@@ -122,21 +122,23 @@ namespace InventoryService.Controllers
         }
 
         // DELETE: api/Containers/5
-        [ResponseType(typeof(Container))]
-        public IHttpActionResult DeleteContainer(int id)
+       [Route("api/Containers/{Seq:int}")]
+       public HttpResponseMessage Delete(int Seq)
+       {
+           var employees = ContainerRepository.DeleteContainer(Seq);
+           HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
+           return response;
+       }
+
+
+        // DELETE: api/Containers/5
+        [Route("api/Containers/")]
+        public HttpResponseMessage Delete(List<Container> e)
         {
-            Container container = db.Containers.Find(id);
-            if (container == null)
-            {
-                return NotFound();
-            }
-
-            db.Containers.Remove(container);
-            db.SaveChanges();
-
-            return Ok(container);
+            var employees = ContainerRepository.DeleteContainer(e);
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
+            return response;
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

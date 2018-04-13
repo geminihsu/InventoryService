@@ -217,10 +217,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/19/2018 17:10:43</publishTime>
     </File>
     <File Include="bin/InventoryService.dll">
-      <publishTime>04/06/2018 15:50:52</publishTime>
+      <publishTime>04/13/2018 09:21:44</publishTime>
     </File>
     <File Include="bin/InventoryService.pdb">
-      <publishTime>04/06/2018 15:50:52</publishTime>
+      <publishTime>04/13/2018 09:21:44</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.Agent.Intercept.dll">
       <publishTime>03/19/2018 17:10:43</publishTime>
@@ -475,7 +475,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/19/2018 17:10:40</publishTime>
     </File>
     <File Include="Controllers/ContainersController.cs">
-      <publishTime>04/06/2018 15:50:46</publishTime>
+      <publishTime>04/13/2018 08:24:23</publishTime>
     </File>
     <File Include="Controllers/CustOrdersController.cs">
       <publishTime>04/06/2018 12:25:12</publishTime>
@@ -484,7 +484,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/19/2018 17:10:40</publishTime>
     </File>
     <File Include="Controllers/DbUtil/ContainerRepository.cs">
-      <publishTime>04/06/2018 15:39:49</publishTime>
+      <publishTime>04/09/2018 09:19:45</publishTime>
     </File>
     <File Include="Controllers/DbUtil/CustOrderRepository.cs">
       <publishTime>03/20/2018 09:33:20</publishTime>
@@ -511,19 +511,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/19/2018 17:10:40</publishTime>
     </File>
     <File Include="Controllers/HistoriesController.cs">
-      <publishTime>03/19/2018 17:10:40</publishTime>
+      <publishTime>04/13/2018 08:23:20</publishTime>
     </File>
     <File Include="Controllers/HomeController.cs">
       <publishTime>03/19/2018 17:10:40</publishTime>
     </File>
     <File Include="Controllers/InventoryInsController.cs">
-      <publishTime>03/19/2018 17:10:40</publishTime>
+      <publishTime>04/13/2018 09:21:35</publishTime>
     </File>
     <File Include="Controllers/LocationsController.cs">
       <publishTime>03/19/2018 17:10:40</publishTime>
     </File>
     <File Include="Controllers/ModelInfoesController.cs">
-      <publishTime>03/19/2018 17:10:40</publishTime>
+      <publishTime>04/10/2018 10:46:12</publishTime>
     </File>
     <File Include="Controllers/ModelZoneMapsController.cs">
       <publishTime>03/19/2018 17:10:40</publishTime>
