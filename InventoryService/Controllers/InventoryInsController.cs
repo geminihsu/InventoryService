@@ -221,7 +221,7 @@ namespace InventoryService.Controllers
             return Ok(inventoryIn);
         }*/
 
-        [Route("api/FGInventory")]
+        [Route("~/api/FGInventory")]
         public HttpResponseMessage Post(List<InventoryIn> e)
         {
             HttpResponseMessage response = null;
@@ -259,7 +259,7 @@ namespace InventoryService.Controllers
              return response;
          }*/
 
-        [Route("api/FGInventory")]
+        [Route("~/api/FGInventory")]
         public HttpResponseMessage Put(List<InventoryIn> e)
         {
             var item = InventoryRepository.UpdateInventory(e);
@@ -279,7 +279,7 @@ namespace InventoryService.Controllers
         [Route("~/api/FGInventory/SN/CheckReceiveItem")]
         public HttpResponseMessage PutReceiveItemBySN(List<InventoryIn> e)
         {
-            var employees = InventoryRepository.SearchInventoryBySNListExits(e);
+            var employees = InventoryRepository.SearchInventoryReceiveBySNListExits(e);
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
             return response;
         }

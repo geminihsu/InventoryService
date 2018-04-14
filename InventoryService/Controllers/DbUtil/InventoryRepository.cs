@@ -70,6 +70,24 @@ namespace InventoryService.Controllers.DbUtil
             return items;
         }
 
+
+        public static List<InventoryIn> SearchInventoryReceiveBySNListExits(List<InventoryIn> e)
+        {
+            var items = new List<InventoryIn>();
+            foreach (InventoryIn i in e)
+            {
+                var item = (from inventory in db.InventoryIns
+                            where inventory.SN == i.SN
+                            select inventory).FirstOrDefault() != null;
+
+                if (item)
+                    items.Add(i);
+
+            }
+
+            return items;
+        }
+
         //Query inventory Items By SN List(Inorder to filter all items exits in zone2 inventory table)
         public static List<InventoryIn> SearchInventoryZone2BySNListExits(String salesOrder, List<InventoryIn> e)
         {
