@@ -230,7 +230,11 @@ namespace InventoryService.Controllers.DbUtil
         //Insert more than one item into Inventory table
         public static List<InventoryIn> InsertInventory(List<InventoryIn> e)
         {
-            db.InventoryIns.AddRange(e);
+            foreach (InventoryIn i in e)
+            {
+                db.InventoryIns.Add(i);
+
+            }
             db.SaveChanges();
             return GetAllInventory();
         }

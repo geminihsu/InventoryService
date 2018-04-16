@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -232,6 +233,7 @@ namespace InventoryService.Controllers
             }
             catch (Exception x)
             {
+                EventLog.WriteEntry("FGInventoryController", x.ToString(), EventLogEntryType.Error);
                 string error = x.ToString();
                 if (error.Equals("An error occurred while updating the entries. See the inner exception for details."))
                     return new HttpResponseMessage(HttpStatusCode.NotModified);
