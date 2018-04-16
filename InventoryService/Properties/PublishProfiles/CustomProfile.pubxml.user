@@ -217,10 +217,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/19/2018 17:10:43</publishTime>
     </File>
     <File Include="bin/InventoryService.dll">
-      <publishTime>04/13/2018 11:03:04</publishTime>
+      <publishTime>04/16/2018 11:10:02</publishTime>
     </File>
     <File Include="bin/InventoryService.pdb">
-      <publishTime>04/13/2018 11:03:04</publishTime>
+      <publishTime>04/16/2018 11:10:02</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.Agent.Intercept.dll">
       <publishTime>03/19/2018 17:10:43</publishTime>
@@ -493,7 +493,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/19/2018 17:10:40</publishTime>
     </File>
     <File Include="Controllers/DbUtil/InventoryRepository.cs">
-      <publishTime>03/19/2018 17:10:40</publishTime>
+      <publishTime>04/15/2018 14:24:41</publishTime>
     </File>
     <File Include="Controllers/DbUtil/LocationRepository.cs">
       <publishTime>03/19/2018 17:10:40</publishTime>
@@ -505,7 +505,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/19/2018 17:10:40</publishTime>
     </File>
     <File Include="Controllers/DbUtil/ModelZone2MinQuantityRepository.cs">
-      <publishTime>04/13/2018 11:02:27</publishTime>
+      <publishTime>04/16/2018 11:09:45</publishTime>
     </File>
     <File Include="Controllers/DbUtil/ReachTreeRepository.cs">
       <publishTime>03/19/2018 17:10:40</publishTime>
@@ -517,7 +517,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/19/2018 17:10:40</publishTime>
     </File>
     <File Include="Controllers/InventoryInsController.cs">
-      <publishTime>04/13/2018 09:21:35</publishTime>
+      <publishTime>04/15/2018 13:34:11</publishTime>
     </File>
     <File Include="Controllers/LocationsController.cs">
       <publishTime>03/19/2018 17:10:40</publishTime>
@@ -664,7 +664,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/19/2018 17:10:40</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>04/06/2018 15:40:52</publishTime>
+      <publishTime>04/16/2018 11:10:08</publishTime>
     </File>
     <File Include="Web.Debug.config">
       <publishTime>03/19/2018 17:10:40</publishTime>
