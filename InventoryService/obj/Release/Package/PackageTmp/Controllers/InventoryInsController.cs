@@ -264,9 +264,18 @@ namespace InventoryService.Controllers
         [Route("~/api/FGInventory")]
         public HttpResponseMessage Put(List<InventoryIn> e)
         {
-            var item = InventoryRepository.UpdateInventory(e);
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, item);
-            return response;
+            HttpResponseMessage response = null;
+            try
+            {
+                var item = InventoryRepository.UpdateInventory(e);
+                response = Request.CreateResponse(HttpStatusCode.OK, item);
+            }
+            catch (Exception x)
+            {
+                EventLog.WriteEntry("FGInventoryController", x.ToString(), EventLogEntryType.Error);
+            }
+
+                return response;
         }
 
 

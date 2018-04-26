@@ -69,7 +69,7 @@ namespace InventoryService.Controllers.DbUtil
                     var zone1 = (from inventory in db.InventoryIns
                                 where inventory.Location.Equals(i.Zone1Code) && inventory.ModelNo.Equals(i.Model)
                                  select inventory).ToList();
-
+                    
                     if (zone1.Count < i.Z2MinQty)
                         continue;
                     else

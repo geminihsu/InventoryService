@@ -42,7 +42,7 @@ namespace InventoryService.Controllers.DbUtil
             foreach (InventoryIn i in e)
             {
                 var item = (from inventory in db.InventoryIns
-                            where inventory.SN == i.SN
+                            where inventory.SN.Equals(i.SN)
                             select inventory).SingleOrDefault();
                 items.Add(item);
 
@@ -58,11 +58,10 @@ namespace InventoryService.Controllers.DbUtil
             var items = new List<InventoryIn>();
             foreach (InventoryIn i in e)
             {
-                var item = (from inventory in db.InventoryIns
-                            where inventory.SN == i.SN
-                            select inventory).FirstOrDefault() != null;
 
-                if(!item)
+                var current = (from d in db.InventoryIns where d.SN.Equals(i.SN) select d).FirstOrDefault();
+
+                if (current == null)
                     items.Add(i);
 
             }
@@ -76,11 +75,9 @@ namespace InventoryService.Controllers.DbUtil
             var items = new List<InventoryIn>();
             foreach (InventoryIn i in e)
             {
-                var item = (from inventory in db.InventoryIns
-                            where inventory.SN == i.SN
-                            select inventory).FirstOrDefault() != null;
+                var current = (from d in db.InventoryIns where d.SN.Equals(i.SN) select d).FirstOrDefault();
 
-                if (item)
+                if (current != null)
                     items.Add(i);
 
             }
@@ -104,7 +101,7 @@ namespace InventoryService.Controllers.DbUtil
                 if (exist && !isSold)
                 {
                     var item = (from inventory in db.InventoryIns
-                                where inventory.SN == i.SN
+                                where inventory.SN.Equals(i.SN)
                                 select inventory).SingleOrDefault();
 
                     if (LocationHelper.MapZoneCode(item.Location) != 2 || item == null)
@@ -174,7 +171,7 @@ namespace InventoryService.Controllers.DbUtil
                          where inventory.ModelNo.Equals(modelNo)
                          join code in db.Locations on inventory.Location equals code.Code where inventory.ModelNo.Equals(modelNo) && (code.ZoneCode == 1 || code.ZoneCode == 2)
                          where inventory.ModelNo.Equals(modelNo) && (code.ZoneCode == 1 || code.ZoneCode == 2)
-                         orderby inventory.SN.Substring(6, 10) ascending, inventory.Location descending
+                         orderby inventory.Location descending, inventory.SN.Substring(6, 10) ascending
                          select inventory).Take(count);
             return query.ToList();
         }
@@ -232,7 +229,12 @@ namespace InventoryService.Controllers.DbUtil
         {
             foreach (InventoryIn i in e)
             {
-                db.InventoryIns.Add(i);
+                var item = (from inventory in db.InventoryIns
+                            where inventory.SN.Equals(i.SN)
+                            select inventory).SingleOrDefault();
+
+                if (item == null)
+                    db.InventoryIns.Add(i);
 
             }
             db.SaveChanges();
@@ -245,11 +247,14 @@ namespace InventoryService.Controllers.DbUtil
             var item = (from inventory in db.InventoryIns
                        where inventory.Seq == e.Seq
                        select inventory).SingleOrDefault();
-            item.SN = e.SN;
-            item.Date = e.Date;
-            item.Location = e.Location;
-            item.ModelNo = e.ModelNo;
 
+            if (item != null)
+            {
+                item.SN = e.SN;
+                item.Date = e.Date;
+                item.Location = e.Location;
+                item.ModelNo = e.ModelNo;
+            }
             db.SaveChanges();
             return GetAllInventory();
         }
@@ -260,14 +265,18 @@ namespace InventoryService.Controllers.DbUtil
         {
             foreach (InventoryIn i in e)
             {
-                var item = (from inventory in db.InventoryIns
-                            where inventory.SN == i.SN
-                            select inventory).SingleOrDefault();
-                item.SN = i.SN;
-                //item.Date = i.Date;
-                item.Location = i.Location;
-                item.ModelNo = i.ModelNo;
 
+                var item = (from inventory in db.InventoryIns
+                            where inventory.SN.Equals(i.SN)
+                            select inventory).SingleOrDefault();
+
+                if (item != null)
+                {
+                    item.SN = i.SN;
+                    //item.Date = i.Date;
+                    item.Location = i.Location;
+                    item.ModelNo = i.ModelNo;
+                }
             }
 
             db.SaveChanges();
@@ -307,7 +316,7 @@ namespace InventoryService.Controllers.DbUtil
             {
 
                 var item = (from inventory in db.InventoryIns
-                            where inventory.SN.Contains(x.SN)
+                            where inventory.SN.Equals(x.SN)
                             select inventory).SingleOrDefault();
                 db.InventoryIns.Remove(item);
             }
