@@ -343,15 +343,22 @@ namespace InventoryService.Controllers
              db.SaveChanges();
 
     }*/
+        [Route("~/api/FGInventory/SN/Delete")]
+        public HttpResponseMessage PutDelete(List<InventoryIn> e)
+        {
+            var employees = InventoryRepository.DeleteInventory(e);
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
+            return response;
+        }
 
-        /*[HttpDelete]
+        [HttpDelete]
         [Route("api/FGInventory")]
         public HttpResponseMessage Delete(List<InventoryIn> e)
         {
             var employees = InventoryRepository.DeleteInventory(e);
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
             return response;
-        }*/
+        }
 
         protected override void Dispose(bool disposing)
         {

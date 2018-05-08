@@ -284,13 +284,16 @@ namespace InventoryService.Controllers.DbUtil
         }
 
         //delete one item from Inventory tableSN/NotExist
-        public static List<InventoryIn> DeleteInventory(InventoryIn e)
+        public static List<InventoryIn> DeleteInventory(List<InventoryIn> e)
         {
-            var item = (from inventory in db.InventoryIns
-                        where inventory.Seq == e.Seq
-                        select inventory).SingleOrDefault();
-            db.InventoryIns.Remove(item);
 
+            foreach (InventoryIn i in e)
+            {
+                var item = (from inventory in db.InventoryIns
+                            where inventory.SN.Equals(i.SN)
+                            select inventory).SingleOrDefault();
+                db.InventoryIns.Remove(item);
+            }
             db.SaveChanges();
             return GetAllInventory();
         }

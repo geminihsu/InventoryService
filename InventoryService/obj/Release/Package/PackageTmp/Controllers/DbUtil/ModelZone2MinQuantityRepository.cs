@@ -96,14 +96,15 @@ namespace InventoryService.Controllers.DbUtil
         public static List<FGDailyReportDto> GetDailyReportByModels(DateTime date)
         {
             var query = (from model in db.ModelZoneMaps
-                        orderby model.FG, model.Model descending
-                        select model);
+                         orderby model.Model descending
+                         select model);
 
             var result = new List<FGDailyReportDto>();
 
             int modelTotal = 0;
             int zone1Count = 0;
             int zone2Count = 0;
+            int zone1Received = 0;
 
             var yesterday = date.AddDays(-1);
             var tomorrow = date.AddDays(1);
@@ -112,7 +113,7 @@ namespace InventoryService.Controllers.DbUtil
 
             foreach (ModelZoneMap i in query)
             {
-
+                zone1Received = 0;
                 FGDailyReportDto m = new FGDailyReportDto();
                 m.ModelNo = i.Model;
                 m.ModelFG = i.FG;
@@ -126,21 +127,22 @@ namespace InventoryService.Controllers.DbUtil
                 var shipped = (from ship in db.Histories
                                where ship.ModelNo.Equals(i.Model) && ship.Date >= date && ship.Date < tomorrow
                                select ship).ToList();
-               
-                if (previous == null)
-                    m.Previous = 0;
-                else
-                    m.Previous = previous.Total;
+
+                var afterShipped = (from ship in db.Histories
+                                    where ship.ModelNo.Equals(i.Model) && ship.Date >= tomorrow
+                                    select ship).ToList();
+
+
 
                 m.Shipped = shipped.Count;
 
-                /*var receivedCurrent = (from inventory in db.InventoryIns
+                /*=var receivedCurrent = (from inventory in db.InventoryIns
                                        where inventory.ModelNo.Equals(i.Model) && inventory.Date >= date
                                        group inventory by inventory.Location);*/
 
                 var receivedCurrent = (from inventory in db.InventoryIns
                                        where inventory.ModelNo.Equals(i.Model)
-                                       join code in db.Locations on inventory.Location equals code.Code                                      
+                                       join code in db.Locations on inventory.Location equals code.Code
                                        orderby code.ZoneCode ascending, inventory.SN.Substring(6, 10) ascending
                                        group inventory by code.ZoneCode);
                 modelTotal = 0;
@@ -152,7 +154,16 @@ namespace InventoryService.Controllers.DbUtil
 
                     //mapped all values
                     if (inventory.Key == 1)
-                        zone1Count = inventory.Count();
+                    {
+                        foreach (var item in inventory)
+                        {
+                            if (item.Date.Date == date.Date)
+                                zone1Received++;
+                            else if (item.Date < tomorrow)
+                                zone1Count++;
+                        }
+                        //zone1Count = inventory.Count();
+                    }
                     if (inventory.Key == 2)
                         zone2Count = inventory.Count();
                     else if (inventory.Key == 3)
@@ -165,16 +176,20 @@ namespace InventoryService.Controllers.DbUtil
                         m.QC = inventory.Count();
                     else if (inventory.Key == 7)
                         m.Scrapped = inventory.Count();
-                    modelTotal += inventory.Count();
+
+                    if (inventory.Key == 1)
+                        modelTotal += zone1Count;
+                    else
+                        modelTotal += inventory.Count();
                 }
 
-                m.Received = zone1Count;
-                m.OnHand = zone1Count + zone2Count;
+                m.Received = zone1Received;
+                m.OnHand = zone1Count + zone2Count + afterShipped.Count;
 
-                m.Total = modelTotal;
+                m.Total = modelTotal + afterShipped.Count;
 
-                if (m.Previous == 0)
-                    m.Previous = m.Total + m.Shipped;
+
+                m.Previous = m.Total + m.Shipped;
 
                 if (m.Total > 0)
                 {
