@@ -122,8 +122,8 @@ namespace InventoryService.Controllers
             try
             {
 
-                InventoryRepository.DeleteInventory(e);
-                var inventory = HistoryRepository.InsertInventory(e);
+                var inventory = InventoryRepository.DeleteInventory(e);
+                //var inventory = HistoryRepository.InsertInventory(e);
                 response = Request.CreateResponse(HttpStatusCode.OK, inventory);
             }
             catch (Exception x)

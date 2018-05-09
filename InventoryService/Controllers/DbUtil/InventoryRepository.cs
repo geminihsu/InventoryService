@@ -322,6 +322,9 @@ namespace InventoryService.Controllers.DbUtil
                             where inventory.SN.Equals(x.SN)
                             select inventory).SingleOrDefault();
                 db.InventoryIns.Remove(item);
+                x.ScanDate = item.Date;
+                x.ContainerNo = item.ContainerNo;
+                var ship = HistoryRepository.InsertInventory(x);
             }
 
             db.SaveChanges();

@@ -183,13 +183,36 @@ namespace InventoryService.Controllers.DbUtil
                         modelTotal += inventory.Count();
                 }
 
+                if (m.ModelNo.Equals("125317"))
+                    m.ModelNo = i.Model;
+
+
+                int receivedShip = 0;
+
+                foreach (var ship in afterShipped)
+                {
+                    if (ship.ScanDate != null && ship.ScanDate.Date == date.Date)
+                    {
+                        zone1Received++;
+                        receivedShip++;
+                    }
+                }
+
+                int afterSippedCnt = afterShipped.Count - receivedShip;
+
+
+
                 m.Received = zone1Received;
-                m.OnHand = zone1Count + zone2Count + afterShipped.Count;
+                m.OnHand = zone1Received + zone1Count + zone2Count + afterSippedCnt;
 
-                m.Total = modelTotal + afterShipped.Count;
+                m.Total = modelTotal + zone1Received + afterSippedCnt;
 
 
-                m.Previous = m.Total + m.Shipped;
+                if (afterShipped.Count > 0)
+                    m.Previous = m.Total - zone1Received + m.Shipped;
+                else
+                    m.Previous = m.Total + m.Shipped;
+
 
                 if (m.Total > 0)
                 {

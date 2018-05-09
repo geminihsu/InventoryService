@@ -40,6 +40,8 @@
           <Property Name="SalesOrder" Type="varchar" MaxLength="100" />
           <Property Name="Location" Type="varchar" MaxLength="3" />
           <Property Name="Seq" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ScanDate" Type="datetime" Nullable="false" />
+          <Property Name="ContainerNo" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="InventoryIn">
           <Key>
@@ -136,6 +138,8 @@
           <Property Name="ModelNo" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
           <Property Name="Location" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
           <Property Name="Seq" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ScanDate" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="ContainerNo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ModelZoneMap">
           <Key>
@@ -208,6 +212,8 @@
           <EntitySetMapping Name="Histories">
             <EntityTypeMapping TypeName="FGInventoryModel.History">
               <MappingFragment StoreEntitySet="History">
+                <ScalarProperty Name="ContainerNo" ColumnName="ContainerNo" />
+                <ScalarProperty Name="ScanDate" ColumnName="ScanDate" />
                 <ScalarProperty Name="Seq" ColumnName="Seq" />
                 <ScalarProperty Name="Location" ColumnName="Location" />
                 <ScalarProperty Name="ModelNo" ColumnName="ModelNo" />

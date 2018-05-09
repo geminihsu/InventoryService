@@ -35,6 +35,8 @@
     <Property Name="SalesOrder" Type="varchar" MaxLength="100" />
     <Property Name="Location" Type="varchar" MaxLength="3" />
     <Property Name="Seq" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ScanDate" Type="datetime" Nullable="false" />
+    <Property Name="ContainerNo" Type="varchar" MaxLength="255" />
   </EntityType>
   <EntityType Name="InventoryIn">
     <Key>
