@@ -238,6 +238,7 @@
     <Compile Include="Controllers\LocationsController.cs" />
     <Compile Include="Controllers\ModelInfoesController.cs" />
     <Compile Include="Controllers\ModelZoneMapsController.cs" />
+    <Compile Include="DTOs\FGDailyReplenishment.cs" />
     <Compile Include="DTOs\FGDailyReportDto.cs" />
     <Compile Include="DTOs\FGZoneDto.cs" />
     <Compile Include="DTOs\ModelDto.cs" />

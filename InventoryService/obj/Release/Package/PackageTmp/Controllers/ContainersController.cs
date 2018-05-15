@@ -105,8 +105,18 @@ namespace InventoryService.Controllers
             HttpResponseMessage response = null;
             try
             {
-                var inventory = ContainerRepository.InsertContainer(e);
-                response = Request.CreateResponse(HttpStatusCode.OK, inventory);
+                var inventory = new List<Container>();
+
+                if (!ContainerRepository.isSNexsit(e))
+                {
+                    inventory = ContainerRepository.InsertContainer(e);
+                    response = Request.CreateResponse(HttpStatusCode.OK, inventory);
+                }
+                else
+                {
+                    response = Request.CreateResponse(HttpStatusCode.Conflict, inventory);
+                }
+
             }
             catch (Exception x)
             {
@@ -116,7 +126,6 @@ namespace InventoryService.Controllers
                 else
                     return new HttpResponseMessage(HttpStatusCode.Forbidden);
             }
-
 
             return response;
         }

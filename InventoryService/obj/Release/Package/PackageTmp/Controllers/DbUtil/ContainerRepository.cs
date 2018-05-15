@@ -30,10 +30,11 @@ namespace InventoryService.Controllers.DbUtil
         public static Container GetContainer(String containerNo)
         {
             var query = from container in db.Containers
-                        where container.ContainerNo.Contains(containerNo)
+                        where container.ContainerNo.Equals(containerNo)
 
                         select container;
             return query.SingleOrDefault();
+        
         }
 
 
@@ -44,6 +45,23 @@ namespace InventoryService.Controllers.DbUtil
                         where container.Date == datetime
                         select container;
             return query.ToList();
+        }
+
+        public static Boolean isSNexsit(List<Container> e)
+        {
+            var containerItem = (from container in db.Containers
+                                 select container);
+            foreach (Container i in e)
+            {
+                foreach (Container s in containerItem)
+                {
+                    if (s.SNBegin.Equals(i.SNBegin) || s.SNEnd.Equals(i.SNEnd))
+                        return true;
+                    else if (s.SNBegin.Equals(i.SNEnd) || s.SNEnd.Equals(i.SNBegin))
+                        return true;
+                }
+            }
+            return false;
         }
 
         //Insert one model into model table

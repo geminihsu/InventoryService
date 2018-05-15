@@ -1,4 +1,5 @@
-﻿using InventoryService.DTOs;
+﻿using InventoryService.Common;
+using InventoryService.DTOs;
 using InventoryService.Models;
 using System;
 using System.Collections.Generic;
@@ -50,6 +51,10 @@ namespace InventoryService.Controllers.DbUtil
         //Get all model Items from DB
         public static List<ModelZoneMap> GetAllModelsQty()
         {
+            var updateModelZone = GetDailyReportByModelsAndLocation();
+
+            UpdateInventory(updateModelZone);
+
             var query = from model in db.ModelZoneMaps
                         orderby model.FG ascending
                         select model ;
@@ -70,7 +75,7 @@ namespace InventoryService.Controllers.DbUtil
                                 where inventory.Location.Equals(i.Zone1Code) && inventory.ModelNo.Equals(i.Model)
                                  select inventory).ToList();
                     
-                    if (zone1.Count < i.Z2MinQty)
+                    if (zone1.Count < 0)
                         continue;
                     else
                     {
@@ -86,9 +91,9 @@ namespace InventoryService.Controllers.DbUtil
                 
             }
 
-            List<ModelZoneMap> SortedList = result.OrderByDescending(o => o.Z2CurtQty).ToList();
+            //List<ModelZoneMap> SortedList = result.OrderByDescending(o => o.Z2CurtQty).ToList();
 
-            return SortedList;
+            return result;
 
         }
 
@@ -183,9 +188,6 @@ namespace InventoryService.Controllers.DbUtil
                         modelTotal += inventory.Count();
                 }
 
-                if (m.ModelNo.Equals("125317"))
-                    m.ModelNo = i.Model;
-
 
                 int receivedShip = 0;
 
@@ -241,7 +243,50 @@ namespace InventoryService.Controllers.DbUtil
 
         }
 
+        //Get all model daily replenishment report from DB
+        public static List<ModelZoneMap> GetDailyReportByModelsAndLocation()
+        {
+       
+            var query = (from model in db.ModelZoneMaps
+                         orderby model.Model descending
+                         select model);
+            var updateModelZone1 = new List<ModelZoneMap>();
 
+            foreach (ModelZoneMap i in query)
+            {
+                var inventoryQty = (from inventory in db.InventoryIns
+                                    where inventory.ModelNo.Equals(i.Model)
+                                    group inventory by inventory.Location into g
+                                    let count = g.Count()
+                                    orderby count descending
+                                    select new { Location = g.Key, Count = count }
+                                    );
+
+                var daily = new FGDailyReplenishment();
+                foreach (var inventory in inventoryQty)
+                {
+                    if (LocationHelper.MapZoneCode(inventory.Location) != 1)
+                        continue;
+
+                    daily.ModelNo = i.Model;
+                    daily.Description = i.FG;
+                    daily.Location = inventory.Location;
+                    daily.Qty = inventory.Count;
+
+                    break;
+                }
+
+                if (daily.Location != null)
+                {
+                    i.Zone1Code = daily.Location;
+                    updateModelZone1.Add(i);
+                }
+            }
+
+
+           
+            return updateModelZone1;
+        }
         //Insert one model into model table
         public static List<ModelZoneMap> InsertInventory(ModelZoneMap e)
         {
@@ -261,23 +306,37 @@ namespace InventoryService.Controllers.DbUtil
         //update one model into model table
         public static List<ModelZoneMap> UpdateInventory(ModelZoneMap e)
         {
+
             var model1 = (from model in db.ModelZoneMaps
-                          where model.Model.Contains(model.Model)
-                          select model).SingleOrDefault();
-            /*model1.MODELNO = e.MODELNO;
-            model1.VERSION = e.VERSION;
-            model1.FG = e.FG;
-            model1.MODEL1 = e.MODEL1;
-            model1.SOLE = e.SOLE;
-            model1.DESC = e.DESC;
-            model1.FP_DATE = e.FP_DATE;
-            model1.LABOR_W = e.LABOR_W;
-            model1.ViewFile= e.ViewFile;
-            model1.SPFile = e.SPFile;
-            model1.Commercial = e.Commercial;
-            model1.Brand = e.Brand;*/
+                          where model.Model.Equals(e.Model)
+                          select model);
+
+            foreach (ModelZoneMap i in model1)
+            {
+
+                i.Zone1Code = e.Zone1Code;
+            }
 
 
+            db.SaveChanges();
+            return GetAllModels();
+        }
+
+        //update one model into model table
+        public static List<ModelZoneMap> UpdateInventory(List<ModelZoneMap> e)
+        {
+            foreach (ModelZoneMap i in e)
+            {
+                var model1 = (from model in db.ModelZoneMaps
+                              where model.Model.Equals(i.Model) && model.Zone2Code.Equals(i.Zone2Code)
+                              select model);
+
+                foreach (ModelZoneMap s in model1)
+                {
+
+                    s.Zone1Code = i.Zone1Code;
+                }
+            }
             db.SaveChanges();
             return GetAllModels();
         }
