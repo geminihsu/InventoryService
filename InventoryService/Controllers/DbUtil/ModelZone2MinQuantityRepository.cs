@@ -138,7 +138,7 @@ namespace InventoryService.Controllers.DbUtil
                 }
 
                 var receivedItemByDate = (from inventory in db.InventoryIns
-                                          where inventory.ModelNo.Equals(i.Model) && inventory.Date >= date && inventory.Date < tomorrow
+                                          where inventory.ModelNo.Equals(i.Model) && !inventory.Location.Equals(Constants.ZONE_CODE_RETURN.ToString()) && inventory.Date >= date && inventory.Date < tomorrow
                                           select inventory
                                           ).ToList();
 
@@ -173,6 +173,8 @@ namespace InventoryService.Controllers.DbUtil
                         m.QC = inventory.Count();
                     else if (inventory.Key == 7)
                         m.Scrapped = inventory.Count();
+                    else if (inventory.Key == 9)
+                        continue;
 
                     modelTotal += inventory.Count();
                 }

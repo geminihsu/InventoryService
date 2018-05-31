@@ -32,6 +32,9 @@ namespace InventoryService.Common
         public static int ZONE_CODE_3_B = 891;
         public static int ZONE_CODE_3_C = 901;
         public static int ZONE_CODE_3_D = 911;
+
+        //Return hide range
+        public static int ZONE_CODE_RETURN = 333;
         //Zone 4 range
         public static int ZONE_CODE_4_ONE = 888;
 

@@ -81,7 +81,7 @@
       <PropertyRef Name="Seq" />
     </Key>
     <Property Name="Seq" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
     <Property Name="ContainerNo" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="SNBegin" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
     <Property Name="SNEnd" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />

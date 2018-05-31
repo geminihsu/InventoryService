@@ -15,7 +15,7 @@ namespace InventoryService.Models
     public partial class Container
     {
         public int Seq { get; set; }
-        public System.DateTime Date { get; set; }
+        public Nullable<System.DateTime> Date { get; set; }
         public string ContainerNo { get; set; }
         public string SNBegin { get; set; }
         public string SNEnd { get; set; }

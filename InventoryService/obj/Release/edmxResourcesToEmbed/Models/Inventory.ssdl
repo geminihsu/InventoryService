@@ -5,7 +5,7 @@
       <PropertyRef Name="Seq" />
     </Key>
     <Property Name="Seq" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Date" Type="datetime" />
     <Property Name="ContainerNo" Type="varchar" MaxLength="255" Nullable="false" />
     <Property Name="SNBegin" Type="varchar" MaxLength="16" Nullable="false" />
     <Property Name="SNEnd" Type="varchar" MaxLength="16" Nullable="false" />

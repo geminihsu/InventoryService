@@ -128,16 +128,23 @@ namespace InventoryService.Controllers.DbUtil
         public static List<InventoryIn> SearchInventoryByLocation(string location)
         {
             if (location.Length == 1)
-                location  = "00" + location;
+                location = "00" + location;
 
             if (location.Length == 2)
                 location = "0" + location;
-            var query = from inventory in db.InventoryIns
-                        where inventory.Location.Equals(location)
-                        select inventory;
+            List<InventoryIn> query;
+
+            if (location.Equals("881") || location.Equals("891") || location.Equals("901"))
+                query = (from inventory in db.InventoryIns
+                         where inventory.Location.Equals("881") || inventory.Location.Equals("891") || inventory.Location.Equals("901")
+                         select inventory).ToList();
+            else
+                query = (from inventory in db.InventoryIns
+                         where inventory.Location.Equals(location)
+                         select inventory).ToList();
+
             return query.ToList();
         }
-
         //Query inventory Items By model
         public static List<InventoryIn> SearchInventoryByModel(string modelNo)
         {
