@@ -25,7 +25,7 @@
       <PropertyRef Name="Seq" />
     </Key>
     <Property Name="SN" Type="varchar" MaxLength="16" Nullable="false" />
-    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="ShippedDate" Type="datetime" Nullable="false" />
     <Property Name="ModelNo" Type="varchar" MaxLength="6" />
     <Property Name="TrackingNo" Type="varchar" MaxLength="100" />
     <Property Name="ShipCity" Type="varchar" MaxLength="150" />
@@ -37,6 +37,7 @@
     <Property Name="Seq" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ScanDate" Type="datetime" Nullable="false" />
     <Property Name="ContainerNo" Type="varchar" MaxLength="255" />
+    <Property Name="CreatedDate" Type="datetime" />
   </EntityType>
   <EntityType Name="InventoryIn">
     <Key>
@@ -78,6 +79,23 @@
     <Property Name="Zone1Code" Type="varchar" MaxLength="3" Nullable="false" />
     <Property Name="Zone2Code" Type="varchar" MaxLength="3" Nullable="false" />
   </EntityType>
+  <EntityType Name="Pallet">
+    <Key>
+      <PropertyRef Name="Seq" />
+    </Key>
+    <Property Name="Seq" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ItemID" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="TrackingNo" Type="varchar" MaxLength="100" />
+    <Property Name="ShipCity" Type="varchar" MaxLength="150" />
+    <Property Name="ShipState" Type="varchar" MaxLength="100" />
+    <Property Name="BillTo" Type="varchar" MaxLength="200" />
+    <Property Name="ShipVia" Type="varchar" MaxLength="200" />
+    <Property Name="SalesOrder" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ShippedDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="Qty" Type="int" Nullable="false" />
+    <Property Name="FG" Type="varchar" MaxLength="150" Nullable="false" />
+  </EntityType>
   <EntityContainer Name="FGInventoryModelStoreContainer">
     <EntitySet Name="Container" EntityType="Self.Container" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DailyTotal" EntityType="Self.DailyTotal" Schema="dbo" store:Type="Tables" />
@@ -86,5 +104,6 @@
     <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ModelInfo" EntityType="Self.ModelInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ModelZoneMap" EntityType="Self.ModelZoneMap" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Pallet" EntityType="Self.Pallet" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

@@ -65,6 +65,15 @@ namespace InventoryService.Controllers
             return response;
         }
 
+
+        [Route("~/api/Histories/dailyship/{date:datetime}")]
+        public HttpResponseMessage GetDateShip(DateTime date)
+        {
+            var employees = HistoryRepository.SearchDailyShipping(date);
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
+            return response;
+        }
+
         // PUT: api/Histories/5
         /* [ResponseType(typeof(void))]
          public IHttpActionResult PutHistory(int id, History history)
@@ -122,9 +131,9 @@ namespace InventoryService.Controllers
             try
             {
 
-                var inventory = InventoryRepository.DeleteInventory(e);
-                //var inventory = HistoryRepository.InsertInventory(e);
-                response = Request.CreateResponse(HttpStatusCode.OK, inventory);
+                var SO = InventoryRepository.DeleteInventory(e);
+                var shipping = HistoryRepository.SearchShippingBySalesOrder(SO);
+                response = Request.CreateResponse(HttpStatusCode.OK, shipping);
             }
             catch (Exception x)
             {

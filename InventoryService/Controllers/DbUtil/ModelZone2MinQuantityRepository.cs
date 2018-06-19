@@ -118,22 +118,28 @@ namespace InventoryService.Controllers.DbUtil
                 m.ModelFG = i.FG;
 
                 var shipped = (from ship in db.Histories
-                               where ship.ModelNo.Equals(i.Model) && ship.Date >= date && ship.Date < tomorrow
+                               where ship.ModelNo.Equals(i.Model) && ship.ShippedDate >= date && ship.ShippedDate < tomorrow
                                select ship).ToList();
 
                 var afterShipped = (from ship in db.Histories
-                                    where ship.ModelNo.Equals(i.Model) && ship.Date >= tomorrow
+                                    where ship.ModelNo.Equals(i.Model) && ship.ShippedDate >= tomorrow
                                     select ship).ToList();
 
                 m.Shipped = shipped.Count;
 
                 int receivedShip = 0;
 
+                int afterShippingScanItem = afterShipped.Count;
+
                 foreach (var ship in afterShipped)
                 {
-                    if (ship.ScanDate != null && ship.ScanDate == date.Date)
+                    if (ship.ScanDate != null && ship.ScanDate.Date == date.Date)
                     {
                         receivedShip++;
+                    }
+                    else if (ship.ScanDate.Date > date.Date)
+                    {
+                        afterShippingScanItem--;
                     }
                 }
 
@@ -183,7 +189,7 @@ namespace InventoryService.Controllers.DbUtil
 
 
 
-                int afterSippedCnt = afterShipped.Count - receivedShip;
+                int afterSippedCnt = afterShippingScanItem - receivedShip;
 
 
 

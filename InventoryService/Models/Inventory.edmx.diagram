@@ -12,6 +12,7 @@
         <EntityTypeShape EntityType="FGInventoryModel.DailyTotal" Width="1.5" PointX="3.375" PointY="8.75" />
         <EntityTypeShape EntityType="FGInventoryModel.ModelInfo" Width="1.5" PointX="9.375" PointY="0.75" />
         <EntityTypeShape EntityType="FGInventoryModel.Container" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="FGInventoryModel.Pallet" Width="1.5" PointX="3.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

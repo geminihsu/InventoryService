@@ -104,7 +104,7 @@ namespace InventoryService.Controllers.DbUtil
                                 where inventory.SN.Equals(i.SN)
                                 select inventory).SingleOrDefault();
 
-                    if (LocationHelper.MapZoneCode(item.Location) != 2 || item == null)
+                    if (item == null || LocationHelper.MapZoneCode(item.Location) != 2)
                     {
                         items.Add(i);
                     }
@@ -134,11 +134,11 @@ namespace InventoryService.Controllers.DbUtil
                 location = "0" + location;
             List<InventoryIn> query;
 
-            if (location.Equals("881") || location.Equals("891") || location.Equals("901"))
+           /* if (location.Equals("881") || location.Equals("891") || location.Equals("901"))
                 query = (from inventory in db.InventoryIns
                          where inventory.Location.Equals("881") || inventory.Location.Equals("891") || inventory.Location.Equals("901")
                          select inventory).ToList();
-            else
+            else*/
                 query = (from inventory in db.InventoryIns
                          where inventory.Location.Equals(location)
                          select inventory).ToList();
@@ -177,7 +177,7 @@ namespace InventoryService.Controllers.DbUtil
             var query = (from inventory in db.InventoryIns
                          where inventory.ModelNo.Equals(modelNo)
                          join code in db.Locations on inventory.Location equals code.Code where inventory.ModelNo.Equals(modelNo) && (code.ZoneCode == 1 || code.ZoneCode == 2)
-                         where inventory.ModelNo.Equals(modelNo) && (code.ZoneCode == 1 || code.ZoneCode == 2)
+                         where inventory.ModelNo.Equals(modelNo) && (code.ZoneCode == 1 || code.ZoneCode == 2) && (!inventory.Location.Equals("901") && !inventory.Location.Equals("891") && !inventory.Location.Equals("881"))
                          orderby inventory.Location descending, inventory.SN.Substring(6, 10) ascending
                          select inventory).Take(count);
             return query.ToList();
@@ -317,14 +317,14 @@ namespace InventoryService.Controllers.DbUtil
             return GetAllInventory();
         }
 
-        
-        //delete more than one item from Inventory table
-        public static List<InventoryIn> DeleteInventory(List<History> e)
-        {
 
+        //delete more than one item from Inventory table
+        public static string DeleteInventory(List<History> e)
+        {
+            string SO = "";
             foreach (History x in e)
             {
-
+                SO = x.SalesOrder;
                 var item = (from inventory in db.InventoryIns
                             where inventory.SN.Equals(x.SN)
                             select inventory).SingleOrDefault();
@@ -335,10 +335,11 @@ namespace InventoryService.Controllers.DbUtil
             }
 
             db.SaveChanges();
-            return GetAllInventory();
+            return SO;
         }
 
-       
+
+
     }
 
 

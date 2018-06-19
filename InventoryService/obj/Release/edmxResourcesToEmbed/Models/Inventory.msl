@@ -24,6 +24,8 @@
     <EntitySetMapping Name="Histories">
       <EntityTypeMapping TypeName="FGInventoryModel.History">
         <MappingFragment StoreEntitySet="History">
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ShippedDate" ColumnName="ShippedDate" />
           <ScalarProperty Name="ContainerNo" ColumnName="ContainerNo" />
           <ScalarProperty Name="ScanDate" ColumnName="ScanDate" />
           <ScalarProperty Name="Seq" ColumnName="Seq" />
@@ -34,7 +36,6 @@
           <ScalarProperty Name="ShipVia" ColumnName="ShipVia" />
           <ScalarProperty Name="BillTo" ColumnName="BillTo" />
           <ScalarProperty Name="TrackingNo" ColumnName="TrackingNo" />
-          <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="SalesOrder" ColumnName="SalesOrder" />
           <ScalarProperty Name="SN" ColumnName="SN" />
         </MappingFragment>
@@ -82,6 +83,24 @@
           <ScalarProperty Name="SNBegin" ColumnName="SNBegin" />
           <ScalarProperty Name="ContainerNo" ColumnName="ContainerNo" />
           <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Seq" ColumnName="Seq" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pallets">
+      <EntityTypeMapping TypeName="FGInventoryModel.Pallet">
+        <MappingFragment StoreEntitySet="Pallet">
+          <ScalarProperty Name="FG" ColumnName="FG" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ShippedDate" ColumnName="ShippedDate" />
+          <ScalarProperty Name="SalesOrder" ColumnName="SalesOrder" />
+          <ScalarProperty Name="ShipVia" ColumnName="ShipVia" />
+          <ScalarProperty Name="BillTo" ColumnName="BillTo" />
+          <ScalarProperty Name="ShipState" ColumnName="ShipState" />
+          <ScalarProperty Name="ShipCity" ColumnName="ShipCity" />
+          <ScalarProperty Name="TrackingNo" ColumnName="TrackingNo" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
           <ScalarProperty Name="Seq" ColumnName="Seq" />
         </MappingFragment>
       </EntityTypeMapping>

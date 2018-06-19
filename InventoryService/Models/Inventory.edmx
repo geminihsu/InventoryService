@@ -30,7 +30,7 @@
             <PropertyRef Name="Seq" />
           </Key>
           <Property Name="SN" Type="varchar" MaxLength="16" Nullable="false" />
-          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="ShippedDate" Type="datetime" Nullable="false" />
           <Property Name="ModelNo" Type="varchar" MaxLength="6" />
           <Property Name="TrackingNo" Type="varchar" MaxLength="100" />
           <Property Name="ShipCity" Type="varchar" MaxLength="150" />
@@ -42,6 +42,7 @@
           <Property Name="Seq" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ScanDate" Type="datetime" Nullable="false" />
           <Property Name="ContainerNo" Type="varchar" MaxLength="255" />
+          <Property Name="CreatedDate" Type="datetime" />
         </EntityType>
         <EntityType Name="InventoryIn">
           <Key>
@@ -83,6 +84,23 @@
           <Property Name="Zone1Code" Type="varchar" MaxLength="3" Nullable="false" />
           <Property Name="Zone2Code" Type="varchar" MaxLength="3" Nullable="false" />
         </EntityType>
+        <EntityType Name="Pallet">
+          <Key>
+            <PropertyRef Name="Seq" />
+          </Key>
+          <Property Name="Seq" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TrackingNo" Type="varchar" MaxLength="100" />
+          <Property Name="ShipCity" Type="varchar" MaxLength="150" />
+          <Property Name="ShipState" Type="varchar" MaxLength="100" />
+          <Property Name="BillTo" Type="varchar" MaxLength="200" />
+          <Property Name="ShipVia" Type="varchar" MaxLength="200" />
+          <Property Name="SalesOrder" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ShippedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="Qty" Type="int" Nullable="false" />
+          <Property Name="FG" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
         <EntityContainer Name="FGInventoryModelStoreContainer">
           <EntitySet Name="Container" EntityType="Self.Container" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DailyTotal" EntityType="Self.DailyTotal" Schema="dbo" store:Type="Tables" />
@@ -91,6 +109,7 @@
           <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ModelInfo" EntityType="Self.ModelInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ModelZoneMap" EntityType="Self.ModelZoneMap" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pallet" EntityType="Self.Pallet" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -122,6 +141,7 @@
           <EntitySet Name="DailyTotals" EntityType="FGInventoryModel.DailyTotal" />
           <EntitySet Name="ModelInfoes" EntityType="FGInventoryModel.ModelInfo" />
           <EntitySet Name="Containers" EntityType="FGInventoryModel.Container" />
+          <EntitySet Name="Pallets" EntityType="FGInventoryModel.Pallet" />
         </EntityContainer>
         <EntityType Name="History">
           <Key>
@@ -129,7 +149,6 @@
           </Key>
           <Property Name="SN" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="SalesOrder" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="TrackingNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="BillTo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="ShipVia" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -140,6 +159,8 @@
           <Property Name="Seq" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ScanDate" Type="DateTime" Precision="3" Nullable="false" />
           <Property Name="ContainerNo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ShippedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="ModelZoneMap">
           <Key>
@@ -183,6 +204,23 @@
           <Property Name="SNEnd" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
           <Property Name="Close" Type="Boolean" Nullable="false" />
         </EntityType>
+        <EntityType Name="Pallet">
+          <Key>
+            <PropertyRef Name="Seq" />
+          </Key>
+          <Property Name="Seq" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TrackingNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ShipCity" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ShipState" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="BillTo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ShipVia" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="SalesOrder" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ShippedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Qty" Type="Int32" Nullable="false" />
+          <Property Name="FG" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -212,6 +250,8 @@
           <EntitySetMapping Name="Histories">
             <EntityTypeMapping TypeName="FGInventoryModel.History">
               <MappingFragment StoreEntitySet="History">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ShippedDate" ColumnName="ShippedDate" />
                 <ScalarProperty Name="ContainerNo" ColumnName="ContainerNo" />
                 <ScalarProperty Name="ScanDate" ColumnName="ScanDate" />
                 <ScalarProperty Name="Seq" ColumnName="Seq" />
@@ -222,7 +262,6 @@
                 <ScalarProperty Name="ShipVia" ColumnName="ShipVia" />
                 <ScalarProperty Name="BillTo" ColumnName="BillTo" />
                 <ScalarProperty Name="TrackingNo" ColumnName="TrackingNo" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="SalesOrder" ColumnName="SalesOrder" />
                 <ScalarProperty Name="SN" ColumnName="SN" />
               </MappingFragment>
@@ -270,6 +309,24 @@
                 <ScalarProperty Name="SNBegin" ColumnName="SNBegin" />
                 <ScalarProperty Name="ContainerNo" ColumnName="ContainerNo" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Seq" ColumnName="Seq" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pallets">
+            <EntityTypeMapping TypeName="FGInventoryModel.Pallet">
+              <MappingFragment StoreEntitySet="Pallet">
+                <ScalarProperty Name="FG" ColumnName="FG" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ShippedDate" ColumnName="ShippedDate" />
+                <ScalarProperty Name="SalesOrder" ColumnName="SalesOrder" />
+                <ScalarProperty Name="ShipVia" ColumnName="ShipVia" />
+                <ScalarProperty Name="BillTo" ColumnName="BillTo" />
+                <ScalarProperty Name="ShipState" ColumnName="ShipState" />
+                <ScalarProperty Name="ShipCity" ColumnName="ShipCity" />
+                <ScalarProperty Name="TrackingNo" ColumnName="TrackingNo" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
                 <ScalarProperty Name="Seq" ColumnName="Seq" />
               </MappingFragment>
             </EntityTypeMapping>

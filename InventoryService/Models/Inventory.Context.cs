@@ -32,5 +32,6 @@ namespace InventoryService.Models
         public virtual DbSet<DailyTotal> DailyTotals { get; set; }
         public virtual DbSet<ModelInfo> ModelInfoes { get; set; }
         public virtual DbSet<Container> Containers { get; set; }
+        public virtual DbSet<Pallet> Pallets { get; set; }
     }
 }

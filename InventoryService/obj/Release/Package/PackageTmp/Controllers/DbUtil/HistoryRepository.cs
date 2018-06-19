@@ -1,4 +1,5 @@
-﻿using InventoryService.Models;
+﻿using InventoryService.DTOs;
+using InventoryService.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,7 @@ namespace InventoryService.Controllers.DbUtil
         public static List<History> SearchShippingByDate(DateTime datetime)
         {
             var query = from inventory in db.Histories
-                        where inventory.Date == datetime
+                        where inventory.ShippedDate == datetime
                         select inventory;
             return query.ToList();
         }
@@ -56,6 +57,84 @@ namespace InventoryService.Controllers.DbUtil
             return query.ToList();
         }
 
+        //Query Daily Shipping
+        public static List<DailyShippingDto> SearchDailyShipping(DateTime datetime)
+        {
+
+            var tomorrow = datetime.AddDays(1);
+
+            var query = from inventory in db.Histories
+                        where inventory.ShippedDate >= datetime && inventory.ShippedDate < tomorrow
+                        orderby inventory.CreatedDate ascending, inventory.SalesOrder ascending
+                        group inventory by inventory.SalesOrder;
+
+            var result = new List<DailyShippingDto>();
+
+            foreach (var inventory in query)
+            {
+                var record = inventory.FirstOrDefault();
+
+                Nullable<System.DateTime> CreatedDate = record.CreatedDate;
+                string SO = record.SalesOrder;
+                Dictionary<string, int> hash = new Dictionary<string, int>();
+                foreach (var item in inventory)
+                {
+                    string ItemID = item.ModelNo;
+                    ModelInfo model = ModelInfoRepository.GetModelByNo(ItemID);
+                    string FG = model.Description;
+                    string Qty = inventory.Count().ToString();
+                    string Pro = item.TrackingNo;
+                    string ShipVia = item.ShipVia;
+                    string ShipState = item.ShipState;
+                    string ShipCity = item.ShipCity;
+                    System.DateTime ShippedDate = item.ShippedDate;
+
+                    var shippingDto = new DailyShippingDto();
+
+                    shippingDto.CreatedDate = CreatedDate;
+                    shippingDto.SO = SO;
+                    shippingDto.ItemID = item.ModelNo;
+
+                    //Match each SO Qty not each model Qty
+                    shippingDto.Qty = inventory.Count().ToString();
+                    shippingDto.FG = FG;
+                    shippingDto.SN = item.SN;
+                    shippingDto.TrackingNo = Pro;
+                    shippingDto.ShipVia = ShipVia;
+                    shippingDto.ShipState = ShipState;
+                    shippingDto.ShipCity = ShipCity;
+                    shippingDto.ShippingDate = ShippedDate;
+                    result.Add(shippingDto);
+
+                }
+
+
+
+                var pallet = from Pallet in db.Pallets
+                             where Pallet.ShippedDate >= datetime && Pallet.SalesOrder.Equals(SO)
+                             select Pallet;
+
+
+                foreach (var item in pallet)
+                {
+                    var shippingDto2 = new DailyShippingDto();
+                    shippingDto2.CreatedDate = item.CreatedDate;
+                    shippingDto2.SO = item.SalesOrder;
+                    shippingDto2.ItemID = item.ItemID;
+                    shippingDto2.FG = item.FG;
+                    shippingDto2.Qty = item.Qty.ToString();
+                    shippingDto2.TrackingNo = item.TrackingNo;
+                    shippingDto2.ShipVia = item.ShipVia;
+                    shippingDto2.ShipState = item.ShipState;
+                    shippingDto2.ShipCity = item.ShipCity;
+                    shippingDto2.ShippingDate = item.ShippedDate;
+                    result.Add(shippingDto2);
+                }
+
+            }
+            //List<DailyShippingDto> SortedList = result.OrderByDescending(o => o.CreatedDate).ToList();
+            return result;
+        }
 
         //Insert one item into History table
         public static List<History> InsertInventory(History e)
@@ -80,7 +159,8 @@ namespace InventoryService.Controllers.DbUtil
                         where inventory.Seq == e.Seq
                        select inventory).SingleOrDefault();
             item.SN = e.SN;
-            item.Date = e.Date;
+            item.ShippedDate = e.ShippedDate;
+            item.CreatedDate = e.CreatedDate;
             item.Location = e.Location;
             item.ModelNo = e.ModelNo;
 
@@ -98,7 +178,8 @@ namespace InventoryService.Controllers.DbUtil
                             where inventory.Seq == i.Seq
                             select inventory).SingleOrDefault();
                 item.SN = i.SN;
-                item.Date = i.Date;
+                item.CreatedDate = i.CreatedDate;
+                item.ShippedDate = i.ShippedDate;
                 item.Location = i.Location;
                 item.ModelNo = i.ModelNo;
 

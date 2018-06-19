@@ -16,7 +16,6 @@ namespace InventoryService.Models
     {
         public string SN { get; set; }
         public string SalesOrder { get; set; }
-        public System.DateTime Date { get; set; }
         public string TrackingNo { get; set; }
         public string BillTo { get; set; }
         public string ShipVia { get; set; }
@@ -27,5 +26,7 @@ namespace InventoryService.Models
         public int Seq { get; set; }
         public System.DateTime ScanDate { get; set; }
         public string ContainerNo { get; set; }
+        public System.DateTime ShippedDate { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
     }
 }

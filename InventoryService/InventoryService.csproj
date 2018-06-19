@@ -224,6 +224,7 @@
     <Compile Include="Controllers\ContainersController.cs" />
     <Compile Include="Controllers\CustOrdersController.cs" />
     <Compile Include="Controllers\DailyTotalsController.cs" />
+    <Compile Include="Controllers\DbUtil\PalletRepository.cs" />
     <Compile Include="Controllers\DbUtil\ContainerRepository.cs" />
     <Compile Include="Controllers\DbUtil\ModelInfoRepository.cs" />
     <Compile Include="Controllers\DbUtil\HistoryRepository.cs" />
@@ -238,8 +239,10 @@
     <Compile Include="Controllers\LocationsController.cs" />
     <Compile Include="Controllers\ModelInfoesController.cs" />
     <Compile Include="Controllers\ModelZoneMapsController.cs" />
+    <Compile Include="Controllers\PalletsController.cs" />
     <Compile Include="DTOs\FGDailyReplenishment.cs" />
     <Compile Include="DTOs\FGDailyReportDto.cs" />
+    <Compile Include="DTOs\DailyShippingDto.cs" />
     <Compile Include="DTOs\FGZoneDto.cs" />
     <Compile Include="DTOs\ModelDto.cs" />
     <Compile Include="Global.asax.cs">
@@ -280,6 +283,9 @@
       <DependentUpon>Inventory.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ModelZoneMap.cs">
+      <DependentUpon>Inventory.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Pallet.cs">
       <DependentUpon>Inventory.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

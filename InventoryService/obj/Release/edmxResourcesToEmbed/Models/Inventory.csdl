@@ -26,6 +26,7 @@
     <EntitySet Name="DailyTotals" EntityType="FGInventoryModel.DailyTotal" />
     <EntitySet Name="ModelInfoes" EntityType="FGInventoryModel.ModelInfo" />
     <EntitySet Name="Containers" EntityType="FGInventoryModel.Container" />
+    <EntitySet Name="Pallets" EntityType="FGInventoryModel.Pallet" />
   </EntityContainer>
   <EntityType Name="History">
     <Key>
@@ -33,7 +34,6 @@
     </Key>
     <Property Name="SN" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="SalesOrder" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="TrackingNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="BillTo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="ShipVia" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -44,6 +44,8 @@
     <Property Name="Seq" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ScanDate" Type="DateTime" Precision="3" Nullable="false" />
     <Property Name="ContainerNo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="ShippedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="ModelZoneMap">
     <Key>
@@ -86,5 +88,22 @@
     <Property Name="SNBegin" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
     <Property Name="SNEnd" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
     <Property Name="Close" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Pallet">
+    <Key>
+      <PropertyRef Name="Seq" />
+    </Key>
+    <Property Name="Seq" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ItemID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TrackingNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ShipCity" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="ShipState" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="BillTo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="ShipVia" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="SalesOrder" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ShippedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Qty" Type="Int32" Nullable="false" />
+    <Property Name="FG" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>

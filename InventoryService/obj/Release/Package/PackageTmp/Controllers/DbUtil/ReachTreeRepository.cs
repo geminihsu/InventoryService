@@ -149,7 +149,7 @@ namespace InventoryService.Controllers.DbUtil
 
                 result.Add(orderInfo);
             }
-
+            cn.Close();
             return result;
         }
 
@@ -195,15 +195,22 @@ namespace InventoryService.Controllers.DbUtil
                 {
                     var arr = row.ItemArray.Select(i => i.ToString()).ToArray();
                     var model = new ModelInfo();
+                  
                     model.ModelNo = arr[0];
                     model.Description = arr[1];
+
+                    if (model.ModelNo.Equals("115816"))
+                        model.Description = "INTEGRA T500";
+                    else if(model.ModelNo.Equals("450887"))
+                        model.Description = "Treadmill Xterra TR150";
                     models.Add(model);
                 }
                 result = ModelInfoRepository.InsertModel(models);
+                cn.Close();
             }
             else
                 result = ModelInfoRepository.GetAllModel();
-
+           
             return result;
 
         }
@@ -239,6 +246,8 @@ namespace InventoryService.Controllers.DbUtil
                 if (arr[0].Equals(serialNo))
                     return true;
             }
+       
+            cn.Close();
             return false;
         }
 
@@ -274,17 +283,21 @@ namespace InventoryService.Controllers.DbUtil
 
                 if (arr[0].Equals(serialNo) && arr[1].Equals("1"))
                 {
+                    cn.Close();
                     return false;
                 }
                 else if (arr[0].Equals(serialNo) && arr[1].Equals("2"))
                 {
+                    cn.Close();
                     return false;
                 }
                 else if (arr[0].Equals(serialNo) && arr[1].Equals("3"))
                 {
+                    cn.Close();
                     return true;
                 }
             }
+            cn.Close();
             return false;
         }
         /*  //Get Data from PeachTree
