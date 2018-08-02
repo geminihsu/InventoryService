@@ -20,5 +20,6 @@ namespace InventoryService.Models
         public string SNBegin { get; set; }
         public string SNEnd { get; set; }
         public bool Close { get; set; }
+        public string ModelNo { get; set; }
     }
 }

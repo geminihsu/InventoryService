@@ -27,14 +27,13 @@ namespace InventoryService.Controllers.DbUtil
 
 
         //Query Container Items By containerNo
-        public static Container GetContainer(String containerNo)
+        public static List<Container> GetContainer(String containerNo)
         {
             var query = from container in db.Containers
                         where container.ContainerNo.Equals(containerNo)
 
                         select container;
-            return query.SingleOrDefault();
-        
+            return query.ToList();
         }
 
 
@@ -105,30 +104,53 @@ namespace InventoryService.Controllers.DbUtil
                 Container containerItem;
                 if (i.Seq != 0)
                 {
-                    containerItem = (from container in db.Containers
-                                     where container.Seq == i.Seq
-                                     select container).SingleOrDefault();
+                    var containers = (from container in db.Containers
+                                      where container.ContainerNo.Equals(i.ContainerNo) || container.SNBegin.Equals(i.SNBegin)
+                                      select container).ToList();
+                    if (containers.Count() == 1)
+                    {
+                        containerItem = containers.SingleOrDefault();
+                        containerItem.Date = i.Date;
+                        containerItem.ContainerNo = i.ContainerNo;
+                        containerItem.ModelNo = i.ModelNo;
+                        containerItem.SNBegin = i.SNBegin;
+                        containerItem.SNEnd = i.SNEnd;
+                        containerItem.Close = i.Close;
+
+                    }
+                    else
+                    {
+                        foreach (Container item in containers)
+                        {
+                            item.Date = i.Date;
+                            item.Close = i.Close;
+                        }
+                    }
                 }
                 else
                 {
                     containerItem = (from container in db.Containers
                                      where container.ContainerNo.Equals(i.ContainerNo) && container.SNBegin.Equals(i.SNBegin) && container.SNEnd.Equals(i.SNEnd)
                                      select container).SingleOrDefault();
+                    containerItem.Date = i.Date;
+                    containerItem.ContainerNo = i.ContainerNo;
+                    containerItem.ModelNo = i.ModelNo;
+                    containerItem.SNBegin = i.SNBegin;
+                    containerItem.SNEnd = i.SNEnd;
+                    containerItem.Close = i.Close;
+
                 }
 
 
 
-                containerItem.Date = i.Date;
-                containerItem.ContainerNo = i.ContainerNo;
-                containerItem.SNBegin = i.SNBegin;
-                containerItem.SNEnd = i.SNEnd;
-                containerItem.Close = i.Close;
 
             }
 
             db.SaveChanges();
             return GetAllContainers();
         }
+
+
 
         //delete one item from Inventory table
         public static List<Container> DeleteContainer(int seq)

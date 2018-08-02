@@ -91,6 +91,89 @@ namespace InventoryService.Controllers.DbUtil
 
         }
 
+        //Get all model Items from DB
+        public static List<FGDailyReplenishment> GetAllModelsZoneQty(int zoneCode)
+        {
+            var query = (from model in db.ModelZoneMaps
+                         orderby model.Model descending
+                         select model);
+            var updateModelZone1 = new List<ModelZoneMap>();
+
+            var result = new List<FGDailyReplenishment>();
+
+            var duplicatedModel = new List<String>();
+            Dictionary<string, int> hashtable = new Dictionary<string, int>();
+            foreach (ModelZoneMap i in query)
+            {
+
+                if (duplicatedModel.Contains(i.Model))
+                    continue;
+                else
+                    duplicatedModel.Add(i.Model);
+
+                var inventoryQty = (from inventory in db.InventoryIns
+                                    where inventory.ModelNo.Equals(i.Model)
+                                    orderby inventory.SN
+                                    group inventory by new { inventory.SN, inventory.Location }
+                                    into g
+                                    let count = g.Count()
+                                    select new
+                                    {
+                                        location = g.Key.Location,
+                                        Count = count
+                                    }
+                                    );
+
+
+
+                foreach (var inventory in inventoryQty)
+                {
+                
+                    if (LocationHelper.MapZoneCode(inventory.location) != zoneCode)
+                        continue;
+
+                    var daily = new FGDailyReplenishment();
+                    daily.ModelNo = i.Model;
+                    daily.Description = i.FG;
+                    daily.Location = inventory.location;
+                    daily.Qty = inventory.Count;
+
+
+
+                    if (daily.Location != null)
+                    {
+                        if (!hashtable.ContainsKey(daily.ModelNo + daily.Location))
+                        {
+                            hashtable.Add(daily.ModelNo + daily.Location, daily.Qty);
+
+                        }
+                        else
+                        {
+                            daily.Qty = (int)hashtable[daily.ModelNo + daily.Location] + (int)daily.Qty;
+                            hashtable[daily.ModelNo + daily.Location] = daily.Qty;
+                        }
+
+
+                    }
+
+                }
+
+            }
+            foreach (KeyValuePair<string, int> entry in hashtable)
+            {
+                var daily = new FGDailyReplenishment();
+                var key = (string)entry.Key;
+                daily.ModelNo = key.Substring(0, 6);
+                daily.Location = key.Substring(6);
+                daily.Qty = (int)entry.Value;
+                result.Add(daily);
+            }
+
+
+            return result;
+        }
+
+
         //Get all model daily report from DB
         public static List<FGDailyReportDto> GetDailyReportByModels(DateTime date)
         {

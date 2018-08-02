@@ -49,6 +49,15 @@ namespace InventoryService.Controllers
             return response;
         }
 
+        // GET api/ModelZoneMaps
+        [Route("api/ModelZoneMaps/zone/{zoneCode:int}")]
+        public HttpResponseMessage GetZoneQty(int zoneCode)
+        {
+            var models = ModelZone2MinQuantityRepository.GetAllModelsZoneQty(zoneCode);
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, models);
+            return response;
+        }
+
         // GET api/ModelZoneMaps/DailyReport/date/
         [Route("api/ModelZoneMaps/DailyReport/date/{date:datetime}")]
         public HttpResponseMessage GetDailyReport(DateTime date)

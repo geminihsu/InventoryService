@@ -133,9 +133,9 @@ namespace InventoryService.Controllers.DbUtil
                 var arr = row.ItemArray.Select(i => i.ToString()).ToArray();
                 orderInfo.Sales_Order = orderNo;
                 orderInfo.Description = arr[1];
-                orderInfo.Bill_to = billTo;
+                orderInfo.Bill_to = description;
                 orderInfo.Date = date;
-                orderInfo.Ship_to_Address_Line_One = ShipToAddress1;
+                orderInfo.Ship_to_Address_Line_One = billTo + "\n" + ShipToAddress1;
                 orderInfo.Ship_to_City = ShipToCity;
                 orderInfo.Ship_to_State = ShipToState;
                 orderInfo.Ship_to_Zipcode = ShipToZIP;

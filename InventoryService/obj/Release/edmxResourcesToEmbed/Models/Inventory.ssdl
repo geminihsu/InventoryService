@@ -10,6 +10,7 @@
     <Property Name="SNBegin" Type="varchar" MaxLength="16" Nullable="false" />
     <Property Name="SNEnd" Type="varchar" MaxLength="16" Nullable="false" />
     <Property Name="Close" Type="bit" Nullable="false" />
+    <Property Name="ModelNo" Type="varchar" MaxLength="6" />
   </EntityType>
   <EntityType Name="DailyTotal">
     <Key>

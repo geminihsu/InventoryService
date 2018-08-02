@@ -78,6 +78,7 @@
     <EntitySetMapping Name="Containers">
       <EntityTypeMapping TypeName="FGInventoryModel.Container">
         <MappingFragment StoreEntitySet="Container">
+          <ScalarProperty Name="ModelNo" ColumnName="ModelNo" />
           <ScalarProperty Name="Close" ColumnName="Close" />
           <ScalarProperty Name="SNEnd" ColumnName="SNEnd" />
           <ScalarProperty Name="SNBegin" ColumnName="SNBegin" />
