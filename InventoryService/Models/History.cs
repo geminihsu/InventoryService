@@ -28,5 +28,6 @@ namespace InventoryService.Models
         public string ContainerNo { get; set; }
         public System.DateTime ShippedDate { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
+        public string CustPoNo { get; set; }
     }
 }

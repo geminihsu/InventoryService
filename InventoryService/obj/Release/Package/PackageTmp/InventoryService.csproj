@@ -224,6 +224,7 @@
     <Compile Include="Controllers\ContainersController.cs" />
     <Compile Include="Controllers\CustOrdersController.cs" />
     <Compile Include="Controllers\DailyTotalsController.cs" />
+    <Compile Include="Common\DailyModelHelper.cs" />
     <Compile Include="Controllers\DbUtil\PalletRepository.cs" />
     <Compile Include="Controllers\DbUtil\ContainerRepository.cs" />
     <Compile Include="Controllers\DbUtil\ModelInfoRepository.cs" />

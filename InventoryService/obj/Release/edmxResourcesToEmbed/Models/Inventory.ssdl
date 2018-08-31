@@ -39,6 +39,7 @@
     <Property Name="ScanDate" Type="datetime" Nullable="false" />
     <Property Name="ContainerNo" Type="varchar" MaxLength="255" />
     <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CustPoNo" Type="varchar" MaxLength="255" />
   </EntityType>
   <EntityType Name="InventoryIn">
     <Key>
@@ -96,6 +97,7 @@
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
     <Property Name="Qty" Type="int" Nullable="false" />
     <Property Name="FG" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="CustPoNo" Type="varchar" MaxLength="255" />
   </EntityType>
   <EntityContainer Name="FGInventoryModelStoreContainer">
     <EntitySet Name="Container" EntityType="Self.Container" Schema="dbo" store:Type="Tables" />

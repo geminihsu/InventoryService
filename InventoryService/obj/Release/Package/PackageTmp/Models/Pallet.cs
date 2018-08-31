@@ -26,5 +26,6 @@ namespace InventoryService.Models
         public System.DateTime CreatedDate { get; set; }
         public int Qty { get; set; }
         public string FG { get; set; }
+        public string CustPoNo { get; set; }
     }
 }

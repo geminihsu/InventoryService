@@ -84,6 +84,8 @@ namespace InventoryService.Controllers.DbUtil
                     string FG = model.Description;
                     string Qty = inventory.Count().ToString();
                     string Pro = item.TrackingNo;
+                    string BillTo = item.BillTo;
+                    String CustPo = item.CustPoNo;
                     string ShipVia = item.ShipVia;
                     string ShipState = item.ShipState;
                     string ShipCity = item.ShipCity;
@@ -101,6 +103,8 @@ namespace InventoryService.Controllers.DbUtil
                     shippingDto.SN = item.SN;
                     shippingDto.TrackingNo = Pro;
                     shippingDto.ShipVia = ShipVia;
+                    shippingDto.BillTo = item.BillTo;
+                    shippingDto.CustPo = CustPo;
                     shippingDto.ShipState = ShipState;
                     shippingDto.ShipCity = ShipCity;
                     shippingDto.ShippingDate = ShippedDate;
@@ -124,6 +128,8 @@ namespace InventoryService.Controllers.DbUtil
                     shippingDto2.FG = item.FG;
                     shippingDto2.Qty = item.Qty.ToString();
                     shippingDto2.TrackingNo = item.TrackingNo;
+                    shippingDto2.BillTo = item.BillTo;
+                    shippingDto2.CustPo = item.CustPoNo;
                     shippingDto2.ShipVia = item.ShipVia;
                     shippingDto2.ShipState = item.ShipState;
                     shippingDto2.ShipCity = item.ShipCity;

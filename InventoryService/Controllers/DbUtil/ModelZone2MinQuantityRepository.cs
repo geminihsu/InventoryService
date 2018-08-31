@@ -34,7 +34,7 @@ namespace InventoryService.Controllers.DbUtil
 
                 result.Add(i);
             }
-                return result;
+            return result;
 
         }
 
@@ -57,7 +57,7 @@ namespace InventoryService.Controllers.DbUtil
 
             var query = from model in db.ModelZoneMaps
                         orderby model.FG ascending
-                        select model ;
+                        select model;
 
             var result = new List<ModelZoneMap>();
 
@@ -65,14 +65,14 @@ namespace InventoryService.Controllers.DbUtil
             {
                 //Query Zone 2 Quantity
                 var zone2 = (from inventory in db.InventoryIns
-                            where inventory.Location.Equals(i.Zone2Code) && inventory.ModelNo.Equals(i.Model)
+                             where inventory.Location.Equals(i.Zone2Code) && inventory.ModelNo.Equals(i.Model)
                              select inventory).ToList();
 
                 if (zone2.Count < i.Z2MinQty)
                 {
                     //Query Zone 1 Quantity
                     var zone1 = (from inventory in db.InventoryIns
-                                where inventory.Location.Equals(i.Zone1Code) && inventory.ModelNo.Equals(i.Model)
+                                 where inventory.Location.Equals(i.Zone1Code) && inventory.ModelNo.Equals(i.Model)
                                  select inventory).ToList();
 
                     if (zone1.Count <= 0)
@@ -82,7 +82,7 @@ namespace InventoryService.Controllers.DbUtil
 
                     result.Add(i);
                 }
-                
+
             }
 
             //List<ModelZoneMap> SortedList = result.OrderByDescending(o => o.Z2CurtQty).ToList();
@@ -128,7 +128,7 @@ namespace InventoryService.Controllers.DbUtil
 
                 foreach (var inventory in inventoryQty)
                 {
-                
+
                     if (LocationHelper.MapZoneCode(inventory.location) != zoneCode)
                         continue;
 
@@ -204,11 +204,21 @@ namespace InventoryService.Controllers.DbUtil
                                where ship.ModelNo.Equals(i.Model) && ship.ShippedDate >= date && ship.ShippedDate < tomorrow
                                select ship).ToList();
 
+                var shippedA = new List<Pallet>();
+
+                if (m.ModelNo.Equals("135416"))
+                {
+
+                    shippedA = (from ship in db.Pallets
+                                where ship.ItemID.Equals("135416A") && ship.ShippedDate >= date && ship.ShippedDate < tomorrow
+                                select ship).ToList();
+                }
+
                 var afterShipped = (from ship in db.Histories
                                     where ship.ModelNo.Equals(i.Model) && ship.ShippedDate >= tomorrow
                                     select ship).ToList();
 
-                m.Shipped = shipped.Count;
+                m.Shipped = shipped.Count + shippedA.Count; ;
 
                 int receivedShip = 0;
 
@@ -233,6 +243,21 @@ namespace InventoryService.Controllers.DbUtil
 
                 zone1Received = receivedShip + receivedItemByDate.Count();
 
+
+                int rts = 0;
+                int showroom = 0;
+                int unshippable = 0;
+                foreach (var inventory in receivedItemByDate)
+                {
+                    if (inventory.Location.Equals(Constants.ZONE_CODE_3_A.ToString()) || inventory.Location.Equals(Constants.ZONE_CODE_3_B.ToString()) || inventory.Location.Equals(Constants.ZONE_CODE_3_B.ToString()) || inventory.Location.Equals(Constants.ZONE_CODE_3_C.ToString()))
+                        rts++;
+                    else if (inventory.Location.Equals(Constants.ZONE_CODE_5_ONE.ToString()))
+                        unshippable++;
+                    else if (inventory.Location.Equals(Constants.ZONE_CODE_4_ONE.ToString()))
+                        showroom++;
+                }
+
+        
                 var receivedCurrent = (from inventory in db.InventoryIns
                                        where inventory.ModelNo.Equals(i.Model) && inventory.Date < date
                                        join code in db.Locations on inventory.Location equals code.Code
@@ -270,14 +295,17 @@ namespace InventoryService.Controllers.DbUtil
 
 
 
-
+                if (showroom != 0)
+                    m.ShowRoom += showroom;
+                if (unshippable != 0)
+                    m.Rework += unshippable;
 
                 int afterSippedCnt = afterShippingScanItem - receivedShip;
 
 
 
                 m.Received = zone1Received;
-                m.OnHand = m.Received + zone1Count + zone2Count + afterSippedCnt;
+                m.OnHand = m.Received + zone1Count + zone2Count + afterSippedCnt - showroom - unshippable;
 
                 m.Total = modelTotal + m.Received + afterSippedCnt;
 
@@ -286,7 +314,7 @@ namespace InventoryService.Controllers.DbUtil
                 m.Previous = m.Total + m.Shipped - m.Received;
 
 
-                if (m.Total > 0)
+                if (m.Total > 0 || DailyModelHelper.isShowModel(m.ModelNo))
                 {
                     result.Add(m);
 
@@ -316,7 +344,7 @@ namespace InventoryService.Controllers.DbUtil
         //Get all model daily replenishment report from DB
         public static List<ModelZoneMap> GetDailyReportByModelsAndLocation()
         {
-       
+
             var query = (from model in db.ModelZoneMaps
                          orderby model.Model descending
                          select model);
@@ -354,7 +382,7 @@ namespace InventoryService.Controllers.DbUtil
             }
 
 
-           
+
             return updateModelZone1;
         }
         //Insert one model into model table
@@ -445,7 +473,7 @@ namespace InventoryService.Controllers.DbUtil
         //delete more than one item from Inventory table
         public static List<ModelZoneMap> DeleteInventory(List<ModelZoneMap> e)
         {
-          
+
             db.ModelZoneMaps.RemoveRange(e);
             db.SaveChanges();
             return GetAllModels();

@@ -24,6 +24,7 @@
     <EntitySetMapping Name="Histories">
       <EntityTypeMapping TypeName="FGInventoryModel.History">
         <MappingFragment StoreEntitySet="History">
+          <ScalarProperty Name="CustPoNo" ColumnName="CustPoNo" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
           <ScalarProperty Name="ShippedDate" ColumnName="ShippedDate" />
           <ScalarProperty Name="ContainerNo" ColumnName="ContainerNo" />
@@ -91,6 +92,7 @@
     <EntitySetMapping Name="Pallets">
       <EntityTypeMapping TypeName="FGInventoryModel.Pallet">
         <MappingFragment StoreEntitySet="Pallet">
+          <ScalarProperty Name="CustPoNo" ColumnName="CustPoNo" />
           <ScalarProperty Name="FG" ColumnName="FG" />
           <ScalarProperty Name="Qty" ColumnName="Qty" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />

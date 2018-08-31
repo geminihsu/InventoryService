@@ -280,7 +280,8 @@ namespace InventoryService.Controllers.DbUtil
                 if (item != null)
                 {
                     item.SN = i.SN;
-                    //item.Date = i.Date;
+                    if (i.Location.Equals("881") || i.Location.Equals("891") || i.Location.Equals("901"))
+                        item.Date = i.Date;
                     item.Location = i.Location;
                     item.ModelNo = i.ModelNo;
                 }

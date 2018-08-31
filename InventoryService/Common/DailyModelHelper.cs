@@ -1,0 +1,135 @@
+﻿using System;
+
+namespace InventoryService.Controllers.DbUtil
+{
+    internal class DailyModelHelper
+    {
+        public static Boolean isShowModel(String modelNo)
+        {
+            if (modelNo.Equals("951115") ||
+                modelNo.Equals("951112") ||
+                modelNo.Equals("902846") ||
+                modelNo.Equals("902346") ||
+                modelNo.Equals("902046") ||
+                modelNo.Equals("900MS7") ||
+                modelNo.Equals("900LP7") ||
+                modelNo.Equals("900FT7") ||
+                modelNo.Equals("900DR7") ||
+                modelNo.Equals("900DB7") ||
+                modelNo.Equals("900AB7") ||
+                modelNo.Equals("900856") ||
+                modelNo.Equals("900846") ||
+                modelNo.Equals("900356") ||
+                modelNo.Equals("900346") ||
+                modelNo.Equals("900156") ||
+                modelNo.Equals("900146") ||
+                modelNo.Equals("900111") ||
+                modelNo.Equals("900056") ||
+                modelNo.Equals("900046") ||
+                modelNo.Equals("895677") ||
+                modelNo.Equals("895015") ||
+                modelNo.Equals("880119") ||
+                modelNo.Equals("851845") ||
+                modelNo.Equals("850855") ||
+                modelNo.Equals("850845") ||
+                modelNo.Equals("850045") ||
+                modelNo.Equals("802853") ||
+                modelNo.Equals("802849") ||
+                modelNo.Equals("802843") ||
+                modelNo.Equals("802449") ||
+                modelNo.Equals("802343") ||
+                modelNo.Equals("802149") ||
+                modelNo.Equals("802143") ||
+                modelNo.Equals("802053") ||
+                modelNo.Equals("802049") ||
+                modelNo.Equals("802043") ||
+                modelNo.Equals("801844") ||
+                modelNo.Equals("800945") ||
+                modelNo.Equals("800845") ||
+                modelNo.Equals("800645") ||
+                modelNo.Equals("800547") ||
+                modelNo.Equals("800545") ||
+                modelNo.Equals("800395") ||
+                modelNo.Equals("800355") ||
+                modelNo.Equals("800345") ||
+                modelNo.Equals("800155") ||
+                modelNo.Equals("800149") ||
+                modelNo.Equals("800145") ||
+                modelNo.Equals("800055") ||
+                modelNo.Equals("800045") ||
+                modelNo.Equals("795015") ||
+                modelNo.Equals("795013") ||
+                modelNo.Equals("735017") ||
+                modelNo.Equals("735015") ||
+                modelNo.Equals("730037") ||
+                modelNo.Equals("730032") ||
+                modelNo.Equals("720087") ||
+                modelNo.Equals("720082") ||
+                modelNo.Equals("710022") ||
+                modelNo.Equals("710017") ||
+                modelNo.Equals("710012") ||
+                modelNo.Equals("685815") ||
+                modelNo.Equals("600976") ||
+                modelNo.Equals("551215") ||
+                modelNo.Equals("551115") ||
+                modelNo.Equals("485815") ||
+                modelNo.Equals("430518") ||
+                modelNo.Equals("400415") ||
+                modelNo.Equals("400410") ||
+                modelNo.Equals("395015") ||
+                modelNo.Equals("385815") ||
+                modelNo.Equals("333777") ||
+                modelNo.Equals("295015") ||
+                modelNo.Equals("295014") ||
+                modelNo.Equals("285815") ||
+                modelNo.Equals("251115") ||
+                modelNo.Equals("222777") ||
+                modelNo.Equals("185815") ||
+                modelNo.Equals("185812") ||
+                modelNo.Equals("180814") ||
+                modelNo.Equals("170918") ||
+                modelNo.Equals("170086") ||
+                modelNo.Equals("168813") ||
+                modelNo.Equals("166812") ||
+                modelNo.Equals("166583") ||
+                modelNo.Equals("164813") ||
+                modelNo.Equals("160918") ||
+                modelNo.Equals("160083") ||
+                modelNo.Equals("159003") ||
+                modelNo.Equals("158012") ||
+                modelNo.Equals("156012") ||
+                modelNo.Equals("155516") ||
+                modelNo.Equals("155316") ||
+                modelNo.Equals("153012") ||
+                modelNo.Equals("152011") ||
+                modelNo.Equals("150916") ||
+                modelNo.Equals("145817") ||
+                modelNo.Equals("140914") ||
+                modelNo.Equals("140005") ||
+                modelNo.Equals("138015") ||
+                modelNo.Equals("138006") ||
+                modelNo.Equals("135817") ||
+                modelNo.Equals("135416") ||
+                modelNo.Equals("135014") ||
+                modelNo.Equals("130003") ||
+                modelNo.Equals("125817") ||
+                modelNo.Equals("125317") ||
+                modelNo.Equals("125316") ||
+                modelNo.Equals("125112") ||
+                modelNo.Equals("125012") ||
+                modelNo.Equals("120916") ||
+                modelNo.Equals("120861") ||
+                modelNo.Equals("450887") ||
+                modelNo.Equals("115518") ||
+                modelNo.Equals("115416") ||
+                modelNo.Equals("115316") ||
+                modelNo.Equals("115026") ||
+                modelNo.Equals("115016") ||
+                modelNo.Equals("115012") ||
+                modelNo.Equals("110026"))
+                return true;
+
+            return false;
+        }
+    }
+}

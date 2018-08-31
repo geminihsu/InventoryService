@@ -10,6 +10,8 @@ namespace InventoryService.DTOs
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public string SO { get; set; }
         public string ItemID { get; set; }
+        public string BillTo { get; set; }
+        public string CustPo { get; set; }
         public string FG { get; set; }
         public string Qty { get; set; }
         public string TrackingNo { get; set; }

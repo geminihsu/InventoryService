@@ -83,13 +83,30 @@ namespace InventoryService.Controllers.DbUtil
         public static List<Container> UpdateContainer(Container e)
         {
             var model1 = (from container in db.Containers
-                          where container.ContainerNo.Contains(container.ContainerNo)
-                          select container).SingleOrDefault();
-            model1.Date = e.Date;
-            model1.ContainerNo = e.ContainerNo;
-            model1.SNBegin = e.SNBegin;
-            model1.SNEnd = e.SNEnd;
-            model1.Close = e.Close;
+                          where container.ContainerNo.Equals(container.ContainerNo) || container.SNBegin.Equals(container.SNBegin)
+                          select container).ToList();
+
+            if (model1.Count() == 1)
+            {
+                foreach (Container i in model1)
+                {
+                    i.Date = e.Date;
+                    i.ContainerNo = e.ContainerNo;
+                    i.SNBegin = e.SNBegin;
+                    i.SNEnd = e.SNEnd;
+                    i.Close = e.Close;
+
+                }
+            }
+            else
+            {
+
+                foreach (Container i in model1)
+                {
+                    i.Date = e.Date;
+
+                }
+            }
 
             db.SaveChanges();
             return GetAllContainers();

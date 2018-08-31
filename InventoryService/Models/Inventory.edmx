@@ -44,6 +44,7 @@
           <Property Name="ScanDate" Type="datetime" Nullable="false" />
           <Property Name="ContainerNo" Type="varchar" MaxLength="255" />
           <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CustPoNo" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="InventoryIn">
           <Key>
@@ -101,6 +102,7 @@
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="Qty" Type="int" Nullable="false" />
           <Property Name="FG" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="CustPoNo" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityContainer Name="FGInventoryModelStoreContainer">
           <EntitySet Name="Container" EntityType="Self.Container" Schema="dbo" store:Type="Tables" />
@@ -162,6 +164,7 @@
           <Property Name="ContainerNo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="ShippedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CustPoNo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ModelZoneMap">
           <Key>
@@ -222,6 +225,7 @@
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Qty" Type="Int32" Nullable="false" />
           <Property Name="FG" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="CustPoNo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -252,6 +256,7 @@
           <EntitySetMapping Name="Histories">
             <EntityTypeMapping TypeName="FGInventoryModel.History">
               <MappingFragment StoreEntitySet="History">
+                <ScalarProperty Name="CustPoNo" ColumnName="CustPoNo" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="ShippedDate" ColumnName="ShippedDate" />
                 <ScalarProperty Name="ContainerNo" ColumnName="ContainerNo" />
@@ -319,6 +324,7 @@
           <EntitySetMapping Name="Pallets">
             <EntityTypeMapping TypeName="FGInventoryModel.Pallet">
               <MappingFragment StoreEntitySet="Pallet">
+                <ScalarProperty Name="CustPoNo" ColumnName="CustPoNo" />
                 <ScalarProperty Name="FG" ColumnName="FG" />
                 <ScalarProperty Name="Qty" ColumnName="Qty" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />

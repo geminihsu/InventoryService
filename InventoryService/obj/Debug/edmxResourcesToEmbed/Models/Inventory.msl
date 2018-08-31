@@ -4,6 +4,7 @@
     <EntitySetMapping Name="InventoryIns">
       <EntityTypeMapping TypeName="FGInventoryModel.InventoryIn">
         <MappingFragment StoreEntitySet="InventoryIn">
+          <ScalarProperty Name="ContainerNo" ColumnName="ContainerNo" />
           <ScalarProperty Name="Seq" ColumnName="Seq" />
           <ScalarProperty Name="SN" ColumnName="SN" />
           <ScalarProperty Name="Date" ColumnName="Date" />
@@ -20,50 +21,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="MODELs">
-      <EntityTypeMapping TypeName="FGInventoryModel.MODEL">
-        <MappingFragment StoreEntitySet="MODEL">
-          <ScalarProperty Name="Brand" ColumnName="Brand" />
-          <ScalarProperty Name="Commercial" ColumnName="Commercial" />
-          <ScalarProperty Name="SPFile" ColumnName="SPFile" />
-          <ScalarProperty Name="ViewFile" ColumnName="ViewFile" />
-          <ScalarProperty Name="SNEnd" ColumnName="SNEnd" />
-          <ScalarProperty Name="SNBegin" ColumnName="SNBegin" />
-          <ScalarProperty Name="LABOR_W" ColumnName="LABOR_W" />
-          <ScalarProperty Name="FP_DATE" ColumnName="FP_DATE" />
-          <ScalarProperty Name="DESC" ColumnName="DESC" />
-          <ScalarProperty Name="SOLE" ColumnName="SOLE" />
-          <ScalarProperty Name="MODEL1" ColumnName="MODEL" />
-          <ScalarProperty Name="FG" ColumnName="FG" />
-          <ScalarProperty Name="VERSION" ColumnName="VERSION" />
-          <ScalarProperty Name="MODELNO" ColumnName="MODELNO" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CustOrders">
-      <EntityTypeMapping TypeName="FGInventoryModel.CustOrder">
-        <MappingFragment StoreEntitySet="CustOrder">
-          <ScalarProperty Name="Closed" ColumnName="Closed" />
-          <ScalarProperty Name="Seq" ColumnName="Seq" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="Item_ID" ColumnName="Item_ID" />
-          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-          <ScalarProperty Name="Ship_Via" ColumnName="Ship_Via" />
-          <ScalarProperty Name="Customer_PO" ColumnName="Customer_PO" />
-          <ScalarProperty Name="Ship_to_Country" ColumnName="Ship_to_Country" />
-          <ScalarProperty Name="Ship_to_Zipcode" ColumnName="Ship_to_Zipcode" />
-          <ScalarProperty Name="Ship_to_State" ColumnName="Ship_to_State" />
-          <ScalarProperty Name="Ship_to_City" ColumnName="Ship_to_City" />
-          <ScalarProperty Name="Ship_to_Address_Line_One" ColumnName="Ship_to_Address_Line_One" />
-          <ScalarProperty Name="Bill_to" ColumnName="Bill_to" />
-          <ScalarProperty Name="Date" ColumnName="Date" />
-          <ScalarProperty Name="Sales_Order" ColumnName="Sales_Order" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Histories">
       <EntityTypeMapping TypeName="FGInventoryModel.History">
         <MappingFragment StoreEntitySet="History">
+          <ScalarProperty Name="CustPoNo" ColumnName="CustPoNo" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ShippedDate" ColumnName="ShippedDate" />
+          <ScalarProperty Name="ContainerNo" ColumnName="ContainerNo" />
+          <ScalarProperty Name="ScanDate" ColumnName="ScanDate" />
           <ScalarProperty Name="Seq" ColumnName="Seq" />
           <ScalarProperty Name="Location" ColumnName="Location" />
           <ScalarProperty Name="ModelNo" ColumnName="ModelNo" />
@@ -72,26 +37,8 @@
           <ScalarProperty Name="ShipVia" ColumnName="ShipVia" />
           <ScalarProperty Name="BillTo" ColumnName="BillTo" />
           <ScalarProperty Name="TrackingNo" ColumnName="TrackingNo" />
-          <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="SalesOrder" ColumnName="SalesOrder" />
           <ScalarProperty Name="SN" ColumnName="SN" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Reports">
-      <EntityTypeMapping TypeName="FGInventoryModel.Report">
-        <MappingFragment StoreEntitySet="Report">
-          <ScalarProperty Name="MinQuantity" ColumnName="MinQuantity" />
-          <ScalarProperty Name="ShowRoom" ColumnName="ShowRoom" />
-          <ScalarProperty Name="ReturnItem" ColumnName="ReturnItem" />
-          <ScalarProperty Name="Zone2" ColumnName="Zone2" />
-          <ScalarProperty Name="Zone1" ColumnName="Zone1" />
-          <ScalarProperty Name="Unshippable" ColumnName="Unshippable" />
-          <ScalarProperty Name="OnHand" ColumnName="OnHand" />
-          <ScalarProperty Name="Shipped" ColumnName="Shipped" />
-          <ScalarProperty Name="total" ColumnName="total" />
-          <ScalarProperty Name="Model" ColumnName="Model" />
-          <ScalarProperty Name="FG" ColumnName="FG" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -126,6 +73,38 @@
           <ScalarProperty Name="Seq" ColumnName="Seq" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="ModelNo" ColumnName="ModelNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Containers">
+      <EntityTypeMapping TypeName="FGInventoryModel.Container">
+        <MappingFragment StoreEntitySet="Container">
+          <ScalarProperty Name="ModelNo" ColumnName="ModelNo" />
+          <ScalarProperty Name="Close" ColumnName="Close" />
+          <ScalarProperty Name="SNEnd" ColumnName="SNEnd" />
+          <ScalarProperty Name="SNBegin" ColumnName="SNBegin" />
+          <ScalarProperty Name="ContainerNo" ColumnName="ContainerNo" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Seq" ColumnName="Seq" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pallets">
+      <EntityTypeMapping TypeName="FGInventoryModel.Pallet">
+        <MappingFragment StoreEntitySet="Pallet">
+          <ScalarProperty Name="CustPoNo" ColumnName="CustPoNo" />
+          <ScalarProperty Name="FG" ColumnName="FG" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ShippedDate" ColumnName="ShippedDate" />
+          <ScalarProperty Name="SalesOrder" ColumnName="SalesOrder" />
+          <ScalarProperty Name="ShipVia" ColumnName="ShipVia" />
+          <ScalarProperty Name="BillTo" ColumnName="BillTo" />
+          <ScalarProperty Name="ShipState" ColumnName="ShipState" />
+          <ScalarProperty Name="ShipCity" ColumnName="ShipCity" />
+          <ScalarProperty Name="TrackingNo" ColumnName="TrackingNo" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="Seq" ColumnName="Seq" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
