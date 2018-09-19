@@ -85,6 +85,8 @@
           <Property Name="Z2CurtQty" Type="int" Nullable="false" />
           <Property Name="Zone1Code" Type="varchar" MaxLength="3" Nullable="false" />
           <Property Name="Zone2Code" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="Brand" Type="varchar" MaxLength="16" />
+          <Property Name="Category" Type="varchar" MaxLength="16" />
         </EntityType>
         <EntityType Name="Pallet">
           <Key>
@@ -179,6 +181,8 @@
           <Property Name="Z2MaxQty" Type="Int32" Nullable="false" />
           <Property Name="Model" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
           <Property Name="FG" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Brand" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="Category" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="DailyTotal">
           <Key>
@@ -277,6 +281,8 @@
           <EntitySetMapping Name="ModelZoneMaps">
             <EntityTypeMapping TypeName="FGInventoryModel.ModelZoneMap">
               <MappingFragment StoreEntitySet="ModelZoneMap">
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
                 <ScalarProperty Name="FG" ColumnName="FG" />
                 <ScalarProperty Name="Model" ColumnName="Model" />
                 <ScalarProperty Name="Z2MaxQty" ColumnName="Z2MaxQty" />

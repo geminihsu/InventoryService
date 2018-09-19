@@ -80,6 +80,8 @@
     <Property Name="Z2CurtQty" Type="int" Nullable="false" />
     <Property Name="Zone1Code" Type="varchar" MaxLength="3" Nullable="false" />
     <Property Name="Zone2Code" Type="varchar" MaxLength="3" Nullable="false" />
+    <Property Name="Brand" Type="varchar" MaxLength="16" />
+    <Property Name="Category" Type="varchar" MaxLength="16" />
   </EntityType>
   <EntityType Name="Pallet">
     <Key>

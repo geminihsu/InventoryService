@@ -9,6 +9,8 @@ namespace InventoryService.DTOs
     {
         public string ModelNo{ get; set; }
         public string ModelFG{ get; set; }
+        public string Brand { get; set; }
+        public string Category { get; set; }
         public int Previous { get; set; }
         public int Shipped { get; set; }
         public int Received { get; set; }

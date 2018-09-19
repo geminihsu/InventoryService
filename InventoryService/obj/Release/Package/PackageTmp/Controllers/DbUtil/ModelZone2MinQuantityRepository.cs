@@ -63,12 +63,14 @@ namespace InventoryService.Controllers.DbUtil
 
             foreach (ModelZoneMap i in query)
             {
+                if (!DailyModelHelper.isShowModel(i.Model) || i.Zone2Code.Equals("111"))
+                    continue;
                 //Query Zone 2 Quantity
                 var zone2 = (from inventory in db.InventoryIns
                              where inventory.Location.Equals(i.Zone2Code) && inventory.ModelNo.Equals(i.Model)
                              select inventory).ToList();
 
-                if (zone2.Count < i.Z2MinQty)
+                if (zone2.Count < i.Z2MinQty || (zone2.Count() == 0 && DailyModelHelper.isShowModel(i.Model)))
                 {
                     //Query Zone 1 Quantity
                     var zone1 = (from inventory in db.InventoryIns
@@ -113,30 +115,25 @@ namespace InventoryService.Controllers.DbUtil
 
                 var inventoryQty = (from inventory in db.InventoryIns
                                     where inventory.ModelNo.Equals(i.Model)
-                                    orderby inventory.SN
                                     group inventory by new { inventory.SN, inventory.Location }
                                     into g
-                                    let count = g.Count()
-                                    select new
-                                    {
-                                        location = g.Key.Location,
-                                        Count = count
-                                    }
-                                    );
+                                    let item = (from ig in g orderby ig.SN select ig).FirstOrDefault()
+                                    select item)
+                                    ;
 
 
 
                 foreach (var inventory in inventoryQty)
                 {
 
-                    if (LocationHelper.MapZoneCode(inventory.location) != zoneCode)
+                    if (LocationHelper.MapZoneCode(inventory.Location) != zoneCode)
                         continue;
 
                     var daily = new FGDailyReplenishment();
                     daily.ModelNo = i.Model;
                     daily.Description = i.FG;
-                    daily.Location = inventory.location;
-                    daily.Qty = inventory.Count;
+                    daily.Location = inventory.Location;
+                    daily.Qty += 1;
 
 
 
@@ -159,10 +156,14 @@ namespace InventoryService.Controllers.DbUtil
                 }
 
             }
+
+            var duplicated = new List<String>();
             foreach (KeyValuePair<string, int> entry in hashtable)
             {
                 var daily = new FGDailyReplenishment();
                 var key = (string)entry.Key;
+                if (duplicated.Contains(key.Substring(0, 6)))
+                    continue;
                 daily.ModelNo = key.Substring(0, 6);
                 daily.Location = key.Substring(6);
                 daily.Qty = (int)entry.Value;
@@ -178,7 +179,7 @@ namespace InventoryService.Controllers.DbUtil
         public static List<FGDailyReportDto> GetDailyReportByModels(DateTime date)
         {
             var query = (from model in db.ModelZoneMaps
-                         orderby model.Model descending
+                         orderby model.Brand ascending, model.Category
                          select model);
 
             var result = new List<FGDailyReportDto>();
@@ -199,6 +200,8 @@ namespace InventoryService.Controllers.DbUtil
                 FGDailyReportDto m = new FGDailyReportDto();
                 m.ModelNo = i.Model;
                 m.ModelFG = i.FG;
+                m.Brand = i.Brand;
+                m.Category = i.Category;
 
                 var shipped = (from ship in db.Histories
                                where ship.ModelNo.Equals(i.Model) && ship.ShippedDate >= date && ship.ShippedDate < tomorrow
@@ -327,8 +330,12 @@ namespace InventoryService.Controllers.DbUtil
 
             }
 
+            List<FGDailyReportDto> SortedList = result.OrderBy(o => o.Brand).ToList();
+
+
+
             ModelDailyTotal.InsertInventory(modelDailyTotal);
-            return result;
+            return SortedList;
         }
 
         //Query model Items By modelNo
