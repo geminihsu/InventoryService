@@ -53,6 +53,7 @@ namespace InventoryService.Controllers
         [Route("api/ModelZoneMaps/zone/{zoneCode:int}")]
         public HttpResponseMessage GetZoneQty(int zoneCode)
         {
+            InventoryRepository.GetAllInventory();
             var models = ModelZone2MinQuantityRepository.GetAllModelsZoneQty(zoneCode);
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, models);
             return response;

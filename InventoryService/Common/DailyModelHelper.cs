@@ -84,6 +84,7 @@ namespace InventoryService.Controllers.DbUtil
                 modelNo.Equals("285815") ||
                 modelNo.Equals("251115") ||
                 modelNo.Equals("222777") ||
+                modelNo.Equals("195015") ||
                 modelNo.Equals("185815") ||
                 modelNo.Equals("185812") ||
                 modelNo.Equals("180814") ||

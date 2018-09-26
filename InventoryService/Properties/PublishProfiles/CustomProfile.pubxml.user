@@ -217,10 +217,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/19/2018 17:10:43</publishTime>
     </File>
     <File Include="bin/InventoryService.dll">
-      <publishTime>09/18/2018 18:43:17</publishTime>
+      <publishTime>09/24/2018 13:57:04</publishTime>
     </File>
     <File Include="bin/InventoryService.pdb">
-      <publishTime>09/18/2018 18:43:17</publishTime>
+      <publishTime>09/24/2018 13:57:04</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.Agent.Intercept.dll">
       <publishTime>03/19/2018 17:10:43</publishTime>
@@ -463,7 +463,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/17/2018 19:38:50</publishTime>
     </File>
     <File Include="Common/DailyModelHelper.cs">
-      <publishTime>08/28/2018 09:50:19</publishTime>
+      <publishTime>09/22/2018 15:56:12</publishTime>
     </File>
     <File Include="Common/LocationHelper.cs">
       <publishTime>03/19/2018 17:10:40</publishTime>
@@ -508,7 +508,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/19/2018 17:10:40</publishTime>
     </File>
     <File Include="Controllers/DbUtil/ModelZone2MinQuantityRepository.cs">
-      <publishTime>09/18/2018 18:24:20</publishTime>
+      <publishTime>09/24/2018 13:56:51</publishTime>
     </File>
     <File Include="Controllers/DbUtil/PalletRepository.cs">
       <publishTime>06/07/2018 22:01:58</publishTime>
@@ -532,7 +532,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/10/2018 10:46:12</publishTime>
     </File>
     <File Include="Controllers/ModelZoneMapsController.cs">
-      <publishTime>07/25/2018 15:42:56</publishTime>
+      <publishTime>09/22/2018 10:51:10</publishTime>
     </File>
     <File Include="Controllers/PalletsController.cs">
       <publishTime>06/07/2018 22:00:56</publishTime>
@@ -574,10 +574,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/19/2018 17:10:40</publishTime>
     </File>
     <File Include="InventoryService.csproj">
-      <publishTime>08/28/2018 09:50:19</publishTime>
+      <publishTime>09/22/2018 10:40:36</publishTime>
     </File>
     <File Include="InventoryService.csproj.user">
-      <publishTime>08/28/2018 09:50:19</publishTime>
+      <publishTime>09/22/2018 13:33:44</publishTime>
     </File>
     <File Include="Models/Container.cs">
       <publishTime>07/24/2018 16:09:57</publishTime>
@@ -682,7 +682,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/19/2018 17:10:40</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>09/18/2018 18:43:23</publishTime>
+      <publishTime>09/24/2018 13:57:22</publishTime>
     </File>
     <File Include="Web.Debug.config">
       <publishTime>03/19/2018 17:10:40</publishTime>

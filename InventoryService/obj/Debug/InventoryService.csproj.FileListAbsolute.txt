@@ -140,7 +140,6 @@ E:\FGService\InventoryService\bin\Microsoft.AI.DependencyCollector.xml
 E:\FGService\InventoryService\bin\Microsoft.AI.ServerTelemetryChannel.xml
 E:\FGService\InventoryService\bin\Microsoft.AI.WindowsServer.xml
 E:\FGService\InventoryService\bin\Microsoft.AI.Web.xml
-E:\FGService\InventoryService\obj\Debug\InventoryService.csprojResolveAssemblyReference.cache
 E:\FGService\InventoryService\obj\Debug\InventoryService.csproj.CoreCompileInputs.cache
 E:\FGService\InventoryService\obj\Debug\InventoryService.csproj.CopyComplete
 E:\FGService\InventoryService\obj\Debug\InventoryService.dll

@@ -45,6 +45,8 @@
     <EntitySetMapping Name="ModelZoneMaps">
       <EntityTypeMapping TypeName="FGInventoryModel.ModelZoneMap">
         <MappingFragment StoreEntitySet="ModelZoneMap">
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
           <ScalarProperty Name="FG" ColumnName="FG" />
           <ScalarProperty Name="Model" ColumnName="Model" />
           <ScalarProperty Name="Z2MaxQty" ColumnName="Z2MaxQty" />

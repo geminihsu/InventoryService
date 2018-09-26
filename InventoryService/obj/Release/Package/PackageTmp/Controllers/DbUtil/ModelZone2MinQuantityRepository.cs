@@ -164,6 +164,8 @@ namespace InventoryService.Controllers.DbUtil
                 var key = (string)entry.Key;
                 if (duplicated.Contains(key.Substring(0, 6)))
                     continue;
+
+                duplicated.Add(key.Substring(0, 6));
                 daily.ModelNo = key.Substring(0, 6);
                 daily.Location = key.Substring(6);
                 daily.Qty = (int)entry.Value;
