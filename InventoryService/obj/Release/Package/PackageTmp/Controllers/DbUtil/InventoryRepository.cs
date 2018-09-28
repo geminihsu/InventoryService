@@ -34,6 +34,19 @@ namespace InventoryService.Controllers.DbUtil
             return query.SingleOrDefault();
         }
 
+        //Query inventory Items By SN 
+        public static List<InventoryIn> SearchInventoryBySNList(String serialNo)
+        {
+
+            var item = (from inventory in db.InventoryIns
+                        where inventory.SN.Equals(serialNo)
+                        select inventory).ToList();
+
+
+
+            return item;
+        }
+
 
         //Query inventory Items By SN List(Inorder to find out orgial location is zone 1 or zone 2)
         public static List<InventoryIn> SearchInventoryBySNList(List<InventoryIn> e)

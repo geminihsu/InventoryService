@@ -1,4 +1,5 @@
-﻿using InventoryService.DTOs;
+﻿using InventoryService.Common;
+using InventoryService.DTOs;
 using InventoryService.Models;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,15 @@ namespace InventoryService.Controllers.DbUtil
                         where inventory.Seq == itemSeq
                         select inventory;
             return query.SingleOrDefault();
+        }
+
+        //Query Shipping histoty By SN
+        public static List<History> SearchShippingBySN(String SN)
+        {
+            var query = from inventory in db.Histories
+                        where inventory.SN.Equals(SN)
+                        select inventory;
+            return query.ToList();
         }
 
 
@@ -140,6 +150,48 @@ namespace InventoryService.Controllers.DbUtil
             }
             //List<DailyShippingDto> SortedList = result.OrderByDescending(o => o.CreatedDate).ToList();
             return result;
+        }
+
+        //Query SN Items from History and Inventory Table
+        public static List<FGSNRecordDto> SearchSNHistory(string serialNo)
+        {
+            var inventory = InventoryRepository.SearchInventoryBySNList(serialNo);
+            var shipping = SearchShippingBySN(serialNo);
+
+            var result = new List<FGSNRecordDto>();
+
+            //add record from inventory table
+            foreach (var item in inventory)
+            {
+                var record = new FGSNRecordDto();
+                record.SN = item.SN;
+
+                if (item.Location.Equals("333"))
+                    record.Status = "Return";
+                else
+                    record.Status = "Received";
+                record.Date = item.Date;
+                record.Location = item.Location;
+                record.ContainNo = item.ContainerNo;
+                record.ZoneCode = LocationHelper.MapZoneCode(item.Location);
+                result.Add(record);
+            }
+
+            //add record from history table
+            foreach (var item in shipping)
+            {
+                var record = new FGSNRecordDto();
+                record.SN = item.SN;
+                record.Status = "Shipped";
+                record.Date = item.ShippedDate;
+                record.ContainNo = item.ContainerNo;
+                record.SalesOrder = item.SalesOrder;
+                result.Add(record);
+            }
+
+            List<FGSNRecordDto> SortedList = result.OrderBy(o => o.Date).ToList();
+
+            return SortedList;
         }
 
         //Insert one item into History table

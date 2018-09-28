@@ -244,6 +244,7 @@
     <Compile Include="DTOs\FGDailyReplenishment.cs" />
     <Compile Include="DTOs\FGDailyReportDto.cs" />
     <Compile Include="DTOs\DailyShippingDto.cs" />
+    <Compile Include="DTOs\FGSNRecordDto.cs" />
     <Compile Include="DTOs\FGZoneDto.cs" />
     <Compile Include="DTOs\ModelDto.cs" />
     <Compile Include="Global.asax.cs">

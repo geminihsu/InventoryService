@@ -103,20 +103,22 @@ namespace InventoryService.Controllers.DbUtil
 
             var result = new List<FGDailyReplenishment>();
 
-            var duplicatedModel = new List<String>();
+            Dictionary<string, int> duplicatedModel = new Dictionary<string, int>();
             Dictionary<string, int> hashtable = new Dictionary<string, int>();
+        
             foreach (ModelZoneMap i in query)
             {
 
-                if (duplicatedModel.Contains(i.Model))
+                if (duplicatedModel.ContainsKey(i.Model))
                     continue;
                 else
-                    duplicatedModel.Add(i.Model);
+                    duplicatedModel.Add(i.Model,1);
 
                 var inventoryQty = (from inventory in db.InventoryIns
                                     where inventory.ModelNo.Equals(i.Model)
                                     group inventory by new { inventory.SN, inventory.Location }
                                     into g
+                                    orderby g.FirstOrDefault().SN
                                     let item = (from ig in g orderby ig.SN select ig).FirstOrDefault()
                                     select item)
                                     ;
@@ -128,6 +130,9 @@ namespace InventoryService.Controllers.DbUtil
 
                     if (LocationHelper.MapZoneCode(inventory.Location) != zoneCode)
                         continue;
+
+                    if (i.Model.Equals("155316"))
+                        Console.WriteLine();
 
                     var daily = new FGDailyReplenishment();
                     daily.ModelNo = i.Model;
@@ -157,15 +162,14 @@ namespace InventoryService.Controllers.DbUtil
 
             }
 
-            var duplicated = new List<String>();
+            Dictionary<string, string> duplicated = new Dictionary<string, string>();
             foreach (KeyValuePair<string, int> entry in hashtable)
             {
                 var daily = new FGDailyReplenishment();
                 var key = (string)entry.Key;
-                if (duplicated.Contains(key.Substring(0, 6)))
+                if (duplicated.ContainsKey(key.Substring(0, 6)))
                     continue;
-
-                duplicated.Add(key.Substring(0, 6));
+                duplicated.Add(key.Substring(0, 6), key.Substring(6));
                 daily.ModelNo = key.Substring(0, 6);
                 daily.Location = key.Substring(6);
                 daily.Qty = (int)entry.Value;

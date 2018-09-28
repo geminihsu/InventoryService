@@ -144,3 +144,4 @@ E:\FGService\InventoryService\obj\Debug\InventoryService.csproj.CoreCompileInput
 E:\FGService\InventoryService\obj\Debug\InventoryService.csproj.CopyComplete
 E:\FGService\InventoryService\obj\Debug\InventoryService.dll
 E:\FGService\InventoryService\obj\Debug\InventoryService.pdb
+E:\FGService\InventoryService\obj\Debug\InventoryService.csprojResolveAssemblyReference.cache

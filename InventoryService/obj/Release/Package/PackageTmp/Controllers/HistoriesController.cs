@@ -41,13 +41,21 @@ namespace InventoryService.Controllers
         }
 
 
-       /* [Route("~/api/Histories/model/{modelNo:int}")]
-        public HttpResponseMessage GetItemsByModelNo(int modelNo)
+        /* [Route("~/api/Histories/model/{modelNo:int}")]
+         public HttpResponseMessage GetItemsByModelNo(int modelNo)
+         {
+             var employees = HistoryRepository.SearchShippingByModel(modelNo.ToString());
+             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
+             return response;
+         }*/
+
+        [Route("~/api/Histories/serialNo/{serialNo}")]
+        public HttpResponseMessage GetItemsBySN(String serialNo)
         {
-            var employees = HistoryRepository.SearchShippingByModel(modelNo.ToString());
+            var employees = HistoryRepository.SearchSNHistory(serialNo);
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
             return response;
-        }*/
+        }
 
         [Route("~/api/Histories/salesOrder/{salesOrder}")]
         public HttpResponseMessage GetItemsBySalesOrder(String salesOrder)
