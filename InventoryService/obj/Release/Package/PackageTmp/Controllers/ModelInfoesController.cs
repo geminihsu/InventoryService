@@ -17,11 +17,7 @@ namespace InventoryService.Controllers
     {
         private FGInventoryEntities db = new FGInventoryEntities();
 
-        /* // GET: api/ModelInfoes
-         public IQueryable<ModelInfo> GetModelInfoes()
-         {
-             return db.ModelInfoes;
-         }*/
+        
 
         // GET api/ModelInfoes
         [Route("api/ModelInfoes")]
@@ -32,23 +28,11 @@ namespace InventoryService.Controllers
 
             var models = ReachTreeRepository.getModelInfo();
 
-            //var models = ModelInfoRepository.GetAllModel();
+        
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, models);
             return response;
         }
 
-        /* // GET: api/ModelInfoes/5
-         [ResponseType(typeof(ModelInfo))]
-         public IHttpActionResult GetModelInfo(int id)
-         {
-             ModelInfo modelInfo = db.ModelInfoes.Find(id);
-             if (modelInfo == null)
-             {
-                 return NotFound();
-             }
-
-             return Ok(modelInfo);
-         }*/
 
         [Route("~/api/ModelInfoes/{modelNo?}")]
         public HttpResponseMessage GetModelByNo(string modelNo)

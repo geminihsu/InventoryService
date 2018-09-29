@@ -42,21 +42,6 @@ namespace InventoryService.Controllers
             return Ok(inventoryIn);
         }
 
-        /* [Route("~/api/FGInventory/SN/LocationInfo")]
-         public HttpResponseMessage GetItemsLocationBySN(List<InventoryIn> e)
-         {
-             var employees = InventoryRepository.SearchInventoryBySNList(e);
-             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
-             return response;
-         }*/
-
-        /*[Route("~/api/FGInventory/SN/NotExist")]
-        public HttpResponseMessage GetItemsLocationBySN(List<InventoryIn> e)
-        {
-            var employees = InventoryRepository.SearchInventoryBySNListExits(e);
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
-            return response;
-        }*/
 
         [Route("~/api/FGInventory/location/{location:int}")]
         public HttpResponseMessage GetItemsByLocation(int location)
@@ -106,121 +91,7 @@ namespace InventoryService.Controllers
             return response;
         }
 
-        /*// PUT: api/FGInventory/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutInventoryIn(int id, InventoryIn inventoryIn)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != inventoryIn.Seq)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(inventoryIn).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!InventoryInExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }*/
-
-        // POST: api/FGInventory
-        /*[ResponseType(typeof(InventoryIn))]
-        public IHttpActionResult PostInventoryIn(InventoryIn inventoryIn)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.InventoryIns.Add(inventoryIn);
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
-            {
-                Exception raise = dbEx;
-                foreach (var validationErrors in dbEx.EntityValidationErrors)
-                {
-                    foreach (var validationError in validationErrors.ValidationErrors)
-                    {
-                        string message = string.Format("{0}:{1}",
-                            validationErrors.Entry.Entity.ToString(),
-                            validationError.ErrorMessage);
-                        // raise a new exception nesting
-                        // the current instance as InnerException
-                        raise = new InvalidOperationException(message, raise);
-                    }
-                }
-
-                if (InventoryInExists(inventoryIn.Seq))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtRoute("DefaultApi", new { id = inventoryIn.Seq }, inventoryIn);
-        }*/
-
-        // POST: api/FGInventory
-        /*[ResponseType(typeof(List<InventoryIn>))]
-        public IHttpActionResult PostInventoryIn(List<InventoryIn> inventoryIn)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.InventoryIns.AddRange(inventoryIn);
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
-            {
-                Exception raise = dbEx;
-                foreach (var validationErrors in dbEx.EntityValidationErrors)
-                {
-                    foreach (var validationError in validationErrors.ValidationErrors)
-                    {
-                        string message = string.Format("{0}:{1}",
-                            validationErrors.Entry.Entity.ToString(),
-                            validationError.ErrorMessage);
-                        // raise a new exception nesting
-                        // the current instance as InnerException
-                        raise = new InvalidOperationException(message, raise);
-                    }
-                }
-
-                
-            }
-
-            return Ok(inventoryIn);
-        }*/
+       
 
         [Route("~/api/FGInventory")]
         public HttpResponseMessage Post(List<InventoryIn> e)
@@ -245,21 +116,7 @@ namespace InventoryService.Controllers
             return response;
         }
 
-        /*[Route("api/FGInventory")]
-         public HttpResponseMessage Post(InventoryIn e)
-         {
-             var employees = InventoryRepository.InsertInventory(e);
-             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
-             return response;
-         }*/
-
-        /* [Route("api/FGInventory")]
-         public HttpResponseMessage Put(InventoryIn e)
-         {
-             var item = InventoryRepository.UpdateInventory(e);
-             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, item);
-             return response;
-         }*/
+        
 
         [Route("~/api/FGInventory")]
         public HttpResponseMessage Put(List<InventoryIn> e)
@@ -309,40 +166,7 @@ namespace InventoryService.Controllers
 
             return response;
         }
-        // DELETE: api/FGInventory/5
-        /*[ResponseType(typeof(InventoryIn))]
-        public IHttpActionResult DeleteInventoryIn(int id)
-        {
-            InventoryIn inventoryIn = db.InventoryIns.Find(id);
-            if (inventoryIn == null)
-            {
-                return NotFound();
-            }
-
-            db.InventoryIns.Remove(inventoryIn);
-            db.SaveChanges();
-
-            return Ok(inventoryIn);
-        }*/
-
-        // DELETE: api/FGInventory
-        /*[ResponseType(typeof(List<InventoryIn>))]
-        public IHttpActionResult DeleteInventoryIn(List<InventoryIn> e)
-        {
-            foreach (InventoryIn x in e)
-            {
-
-                InventoryIn inventoryIn = db.InventoryIns.Find(x.Seq);
-                if (inventoryIn == null)
-                {
-                    return NotFound();
-                }
-
-                db.InventoryIns.Remove(inventoryIn);
-            }
-             db.SaveChanges();
-
-    }*/
+       
         [Route("~/api/FGInventory/SN/Delete")]
         public HttpResponseMessage PutDelete(List<InventoryIn> e)
         {

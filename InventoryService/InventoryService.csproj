@@ -246,7 +246,6 @@
     <Compile Include="DTOs\DailyShippingDto.cs" />
     <Compile Include="DTOs\FGSNRecordDto.cs" />
     <Compile Include="DTOs\FGZoneDto.cs" />
-    <Compile Include="DTOs\ModelDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

@@ -49,55 +49,7 @@ namespace InventoryService.Controllers
             return response;
         }
 
-        /*// PUT: api/Containers/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutContainer(int id, Container container)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != container.Seq)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(container).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ContainerExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST: api/Containers
-        [ResponseType(typeof(Container))]
-        public IHttpActionResult PostContainer(Container container)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.Containers.Add(container);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = container.Seq }, container);
-        }*/
+      
 
         [Route("api/Containers")]
         public HttpResponseMessage Post(List<Container> e)

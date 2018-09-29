@@ -27,7 +27,7 @@ namespace InventoryService.Common
         public static int ZONE_CODE_2_MIN = 701;
         public static int ZONE_CODE_2_MAX = 992;
 
-        //Zone 3 range
+        //RTS range
         public static int ZONE_CODE_3_A = 881;
         public static int ZONE_CODE_3_B = 891;
         public static int ZONE_CODE_3_C = 901;
@@ -35,10 +35,10 @@ namespace InventoryService.Common
 
         //Return hide range
         public static int ZONE_CODE_RETURN = 333;
-        //Zone 4 range
+        //Show Room
         public static int ZONE_CODE_4_ONE = 888;
 
-        //Rework range
+        //Unshippable
         public static int ZONE_CODE_5_ONE = 555;
 
         //QC range

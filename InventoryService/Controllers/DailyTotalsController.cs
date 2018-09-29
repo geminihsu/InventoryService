@@ -35,41 +35,7 @@ namespace InventoryService.Controllers
             return Ok(dailyTotal);
         }
 
-        // PUT: api/DailyTotals/5
-      /*  [ResponseType(typeof(void))]
-        public IHttpActionResult PutDailyTotal(int id, DailyTotal dailyTotal)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != dailyTotal.Total)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(dailyTotal).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!DailyTotalExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }*/
-
+     
         // POST: api/DailyTotals
         [ResponseType(typeof(DailyTotal))]
         public IHttpActionResult PostDailyTotal(DailyTotal dailyTotal)

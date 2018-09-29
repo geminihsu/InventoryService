@@ -41,14 +41,7 @@ namespace InventoryService.Controllers
         }
 
 
-        /* [Route("~/api/Histories/model/{modelNo:int}")]
-         public HttpResponseMessage GetItemsByModelNo(int modelNo)
-         {
-             var employees = HistoryRepository.SearchShippingByModel(modelNo.ToString());
-             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, employees);
-             return response;
-         }*/
-
+     
         [Route("~/api/Histories/serialNo/{serialNo}")]
         public HttpResponseMessage GetItemsBySN(String serialNo)
         {
@@ -82,55 +75,7 @@ namespace InventoryService.Controllers
             return response;
         }
 
-        // PUT: api/Histories/5
-        /* [ResponseType(typeof(void))]
-         public IHttpActionResult PutHistory(int id, History history)
-         {
-             if (!ModelState.IsValid)
-             {
-                 return BadRequest(ModelState);
-             }
-
-             if (id != history.Seq)
-             {
-                 return BadRequest();
-             }
-
-             db.Entry(history).State = EntityState.Modified;
-
-             try
-             {
-                 db.SaveChanges();
-             }
-             catch (DbUpdateConcurrencyException)
-             {
-                 if (!HistoryExists(id))
-                 {
-                     return NotFound();
-                 }
-                 else
-                 {
-                     throw;
-                 }
-             }
-
-             return StatusCode(HttpStatusCode.NoContent);
-         }*/
-
-        /*// POST: api/Histories
-        [ResponseType(typeof(History))]
-        public IHttpActionResult PostHistory(History history)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.Histories.Add(history);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = history.Seq }, history);
-        }*/
+      
 
         [Route("api/Histories")]
         public HttpResponseMessage Post(List<History> e)

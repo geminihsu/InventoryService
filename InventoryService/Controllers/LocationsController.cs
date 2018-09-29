@@ -17,12 +17,7 @@ namespace InventoryService.Controllers
     {
         private FGInventoryEntities db = new FGInventoryEntities();
 
-        /*// GET: api/Locations
-        public IQueryable<Location> GetLocations()
-        {
-            return db.Locations;
-        }*/
-
+      
         [Route("api/Locations")]
         public HttpResponseMessage Get()
         {
@@ -31,19 +26,7 @@ namespace InventoryService.Controllers
             return response;
         }
 
-        /*// GET: api/Locations/5
-        [ResponseType(typeof(Location))]
-        public IHttpActionResult GetLocation(string id)
-        {
-            Location location = db.Locations.Find(id);
-            if (location == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(location);
-        }*/
-
+     
         [Route("~/api/Locations/{location:int}")]
         public HttpResponseMessage GetItemsByLocation(int location)
         {
@@ -52,40 +35,7 @@ namespace InventoryService.Controllers
             return response;
         }
 
-        // PUT: api/Locations/5
-       /* [ResponseType(typeof(void))]
-        public IHttpActionResult PutLocation(string id, Location location)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != location.Code)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(location).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!LocationExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }*/
+       
 
         // POST: api/Locations
         [ResponseType(typeof(Location))]

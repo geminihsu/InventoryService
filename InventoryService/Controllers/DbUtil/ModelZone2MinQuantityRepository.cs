@@ -48,11 +48,13 @@ namespace InventoryService.Controllers.DbUtil
             return query.ToList();
         }
 
-        //Get all model Items from DB
+        //Get replenishment table 
         public static List<ModelZoneMap> GetAllModelsQty()
         {
+            
             var updateModelZone = GetDailyReportByModelsAndLocation();
-
+            
+            //Updated which zone 1 location for different model
             UpdateInventory(updateModelZone);
 
             var query = from model in db.ModelZoneMaps
@@ -87,13 +89,12 @@ namespace InventoryService.Controllers.DbUtil
 
             }
 
-            //List<ModelZoneMap> SortedList = result.OrderByDescending(o => o.Z2CurtQty).ToList();
-
+       
             return result;
 
         }
 
-        //Get all model Items from DB
+        //Get all model Zone2fifo qty from DB
         public static List<FGDailyReplenishment> GetAllModelsZoneQty(int zoneCode)
         {
             var query = (from model in db.ModelZoneMaps
@@ -131,9 +132,7 @@ namespace InventoryService.Controllers.DbUtil
                     if (LocationHelper.MapZoneCode(inventory.Location) != zoneCode)
                         continue;
 
-                    if (i.Model.Equals("155316"))
-                        Console.WriteLine();
-
+                 
                     var daily = new FGDailyReplenishment();
                     daily.ModelNo = i.Model;
                     daily.Description = i.FG;

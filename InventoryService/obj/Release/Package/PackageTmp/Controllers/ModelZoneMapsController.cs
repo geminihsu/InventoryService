@@ -17,11 +17,7 @@ namespace InventoryService.Controllers
     {
         private FGInventoryEntities db = new FGInventoryEntities();
 
-        /*// GET: api/ModelZoneMaps
-        public IQueryable<ModelZoneMap> GetModelZoneMaps()
-        {
-            return db.ModelZoneMaps;
-        }*/
+      
 
         // GET api/ModelZoneMaps
         [Route("api/ModelZoneMaps")]
@@ -81,40 +77,7 @@ namespace InventoryService.Controllers
             return Ok(modelZoneMap);
         }
 
-       /* // PUT: api/ModelZoneMaps/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutModelZoneMap(int id, ModelZoneMap modelZoneMap)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != modelZoneMap.Seq)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(modelZoneMap).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ModelZoneMapExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }*/
+     
 
         // POST: api/ModelZoneMaps
         [ResponseType(typeof(ModelZoneMap))]
