@@ -217,10 +217,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/19/2018 17:10:43</publishTime>
     </File>
     <File Include="bin/InventoryService.dll">
-      <publishTime>09/29/2018 15:55:25</publishTime>
+      <publishTime>09/29/2018 16:12:29</publishTime>
     </File>
     <File Include="bin/InventoryService.pdb">
-      <publishTime>09/29/2018 15:55:25</publishTime>
+      <publishTime>09/29/2018 16:12:29</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.Agent.Intercept.dll">
       <publishTime>03/19/2018 17:10:43</publishTime>
@@ -577,10 +577,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/19/2018 17:10:40</publishTime>
     </File>
     <File Include="InventoryService.csproj">
-      <publishTime>09/29/2018 15:55:16</publishTime>
+      <publishTime>09/29/2018 16:12:20</publishTime>
     </File>
     <File Include="InventoryService.csproj.user">
-      <publishTime>09/29/2018 15:55:16</publishTime>
+      <publishTime>09/29/2018 16:12:20</publishTime>
     </File>
     <File Include="Models/Container.cs">
       <publishTime>07/24/2018 16:09:57</publishTime>
@@ -642,6 +642,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Properties/PublishProfiles/CustomProfile1.pubxml">
       <publishTime>03/19/2018 17:10:40</publishTime>
     </File>
+    <File Include="Properties/PublishProfiles/FGWebService.pubxml">
+      <publishTime>04/06/2018 15:49:29</publishTime>
+    </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>03/19/2018 17:10:40</publishTime>
     </File>
@@ -685,7 +688,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/19/2018 17:10:40</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>09/29/2018 15:55:33</publishTime>
+      <publishTime>09/29/2018 16:12:39</publishTime>
     </File>
     <File Include="Web.Debug.config">
       <publishTime>03/19/2018 17:10:40</publishTime>
